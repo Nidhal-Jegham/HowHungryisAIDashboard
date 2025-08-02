@@ -1,0 +1,39 @@
+name: Run Headless Selenium Scraper
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Chrome
+        run: |
+          sudo apt update
+          sudo apt install -y wget unzip xvfb libxi6 libgconf-2-4
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt -f install -y
+
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1)
+          wget -N https://chromedriver.storage.googleapis.com/${CHROME_VERSION}.0.0/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          chmod +x chromedriver
+          sudo mv -f chromedriver /usr/local/bin/chromedriver
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Python packages
+        run: pip install -r requirements.txt
+
+      - name: Run scraper
+        run: xvfb-run python ArtificialAnalysisScraping.py

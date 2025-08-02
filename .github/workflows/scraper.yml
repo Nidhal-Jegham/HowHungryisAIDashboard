@@ -13,24 +13,22 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Install Chrome and ChromeDriver 117
+      - name: Install Chrome 138
         run: |
           sudo apt update
           sudo apt install -y wget unzip xvfb curl gnupg2 libxi6
-          
-          # Add Google Chrome repo
-          curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/google.gpg
-          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome-keyring.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
           sudo apt update
-          
-          # Install Chrome 117
-          sudo apt install -y google-chrome-stable=117.0.5938.62-1 || true
-          
-          # Download matching ChromeDriver manually
-          wget https://chromedriver.storage.googleapis.com/117.0.5938.62/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
+          sudo apt install -y google-chrome-stable
+
+      - name: Install ChromeDriver 138
+        run: |
+          wget https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.183/linux64/chromedriver-linux64.zip
+          unzip chromedriver-linux64.zip
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/chromedriver
+
 
 
 

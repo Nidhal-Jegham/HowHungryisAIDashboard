@@ -290,33 +290,9 @@ NANO_API_ID = [
     "us.meta.llama3-2-1b-instruct-v1:0",
     ]
 
-# In[20]:
 
-
-df.columns
-
-# In[21]:
-
-
-df['P5Tokens/s']
 
 # In[22]:
-
-
-df.loc[df['API ID'].str.contains('20250514', case=False, na=False), ["API ID", "P5Tokens/s",'length']]
-
-
-# In[23]:
-
-
-df_test=pd.read_csv('artificialanalysis_cleanmedium.csv')
-df_test
-
-# In[24]:
-
-
-df_test_sel = df_test[df_test['API ID'].isin(api_id)]
-df_test_sel.loc[df_test_sel['API ID'].str.contains('claude-opus-4-20250514', case=False, na=False), ["API ID", "P5Tokens/s",]]
 
 # In[25]:
 
@@ -326,18 +302,12 @@ df_selected = df[df['API ID'].isin(api_id)]
 # In[26]:
 
 
-df.loc[df['API ID']=="claude-3-5-haiku-20241022"]
 
-# In[52]:
-
-
-df_selected.loc[df_selected['API ID'].str.contains('o4', case=False, na=False),]
 
 
 # In[28]:
 
 
-df_selected.loc[df_selected['Model'].str.contains('Claude', case=False, na=False),]
 
 
 # In[29]:
@@ -704,6 +674,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

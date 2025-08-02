@@ -21,8 +21,7 @@ for i in range(3):
     
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")  # Run in headless mode
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    
     driver = webdriver.Chrome(service=Service(), options=options)
 
     driver.get(link_list[i])
@@ -36,36 +35,29 @@ for i in range(3):
     # Step 1: Find and click the "Expand Columns" button
     buttons = driver.find_elements(By.TAG_NAME, "button")
 
-    from selenium.webdriver.common.action_chains import ActionChains
-    from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException
-
 
     for btn in buttons:
         text = btn.text.strip().replace("\n", " ").lower()
         if "expand columns" in text:
-            print("Found the exact 'Expand Columns' button.")
+            print("Found the'Expand Columns' button.")
 
-            # Highlight it for debug
             driver.execute_script("""
                 arguments[0].style.border = "3px solid red";
                 arguments[0].style.background = "#ff0";
             """, btn)
 
-            time.sleep(0.3)
+            time.sleep(0.5)
 
             try:
-                btn.click()
-                print("Clicked with .click() Selenium method")
-                break
-            except (ElementClickInterceptedException, ElementNotInteractableException) as e:
-                print(f"⚠️ Native click failed: {e} — trying JS click...")
-                driver.execute_script("arguments[0].click();", btn)
-                print("Clicked with JS fallback")
-                break
+                from selenium.webdriver.common.action_chains import ActionChains
+                actions = ActionChains(driver)
+                actions.move_to_element(btn).pause(0.3).click().perform()
+                print("Button Clicked")
+            except Exception as e:
+                print(f" ActionChains failed: {e}")
 
-            
-    else:
-        print("Could not find the 'Expand Columns' button.")
+            break
+
 
 
     html = driver.page_source
@@ -79,7 +71,7 @@ for i in range(3):
         if row_data:
             raw_data.append(row_data)
 
-    header = raw_data[1]  
+    header = raw_data[1]
 
     cleaned_rows = [r for r in raw_data[2:] if len(r) == len(header)]
     bad_rows = [r for r in raw_data[2:] if len(r) != len(header)]

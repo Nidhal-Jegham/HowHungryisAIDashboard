@@ -13,20 +13,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Install Chrome
+      - name: Install Chrome 117
         run: |
-          sudo apt update
-          sudo apt install -y wget unzip xvfb libxi6
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt -f install -y
+          wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_117.0.5938.62-1_amd64.deb
+          sudo apt install -y ./google-chrome-stable_117.0.5938.62-1_amd64.deb
 
-      - name: Install ChromeDriver
+      - name: Install matching ChromeDriver 117
         run: |
-          CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1)
-          wget -N https://chromedriver.storage.googleapis.com/${CHROME_VERSION}.0.0/chromedriver_linux64.zip
+          wget https://chromedriver.storage.googleapis.com/117.0.5938.62/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           chmod +x chromedriver
           sudo mv -f chromedriver /usr/local/bin/chromedriver
+
 
       - name: Set up Python
         uses: actions/setup-python@v4

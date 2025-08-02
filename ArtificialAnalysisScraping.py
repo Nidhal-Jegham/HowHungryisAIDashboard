@@ -1,0 +1,96 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+import time
+from bs4 import BeautifulSoup
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import pandas as pd
+
+link_list= [
+    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/short",
+    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/medium",
+    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/long",]
+length_list = [
+    "short", 
+    "medium",
+    "long",]
+for i in range(3): 
+
+    # Set up the driver
+    
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")  # Run in headless mode
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    driver = webdriver.Chrome(service=Service(), options=options)
+
+    driver.get(link_list[i])
+    time.sleep(5) 
+
+    # Wait for table to appear
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//table"))
+    )
+
+    # Step 1: Find and click the "Expand Columns" button
+    buttons = driver.find_elements(By.TAG_NAME, "button")
+
+    from selenium.webdriver.common.action_chains import ActionChains
+    from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException
+
+
+    for btn in buttons:
+        text = btn.text.strip().replace("\n", " ").lower()
+        if "expand columns" in text:
+            print("Found the exact 'Expand Columns' button.")
+
+            # Highlight it for debug
+            driver.execute_script("""
+                arguments[0].style.border = "3px solid red";
+                arguments[0].style.background = "#ff0";
+            """, btn)
+
+            time.sleep(0.3)
+
+            try:
+                btn.click()
+                print("Clicked with .click() Selenium method")
+                break
+            except (ElementClickInterceptedException, ElementNotInteractableException) as e:
+                print(f"⚠️ Native click failed: {e} — trying JS click...")
+                driver.execute_script("arguments[0].click();", btn)
+                print("Clicked with JS fallback")
+                break
+
+            
+    else:
+        print("Could not find the 'Expand Columns' button.")
+
+
+    html = driver.page_source
+    soup = BeautifulSoup(html, "html.parser")
+
+    rows = soup.find_all("tr")
+    raw_data = []
+    for row in rows:
+        cells = row.find_all(["td", "th"])
+        row_data = [cell.get_text(strip=True) for cell in cells]
+        if row_data:
+            raw_data.append(row_data)
+
+    header = raw_data[1]  
+
+    cleaned_rows = [r for r in raw_data[2:] if len(r) == len(header)]
+    bad_rows = [r for r in raw_data[2:] if len(r) != len(header)]
+
+    if bad_rows:
+        print(f"Skipped {len(bad_rows)} rows that didn't match header length of {len(header)}.")
+
+    import pandas as pd
+    df = pd.DataFrame(cleaned_rows, columns=header)
+
+    print(df.head())
+
+    df.to_csv(f'artificialanalysis_clean{length_list[i]}.csv', index=False)
+    print(f'Data exported to {length_list[i]} artificialanalysis_clean.csv')

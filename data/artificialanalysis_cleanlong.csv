@@ -1,208 +1,208 @@
-API Provider,Model,ContextWindow,Artificial AnalysisIntelligence Index,BlendedUSD/1M Tokens,MedianTokens/s,MedianFirst Chunk (s),TotalResponse (s),ReasoningTime (s),FurtherAnalysis
-,Grok 4,256k,73,$6.00,72.6,13.11,20.00,N/A,ModelProviders
-,Gemini 2.5 Pro (AI_Studio),1m,70,$3.44,149.9,38.69,42.03,N/A,ModelProviders
-,Gemini 2.5 Pro Vertex,1m,70,$3.44,160.2,36.30,39.43,N/A,ModelProviders
-,o3,200k,70,$3.50,214.3,18.12,20.46,N/A,ModelProviders
-,o3,200k,70,$3.50,87.8,37.30,43.00,N/A,ModelProviders
-,o4-mini (high),200k,70,$1.93,122.6,45.97,50.05,N/A,ModelProviders
-,o4-mini (high),200k,70,$1.93,160.8,30.37,33.48,N/A,ModelProviders
-,Qwen3 235B 2507 (Reasoning),132k,69,$1.24,66.4,1.04,38.69,30.12,ModelProviders
-,Qwen3 235B 2507 (Reasoning),131k,69,$0.75,"1,689.5",0.85,2.33,1.18,ModelProviders
-,Qwen3 235B 2507 (Reasoning) (FP8),262k,69,$0.25,30.6,0.86,82.54,65.35,ModelProviders
-,Qwen3 235B 2507 (Reasoning),132k,69,$0.97,63.9,1.55,40.65,31.28,ModelProviders
-,Qwen3 235B 2507 (Reasoning),262k,69,$1.24,47.6,0.87,53.34,41.98,ModelProviders
-,Qwen3 235B 2507 (Reasoning),131k,69,$2.63,62.9,3.06,42.78,31.78,ModelProviders
-,DeepSeek R1 0528,164k,68,$0.92,51.1,0.86,49.81,39.16,ModelProviders
-,DeepSeek R1 0528,64k,68,$0.96,22.8,5.39,114.96,87.66,ModelProviders
-,DeepSeek R1 0528,164k,68,$1.59,80.5,1.18,32.24,24.85,ModelProviders
-,DeepSeek R1 0528,164k,68,$3.00,127.1,1.66,21.33,15.74,ModelProviders
-,DeepSeek R1 0528,164k,68,$1.20,25.5,1.47,99.35,78.30,ModelProviders
-,DeepSeek R1 0528 (Vertex),164k,68,$2.36,154.2,1.24,17.45,12.97,ModelProviders
-,DeepSeek R1 0528,128k,68,$2.36,104.6,1.44,25.34,19.12,ModelProviders
-,DeepSeek R1 0528 Fast,164k,68,$4.25,130.3,0.81,19.99,15.35,ModelProviders
-,DeepSeek R1 0528,164k,68,$0.91,63.9,0.58,39.73,31.31,ModelProviders
-,DeepSeek R1 0528,128k,68,$1.15,43.7,1.26,58.50,45.79,ModelProviders
-,DeepSeek R1 0528,131k,68,$1.18,108.9,1.02,23.97,18.36,ModelProviders
-,DeepSeek R1 0528,33k,68,$5.50,134.9,4.95,23.48,14.83,ModelProviders
-,DeepSeek R1 0528,128k,68,$4.00,275.5,1.03,10.11,7.26,ModelProviders
-,DeepSeek R1 0528 (Throughput),128k,68,$0.96,59.1,1.33,43.66,33.86,ModelProviders
-,Grok 3 mini Reasoning (high),131k,67,$0.35,204.3,0.87,13.11,9.79,ModelProviders
-,Grok 3 mini Reasoning (high) Fast,131k,67,$1.45,204.3,0.92,13.16,9.79,ModelProviders
-,GLM-4.5,128k,66,$0.88,61.9,2.53,42.94,32.32,ModelProviders
-,GLM-4.5 (FP8),131k,66,$0.97,116.5,1.18,22.64,17.17,ModelProviders
-,GLM-4.5,131k,66,$0.96,105.0,0.96,24.78,19.05,ModelProviders
-,GLM-4.5,128k,66,$0.91,61.2,0.69,41.53,32.68,ModelProviders
-,GLM-4.5,131k,66,$1.00,54.3,1.49,47.51,36.82,ModelProviders
-,o3-mini (high),200k,66,$1.93,181.0,39.67,42.43,N/A,ModelProviders
-,o3-mini (high),200k,66,$1.93,180.0,35.39,38.17,N/A,ModelProviders
-,Gemini 2.5 Flash (Reasoning) (AI_Studio),1m,65,$0.85,307.7,14.83,16.46,N/A,ModelProviders
-,Gemini 2.5 Flash (Reasoning) (Vertex),1m,65,$0.85,285.1,15.31,17.06,N/A,ModelProviders
-,Claude 4 Opus Thinking,200k,64,$30.00,21.5,18.87,134.97,92.87,ModelProviders
-,Claude 4 Opus Thinking Vertex,200k,64,$30.00,41.5,2.00,62.18,48.14,ModelProviders
-,Claude 4 Opus Thinking,200k,64,$30.00,52.2,2.63,50.51,38.31,ModelProviders
-,EXAONE 4.0 32B (Reasoning),131k,64,$0.70,87.3,0.95,29.58,22.91,ModelProviders
-,Claude 4 Sonnet Thinking,200k,64,$6.00,62.9,2.05,41.80,31.80,ModelProviders
-,Claude 4 Sonnet Thinking Vertex,200k,64,$6.00,51.8,1.54,49.83,38.63,ModelProviders
-,Claude 4 Sonnet Thinking,200k,64,$6.00,58.2,1.94,44.93,34.39,ModelProviders
-,Qwen3 30B 2507 (Reasoning),128k,63,$0.75,106.9,2.63,26.01,18.70,ModelProviders
-,MiniMax M1 80k,1m,63,$0.82,27.2,2.28,94.27,73.60,ModelProviders
-,o3-mini,200k,63,$1.93,191.4,15.86,18.47,N/A,ModelProviders
-,o3-mini,200k,63,$1.93,163.1,18.79,21.86,N/A,ModelProviders
-,MiniMax M1 40k,1m,61,$0.82,24.0,2.33,106.48,83.33,ModelProviders
-,Llama Nemotron Ultra Reasoning Base,131k,61,$0.90,42.1,2.46,61.82,47.49,ModelProviders
-,Qwen3 235B 2507 (Non-reasoning),262k,60,$0.33,48.9,1.06,11.29,N/A,ModelProviders
-,Qwen3 235B 2507 (Non-reasoning),131k,60,$0.75,"1,410.5",0.77,1.12,N/A,ModelProviders
-,Qwen3 235B 2507 (Non-reasoning),128k,60,$0.39,131.8,0.84,4.63,N/A,ModelProviders
-,Qwen3 235B 2507 (Non-reasoning),262k,60,$0.25,33.9,1.02,15.75,N/A,ModelProviders
-,Qwen3 235B 2507 (Non-reasoning),262k,60,$0.31,79.8,1.46,7.73,N/A,ModelProviders
-,Qwen3 235B 2507 (Non-reasoning) (FP8),256k,60,$0.30,40.6,0.86,13.17,N/A,ModelProviders
-,Qwen3 235B 2507 (Non-reasoning),131k,60,$1.23,41.7,3.00,14.98,N/A,ModelProviders
-,GLM-4.5-Air,128k,60,$0.32,87.0,2.90,31.63,22.98,ModelProviders
-,GLM-4.5-Air,128k,60,$0.42,156.0,1.40,17.43,12.82,ModelProviders
-,GLM-4.5-Air (FP8),131k,60,$0.42,228.8,0.73,11.66,8.74,ModelProviders
-,Solar Pro 2 (Reasoning),66k,58,$0.50,118.4,2.18,23.29,16.89,ModelProviders
-,QwQ-32B,131k,58,$0.20,52.3,2.24,59.43,47.63,ModelProviders
-,QwQ-32B Fast,131k,58,$0.75,81.6,1.27,37.92,30.52,ModelProviders
-,QwQ-32B Base,131k,58,$0.23,50.9,1.58,60.39,48.98,ModelProviders
-,QwQ-32B,131k,58,$0.09,35.6,1.62,85.68,70.01,ModelProviders
-,QwQ-32B,41k,58,$0.75,51.0,1.46,60.10,48.83,ModelProviders
-,QwQ-32B,131k,58,$1.20,94.1,0.62,32.41,26.48,ModelProviders
-,Claude 4 Opus,200k,58,$30.00,22.0,3.81,26.58,N/A,ModelProviders
-,Claude 4 Opus Vertex,200k,58,$30.00,39.2,2.08,14.82,N/A,ModelProviders
-,Claude 4 Opus,200k,58,$30.00,48.5,2.80,13.10,N/A,ModelProviders
-,Kimi K2,33k,58,$2.13,17.3,1.07,30.05,N/A,ModelProviders
-,Kimi K2,128k,58,$1.07,12.4,6.12,46.49,N/A,ModelProviders
-,Kimi K2,131k,58,$1.07,45.4,1.18,12.19,N/A,ModelProviders
-,Kimi K2,131k,58,$0.88,48.9,0.46,10.68,N/A,ModelProviders
-,Kimi K2,131k,58,$1.00,47.5,1.99,12.52,N/A,ModelProviders
-,Kimi K2,131k,58,$1.50,32.1,0.92,16.50,N/A,ModelProviders
-,Kimi K2,131k,58,$1.50,197.1,0.60,3.13,N/A,ModelProviders
-,Kimi K2,131k,58,$1.50,36.1,0.90,14.75,N/A,ModelProviders
-,Kimi K2,131k,58,$1.07,84.0,0.38,6.34,N/A,ModelProviders
-,Qwen3 30B 2507 (Non-reasoning),128k,57,$0.35,102.9,2.54,7.40,N/A,ModelProviders
-,Magistral Medium,41k,56,$2.75,105.7,1.47,25.13,18.92,ModelProviders
-,Gemini 2.5 Flash-Lite (Reasoning) (AI Studio),1m,55,$0.17,542.8,9.00,9.92,N/A,ModelProviders
-,Magistral Small,40k,55,$0.75,178.4,0.94,14.95,11.21,ModelProviders
-,Qwen3 Coder 480B (FP8),262k,54,$1.63,45.4,1.30,12.32,N/A,ModelProviders
-,Qwen3 Coder 480B,131k,54,$2.00,"1,394.0",0.79,1.15,N/A,ModelProviders
-,Qwen3 Coder 480B (FP8),262k,54,$2.00,22.3,3.22,25.62,N/A,ModelProviders
-,Qwen3 Coder 480B,262k,54,$0.79,125.7,0.88,4.86,N/A,ModelProviders
-,Qwen3 Coder 480B (FP8),262k,54,$0.70,46.5,1.12,11.87,N/A,ModelProviders
-,"Qwen3 Coder 480B (Turbo, FP4)",262k,54,$0.53,47.8,0.54,11.00,N/A,ModelProviders
-,Qwen3 Coder 480B,262k,54,$1.96,44.7,0.90,12.09,N/A,ModelProviders
-,Qwen3 Coder 480B (FP8),33k,54,$1.25,81.5,0.92,7.06,N/A,ModelProviders
-,Qwen3 Coder 480B (FP8),262k,54,$2.00,43.4,0.93,12.44,N/A,ModelProviders
-,Qwen3 Coder 480B,262k,54,$3.00,40.6,3.50,15.80,N/A,ModelProviders
-,Gemini 2.5 Flash (AI_Studio),1m,53,$0.85,261.9,0.42,2.33,N/A,ModelProviders
-,Gemini 2.5 Flash (Vertex),1m,53,$0.85,251.9,0.44,2.43,N/A,ModelProviders
-,Claude 4 Sonnet,200k,53,$6.00,83.2,2.05,8.05,N/A,ModelProviders
-,Claude 4 Sonnet Vertex,200k,53,$6.00,60.9,1.58,9.79,N/A,ModelProviders
-,Claude 4 Sonnet,200k,53,$6.00,60.9,1.56,9.76,N/A,ModelProviders
-,GPT-4.1 mini,1m,53,$0.70,86.9,0.62,6.38,N/A,ModelProviders
-,GPT-4.1 mini,1m,53,$0.70,127.9,0.84,4.75,N/A,ModelProviders
-,GPT-4.1,1m,53,$3.50,144.0,0.94,4.41,N/A,ModelProviders
-,GPT-4.1,1m,53,$3.50,101.0,1.42,6.38,N/A,ModelProviders
-,DeepSeek R1 0528 Qwen3 8B,131k,52,$0.06,112.6,0.84,23.04,17.75,ModelProviders
-,DeepSeek R1 0528 Qwen3 8B,128k,52,$0.07,84.7,1.91,31.43,23.62,ModelProviders
-,EXAONE 4.0 32B,131k,51,$0.70,88.2,0.94,6.61,N/A,ModelProviders
-,Grok 3,131k,51,$6.00,70.1,1.81,8.94,N/A,ModelProviders
-,Grok 3 Fast,131k,51,$10.00,70.1,1.82,8.94,N/A,ModelProviders
-,Llama 4 Maverick (FP8),1m,51,$0.28,154.0,0.44,3.69,N/A,ModelProviders
-,Llama 4 Maverick (FP8),1m,51,$0.35,149.6,0.73,4.08,N/A,ModelProviders
-,Llama 4 Maverick,32k,51,$0.30,"1,876.3",0.55,0.81,N/A,ModelProviders
-,Llama 4 Maverick,128k,51,$0.42,264.2,0.90,2.79,N/A,ModelProviders
-,Llama 4 Maverick Vertex,524k,51,$0.55,130.7,0.49,4.31,N/A,ModelProviders
-,Llama 4 Maverick (FP8),128k,51,$0.61,190.3,0.55,3.18,N/A,ModelProviders
-,Llama 4 Maverick (Base),1m,51,$0.39,179.5,0.66,3.44,N/A,ModelProviders
-,Llama 4 Maverick (FP8),131k,51,$0.26,91.4,0.49,5.95,N/A,ModelProviders
-,Llama 4 Maverick (FP8),1m,51,$0.34,148.1,0.84,4.21,N/A,ModelProviders
-,Llama 4 Maverick (FP8),1m,51,$0.39,176.2,0.55,3.39,N/A,ModelProviders
-,Llama 4 Maverick,128k,51,$0.30,474.5,0.34,1.39,N/A,ModelProviders
-,Llama 4 Maverick,131k,51,$0.92,823.1,0.98,1.58,N/A,ModelProviders
-,Llama 4 Maverick,524k,51,$0.41,119.3,0.45,4.64,N/A,ModelProviders
-,Mistral Medium 3,128k,49,$0.80,73.6,1.55,8.34,N/A,ModelProviders
-,Mistral Medium 3,128k,49,$0.80,57.0,1.85,10.62,N/A,ModelProviders
-,Reka Flash 3,128k,47,$0.35,45.9,2.45,56.98,43.62,ModelProviders
-,Solar Pro 2,66k,47,$0.50,131.5,2.18,5.99,N/A,ModelProviders
-,Gemini 2.5 Flash-Lite (AI Studio),1m,46,$0.17,374.2,0.39,1.72,N/A,ModelProviders
-,Llama 4 Scout,1m,43,$0.14,123.8,0.55,4.59,N/A,ModelProviders
-,Llama 4 Scout (FP8),158k,43,$0.19,126.6,0.83,4.78,N/A,ModelProviders
-,Llama 4 Scout,32k,43,$0.70,"2,382.2",0.58,0.78,N/A,ModelProviders
-,Llama 4 Scout,128k,43,$0.29,170.6,0.84,3.78,N/A,ModelProviders
-,Llama 4 Scout Vertex,1m,43,$0.36,136.7,0.52,4.18,N/A,ModelProviders
-,Llama 4 Scout,128k,43,$0.34,136.8,0.60,4.25,N/A,ModelProviders
-,Llama 4 Scout (Base),1m,43,$0.26,173.6,0.68,3.56,N/A,ModelProviders
-,Llama 4 Scout,131k,43,$0.14,76.1,0.69,7.27,N/A,ModelProviders
-,Llama 4 Scout,131k,43,$0.20,78.2,1.70,8.10,N/A,ModelProviders
-,Llama 4 Scout,1m,43,$0.18,138.9,0.69,4.29,N/A,ModelProviders
-,Llama 4 Scout,131k,43,$0.17,558.5,0.42,1.31,N/A,ModelProviders
-,Llama 4 Scout,328k,43,$0.28,117.0,0.52,4.79,N/A,ModelProviders
-,Nova Premier,1m,43,$5.00,35.7,2.80,16.79,N/A,ModelProviders
-,Mistral Small 3.2,33k,42,$0.15,163.8,0.81,3.86,N/A,ModelProviders
-,Mistral Small 3.2 (FP8),128k,42,$0.06,38.9,1.53,14.40,N/A,ModelProviders
-,Llama 3.3 70B (FP8),128k,41,$0.17,53.0,1.26,10.70,N/A,ModelProviders
-,Llama 3.3 70B (FP8),131k,41,$0.28,49.7,1.63,11.70,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.94,"2,242.4",0.64,0.87,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.40,31.6,2.84,18.68,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.71,213.5,1.10,3.44,N/A,ModelProviders
-,Llama 3.3 70B Fast,128k,41,$0.38,234.5,1.31,3.44,N/A,ModelProviders
-,Llama 3.3 70B Base,128k,41,$0.20,36.0,2.42,16.32,N/A,ModelProviders
-,Llama 3.3 70B Vertex,128k,41,$0.72,81.0,0.54,6.71,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.71,42.1,1.80,13.67,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.90,139.1,0.81,4.41,N/A,ModelProviders
-,"Llama 3.3 70B (Turbo, FP8)",128k,41,$0.06,44.7,1.48,12.67,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.27,28.3,1.42,19.08,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.60,99.1,0.94,5.99,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.20,35.5,1.70,15.77,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.64,311.8,0.87,2.47,N/A,ModelProviders
-,Llama 3.3 70B,128k,41,$0.75,298.5,1.49,3.17,N/A,ModelProviders
-,Llama 3.3 70B Turbo,128k,41,$0.88,92.1,1.10,6.53,N/A,ModelProviders
-,GPT-4.1 nano,1m,41,$0.17,117.1,0.48,4.75,N/A,ModelProviders
-,GPT-4.1 nano,1m,41,$0.17,211.0,0.86,3.23,N/A,ModelProviders
-,Llama 3.1 405B (FP8),128k,40,$0.80,34.3,1.78,16.35,N/A,ModelProviders
-,Llama 3.1 405B,128k,40,$4.00,81.1,2.67,8.83,N/A,ModelProviders
-,Llama 3.1 405B Standard,128k,40,$2.40,16.0,7.93,39.23,N/A,ModelProviders
-,Llama 3.1 405B Latency Optimized,128k,40,$3.00,79.5,2.11,8.40,N/A,ModelProviders
-,Llama 3.1 405B Base,128k,40,$1.50,31.6,2.46,18.27,N/A,ModelProviders
-,Llama 3.1 405B Vertex,128k,40,$7.75,21.7,2.44,25.45,N/A,ModelProviders
-,Llama 3.1 405B,128k,40,$8.00,30.4,1.96,18.41,N/A,ModelProviders
-,Llama 3.1 405B,128k,40,$3.00,88.4,2.02,7.67,N/A,ModelProviders
-,Llama 3.1 405B,33k,40,$0.80,19.9,2.51,27.59,N/A,ModelProviders
-,Llama 3.1 405B,16k,40,$6.25,101.5,5.25,10.17,N/A,ModelProviders
-,Llama 3.1 405B,128k,40,$7.50,15.9,4.77,36.23,N/A,ModelProviders
-,Llama 3.1 405B Turbo,128k,40,$3.50,26.8,2.30,20.96,N/A,ModelProviders
-,MiniMax-Text-01,1m,40,$0.42,21.4,1.81,25.20,N/A,ModelProviders
-,Phi-4,16k,40,$0.15,107.1,1.13,5.80,N/A,ModelProviders
-,Phi-4,16k,40,$0.22,39.9,2.02,14.55,N/A,ModelProviders
-,Phi-4,16k,40,$0.09,45.4,1.46,12.48,N/A,ModelProviders
-,Command A,256k,40,$4.38,64.0,1.18,9.00,N/A,ModelProviders
-,Devstral Medium,256k,38,$0.80,90.2,1.56,7.10,N/A,ModelProviders
-,Gemma 3 27B,131k,38,$0.29,79.4,1.16,7.46,N/A,ModelProviders
-,Gemma 3 27B (AI_Studio),128k,38,$0.00,49.1,1.85,12.03,N/A,ModelProviders
-,Gemma 3 27B,128k,38,$0.11,33.0,0.94,16.11,N/A,ModelProviders
-,Llama 3.1 Nemotron 70B (FP8),128k,37,$0.17,49.2,1.13,11.29,N/A,ModelProviders
-,Llama 3.1 Nemotron 70B,128k,37,$0.17,34.9,1.92,16.24,N/A,ModelProviders
-,GPT-4o mini,128k,36,$0.26,61.5,0.74,8.87,N/A,ModelProviders
-,GPT-4o mini,128k,36,$0.26,79.0,1.30,7.63,N/A,ModelProviders
-,Gemma 3 12B,128k,34,$0.06,51.0,1.61,11.41,N/A,ModelProviders
-,Llama 3.2 90B (Vision),128k,33,$0.72,56.4,1.07,9.94,N/A,ModelProviders
-,Llama 3.2 90B (Vision) Vertex,128k,33,$0.00,32.5,0.64,16.04,N/A,ModelProviders
-,Llama 3.2 90B (Vision),33k,33,$0.36,31.5,1.77,17.65,N/A,ModelProviders
-,Devstral Small,256k,32,$0.15,141.9,0.97,4.49,N/A,ModelProviders
-,Devstral Small,128k,32,$0.12,147.4,1.07,4.46,N/A,ModelProviders
-,Devstral Small,128k,32,$0.12,97.2,1.47,6.61,N/A,ModelProviders
-,Jamba 1.7 Large,256k,30,$3.50,62.1,1.62,9.68,N/A,ModelProviders
-,Gemma 3n E4B,33k,28,$0.03,77.6,1.29,7.73,N/A,ModelProviders
-,Codestral (Jan '25),256k,28,$0.45,159.5,0.63,3.77,N/A,ModelProviders
-,Codestral (Jan '25) Vertex,128k,28,$0.45,146.2,0.41,3.83,N/A,ModelProviders
-,Phi-4 Multimodal,128k,27,$0.00,22.7,0.83,22.81,N/A,ModelProviders
-,Gemma 3 4B,128k,25,$0.03,91.7,1.13,6.58,N/A,ModelProviders
-,Ministral 8B,128k,22,$0.10,141.0,0.73,4.28,N/A,ModelProviders
-,Aya Expanse 32B,128k,20,$0.75,38.0,0.77,13.94,N/A,ModelProviders
-,Ministral 3B,128k,20,$0.04,219.3,0.60,2.88,N/A,ModelProviders
-,Jamba 1.7 Mini,258k,18,$0.25,169.9,0.85,3.80,N/A,ModelProviders
-,o3-pro,200k,,$35.00,36.4,93.20,106.95,N/A,ModelProviders
-,Llama 3.2 11B (Vision),128k,,$0.16,53.3,0.72,10.09,N/A,ModelProviders
-,Llama 3.2 11B (Vision),128k,,$0.05,53.2,1.24,10.64,N/A,ModelProviders
-,Grok 3 mini Reasoning (low),131k,,$0.35,157.2,0.80,16.71,12.73,ModelProviders
-,Grok 3 mini Reasoning (low) Fast,131k,,$1.45,206.1,0.74,12.87,9.70,ModelProviders
+API Provider,Model,ContextWindow,Function Calling,JSON Mode,License,OpenAI Compatible,API ID,Footnotes,Artificial AnalysisIntelligence Index,MMLU-Pro (Reasoning & Knowledge),GPQA Diamond (Scientific Reasoning),Humanity's Last Exam (Reasoning & Knowledge),LiveCodeBench (Coding),SciCode (Coding),HumanEval (Coding),MATH-500 (Quantitative Reasoning),AIME 2024 (Competition Math),Chatbot Arena,BlendedUSD/1M Tokens,Input PriceUSD/1M Tokens,Output PriceUSD/1M Tokens,MedianTokens/s,P5Tokens/s,P25Tokens/s,P75Tokens/s,P95Tokens/s,MedianFirst Chunk (s),First AnswerToken (s),P5First Chunk (s),P25First Chunk (s),P75First Chunk (s),P95First Chunk (s),TotalResponse (s),ReasoningTime (s),FurtherAnalysis
+,Grok 4,256k,Yes,Yes,Proprietary,Yes,grok-4-0709,,73,87%,88%,24%,82%,46%,98%,99%,94%,,$6.00,$3.00,$15.00,72.6,50.0,65.1,84.9,99.0,13.11,13.11,6.64,11.34,14.80,29.71,20.00,N/A,ModelProviders
+,Gemini 2.5 Pro (AI_Studio),1m,Yes,Yes,Proprietary,Yes,gemini-2.5-pro,,70,86%,84%,21%,80%,43%,,97%,89%,,$3.44,$1.25,$10.00,149.9,140.4,147.4,154.3,160.0,38.69,38.69,29.20,33.55,45.92,53.48,42.03,N/A,ModelProviders
+,Gemini 2.5 Pro Vertex,1m,No,No,Proprietary,Yes,gemini-2.5-pro,,70,86%,84%,21%,80%,43%,,97%,89%,,$3.44,$1.25,$10.00,160.2,143.4,152.8,166.4,182.9,36.30,36.30,23.37,32.18,42.39,52.94,39.43,N/A,ModelProviders
+,o3,200k,Yes,Yes,Proprietary,Yes,o3-2025-04-16,,70,85%,83%,20%,78%,41%,99%,99%,90%,,$3.50,$2.00,$8.00,214.3,80.6,157.7,246.4,287.5,18.12,18.12,13.14,14.47,22.28,56.53,20.46,N/A,ModelProviders
+,o3,200k,Yes,No,Proprietary,Yes,o3-global-standard,,70,85%,83%,20%,78%,41%,99%,99%,90%,,$3.50,$2.00,$8.00,87.8,76.3,82.3,90.0,94.8,37.30,37.30,32.03,34.30,40.58,49.72,43.00,N/A,ModelProviders
+,o4-mini (high),200k,Yes,Yes,Proprietary,Yes,o4-mini-2025-04-16,,70,83%,78%,18%,80%,47%,99%,99%,94%,,$1.93,$1.10,$4.40,122.6,72.7,114.7,132.0,142.1,45.97,45.97,23.58,36.77,61.75,82.74,50.05,N/A,ModelProviders
+,o4-mini (high),200k,Yes,No,Proprietary,Yes,o4-mini,,70,83%,78%,18%,80%,47%,99%,99%,94%,,$1.93,$1.10,$4.40,160.8,66.0,111.6,185.3,192.9,30.37,30.37,18.87,21.30,41.67,69.03,33.48,N/A,ModelProviders
+,Qwen3 235B 2507 (Reasoning),132k,No,No,Open,Yes,parasail-qwen3-235b-a22b-thinking-2507,,69,84%,79%,15%,79%,42%,98%,98%,94%,,$1.24,$0.65,$3.00,66.4,42.5,57.3,71.4,78.0,1.04,31.16,0.90,0.94,1.14,1.64,38.69,30.12,ModelProviders
+,Qwen3 235B 2507 (Reasoning),131k,Yes,Yes,Open,Yes,qwen-3-235b-a22b-thinking-2507,,69,84%,79%,15%,79%,42%,98%,98%,94%,,$0.75,$0.60,$1.20,"1,689.5","1,331.6","1,586.8","1,895.1","1,963.5",0.85,2.03,0.72,0.78,0.91,1.52,2.33,1.18,ModelProviders
+,Qwen3 235B 2507 (Reasoning) (FP8),262k,Yes,Yes,Open,Yes,Qwen/Qwen3-235B-A22B-Thinking-2507,,69,84%,79%,15%,79%,42%,98%,98%,94%,,$0.25,$0.13,$0.60,30.6,23.6,27.5,32.8,40.5,0.86,66.21,0.73,0.75,0.97,1.34,82.54,65.35,ModelProviders
+,Qwen3 235B 2507 (Reasoning),132k,No,No,Open,Yes,qwen/qwen3-235b-a22b-thinking-2507,,69,84%,79%,15%,79%,42%,98%,98%,94%,,$0.97,$0.30,$3.00,63.9,22.6,40.3,77.7,78.9,1.55,32.83,1.02,1.41,1.83,2.84,40.65,31.28,ModelProviders
+,Qwen3 235B 2507 (Reasoning),262k,No,No,Open,Yes,Qwen/Qwen3-235B-A22B-Thinking-2507,,69,84%,79%,15%,79%,42%,98%,98%,94%,,$1.24,$0.65,$3.00,47.6,33.5,44.8,64.2,75.7,0.87,42.85,0.78,0.82,0.93,1.04,53.34,41.98,ModelProviders
+,Qwen3 235B 2507 (Reasoning),131k,Yes,Yes,Open,Yes,qwen3-235b-a22b-thinking-2507,,69,84%,79%,15%,79%,42%,98%,98%,94%,,$2.63,$0.70,$8.40,62.9,37.1,58.0,66.4,72.4,3.06,34.84,2.74,2.93,3.31,4.84,42.78,31.78,ModelProviders
+,DeepSeek R1 0528,164k,Yes,No,Open,Yes,deepseek-r1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$0.92,$0.50,$2.18,51.1,43.1,46.9,56.3,60.1,0.86,40.02,0.83,0.84,0.91,1.08,49.81,39.16,ModelProviders
+,DeepSeek R1 0528,64k,Yes,Yes,Open,Yes,deepseek-reasoner,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$0.96,$0.55,$2.19,22.8,19.9,21.8,23.8,27.7,5.39,93.05,2.55,4.06,5.91,6.61,114.96,87.66,ModelProviders
+,DeepSeek R1 0528,164k,Yes,No,Open,Yes,parasail-deepseek-r1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$1.59,$0.79,$4.00,80.5,57.7,68.2,95.9,124.6,1.18,26.03,0.95,1.05,1.23,1.32,32.24,24.85,ModelProviders
+,DeepSeek R1 0528,164k,No,No,Open,Yes,deepseek-ai/DeepSeek-R1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$3.00,$3.00,$3.00,127.1,82.5,116.4,152.7,159.2,1.66,17.40,1.29,1.35,2.05,3.66,21.33,15.74,ModelProviders
+,DeepSeek R1 0528,164k,Yes,Yes,Open,Yes,deepseek-ai/DeepSeek-R1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$1.20,$0.80,$2.40,25.5,20.0,22.2,28.4,31.2,1.47,79.78,1.44,1.45,1.55,3.57,99.35,78.30,ModelProviders
+,DeepSeek R1 0528 (Vertex),164k,Yes,Yes,Open,Yes,deepseek-ai/deepseek-r1-0528-maas,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$2.36,$1.35,$5.40,154.2,119.4,132.7,167.9,182.4,1.24,14.21,1.00,1.02,1.27,1.44,17.45,12.97,ModelProviders
+,DeepSeek R1 0528,128k,No,No,Open,Yes,DeepSeek-R1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$2.36,$1.35,$5.40,104.6,98.7,102.5,106.7,110.2,1.44,20.56,1.32,1.36,1.57,6.09,25.34,19.12,ModelProviders
+,DeepSeek R1 0528 Fast,164k,Yes,Yes,Open,Yes,accounts/fireworks/models/deepseek-r1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$4.25,$3.00,$8.00,130.3,98.5,115.5,144.6,160.2,0.81,16.16,0.70,0.77,0.86,0.99,19.99,15.35,ModelProviders
+,DeepSeek R1 0528,164k,Yes,No,Open,Yes,deepseek-ai/DeepSeek-R1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$0.91,$0.50,$2.15,63.9,13.8,19.9,94.0,117.8,0.58,31.90,0.46,0.49,0.68,1.51,39.73,31.31,ModelProviders
+,DeepSeek R1 0528,128k,Yes,No,Open,Yes,deepseek/deepseek-r1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$1.15,$0.70,$2.50,43.7,22.1,26.6,54.6,111.6,1.26,47.05,1.00,1.19,1.79,1.98,58.50,45.79,ModelProviders
+,DeepSeek R1 0528,131k,No,Yes,Open,Yes,deepseek-ai/DeepSeek-R1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$1.18,$0.80,$2.30,108.9,86.2,90.5,125.8,194.6,1.02,19.38,0.92,0.94,1.13,1.41,23.97,18.36,ModelProviders
+,DeepSeek R1 0528,33k,No,No,Open,Yes,DeepSeek-R1-0528,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$5.50,$5.00,$7.00,134.9,131.5,133.8,136.4,138.3,4.95,19.77,4.87,4.92,5.05,5.21,23.48,14.83,ModelProviders
+,DeepSeek R1 0528,128k,Yes,No,Open,Yes,deepseek-ai/DeepSeek-R1,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$4.00,$3.00,$7.00,275.5,80.0,239.4,339.2,367.9,1.03,8.29,0.84,0.96,1.14,1.28,10.11,7.26,ModelProviders
+,DeepSeek R1 0528 (Throughput),128k,Yes,No,Open,Yes,deepseek-ai/DeepSeek-R1-0528-tput,,68,85%,81%,15%,77%,40%,97%,98%,89%,,$0.96,$0.55,$2.19,59.1,45.8,50.5,68.2,95.5,1.33,35.19,1.09,1.17,1.74,16.70,43.66,33.86,ModelProviders
+,Grok 3 mini Reasoning (high),131k,Yes,Yes,Proprietary,Yes,grok-3-mini-beta,,67,83%,79%,11%,70%,41%,98%,99%,93%,,$0.35,$0.30,$0.50,204.3,184.3,188.7,209.4,216.3,0.87,10.66,0.73,0.83,0.93,1.02,13.11,9.79,ModelProviders
+,Grok 3 mini Reasoning (high) Fast,131k,Yes,Yes,Proprietary,Yes,grok-3-mini-fast-beta,,67,83%,79%,11%,70%,41%,98%,99%,93%,,$1.45,$0.60,$4.00,204.3,185.6,201.2,209.8,214.9,0.92,10.71,0.82,0.86,0.99,4.09,13.16,9.79,ModelProviders
+,GLM-4.5,128k,Yes,Yes,Open,Yes,z-ai/GLM-4.5,,66,84%,78%,12%,74%,35%,98%,98%,87%,,$0.88,$0.50,$2.00,61.9,42.5,52.6,72.0,98.9,2.53,34.86,1.85,2.02,2.96,3.19,42.94,32.32,ModelProviders
+,GLM-4.5 (FP8),131k,No,No,Open,Yes,parasail-glm-45,,66,84%,78%,12%,74%,35%,98%,98%,87%,,$0.97,$0.59,$2.10,116.5,98.3,112.4,118.2,120.2,1.18,18.35,1.11,1.14,1.23,1.41,22.64,17.17,ModelProviders
+,GLM-4.5,131k,No,Yes,Open,Yes,accounts/fireworks/models/glm-4p5,,66,84%,78%,12%,74%,35%,98%,98%,87%,,$0.96,$0.55,$2.19,105.0,83.6,91.6,110.3,111.4,0.96,20.01,0.91,0.93,1.22,1.60,24.78,19.05,ModelProviders
+,GLM-4.5,128k,No,No,Open,Yes,zai-org/GLM-4.5,,66,84%,78%,12%,74%,35%,98%,98%,87%,,$0.91,$0.55,$2.00,61.2,38.8,47.3,72.4,108.3,0.69,33.36,0.56,0.60,0.83,"1,115.22",41.53,32.68,ModelProviders
+,GLM-4.5,131k,No,No,Open,Yes,zai-org/glm-4.5,,66,84%,78%,12%,74%,35%,98%,98%,87%,,$1.00,$0.60,$2.20,54.3,22.3,44.7,60.7,68.7,1.49,38.31,1.36,1.46,1.55,2.82,47.51,36.82,ModelProviders
+,o3-mini (high),200k,Yes,Yes,Proprietary,Yes,o3-mini,,66,80%,77%,12%,73%,40%,,99%,86%,,$1.93,$1.10,$4.40,181.0,123.4,148.1,205.7,216.6,39.67,39.67,21.93,28.65,50.89,65.36,42.43,N/A,ModelProviders
+,o3-mini (high),200k,Yes,Yes,Proprietary,Yes,o3-mini,,66,80%,77%,12%,73%,40%,,99%,86%,,$1.93,$1.10,$4.40,180.0,91.5,134.8,208.6,220.8,35.39,35.39,26.38,32.62,45.29,59.21,38.17,N/A,ModelProviders
+,Gemini 2.5 Flash (Reasoning) (AI_Studio),1m,Yes,No,Proprietary,Yes,gemini-2.5-flash,,65,83%,79%,11%,70%,39%,96%,98%,82%,,$0.85,$0.30,$2.50,307.7,270.7,290.9,315.5,323.0,14.83,14.83,8.43,12.56,18.69,21.47,16.46,N/A,ModelProviders
+,Gemini 2.5 Flash (Reasoning) (Vertex),1m,Yes,Yes,Proprietary,Yes,google/gemini-2.5-flash,,65,83%,79%,11%,70%,39%,96%,98%,82%,,$0.85,$0.30,$2.50,285.1,245.8,270.4,354.9,382.6,15.31,15.31,1.59,12.77,20.90,27.89,17.06,N/A,ModelProviders
+,Claude 4 Opus Thinking,200k,Yes,No,Proprietary,No,us.anthropic.claude-opus-4-20250514-v1:0,,64,87%,80%,12%,64%,40%,,98%,76%,,$30.00,$15.00,$75.00,21.5,19.3,21.1,22.0,22.3,18.87,111.75,4.15,7.08,24.56,49.18,134.97,92.87,ModelProviders
+,Claude 4 Opus Thinking Vertex,200k,Yes,Yes,Proprietary,Yes,claude-opus-4,,64,87%,80%,12%,64%,40%,,98%,76%,,$30.00,$15.00,$75.00,41.5,35.2,38.2,45.0,51.2,2.00,50.14,1.72,1.88,2.45,4.15,62.18,48.14,ModelProviders
+,Claude 4 Opus Thinking,200k,Yes,Yes,Proprietary,Yes,claude-opus-4-20250514,,64,87%,80%,12%,64%,40%,,98%,76%,,$30.00,$15.00,$75.00,52.2,38.1,41.4,54.8,56.5,2.63,40.94,1.74,2.05,3.43,10.38,50.51,38.31,ModelProviders
+,EXAONE 4.0 32B (Reasoning),131k,Yes,Yes,Open,Yes,LGAI-EXAONE/EXAONE-4.0-32B,,64,82%,74%,11%,75%,34%,97%,98%,84%,,$0.70,$0.60,$1.00,87.3,75.1,78.9,112.5,130.4,0.95,23.86,0.90,0.92,1.00,1.03,29.58,22.91,ModelProviders
+,Claude 4 Sonnet Thinking,200k,Yes,No,Proprietary,No,us.anthropic.claude-sonnet-4-20250514-v1:0,,64,84%,78%,10%,66%,40%,,99%,77%,,$6.00,$3.00,$15.00,62.9,54.1,58.2,67.7,76.0,2.05,33.85,1.12,1.37,2.50,4.41,41.80,31.80,ModelProviders
+,Claude 4 Sonnet Thinking Vertex,200k,Yes,Yes,Proprietary,Yes,claude-sonnet-4,,64,84%,78%,10%,66%,40%,,99%,77%,,$6.00,$3.00,$15.00,51.8,40.2,47.7,53.8,58.2,1.54,40.17,1.37,1.40,1.67,1.84,49.83,38.63,ModelProviders
+,Claude 4 Sonnet Thinking,200k,Yes,Yes,Proprietary,Yes,claude-sonnet-4-20250514,,64,84%,78%,10%,66%,40%,,99%,77%,,$6.00,$3.00,$15.00,58.2,52.1,55.2,59.5,62.8,1.94,36.33,1.37,1.65,2.66,3.94,44.93,34.39,ModelProviders
+,Qwen3 30B 2507 (Reasoning),128k,Yes,Yes,Open,Yes,qwen3-30b-a3b-thinking-2507,,63,81%,71%,10%,71%,33%,,98%,91%,,$0.75,$0.20,$2.40,106.9,10.5,106.2,107.8,108.5,2.63,21.33,2.28,2.46,2.96,3.86,26.01,18.70,ModelProviders
+,MiniMax M1 80k,1m,Yes,No,Open,Yes,MiniMax-M1,,63,82%,70%,8%,71%,37%,,98%,85%,,$0.82,$0.40,$2.10,27.2,26.3,26.6,27.7,50.8,2.28,75.88,1.85,2.02,2.79,3.10,94.27,73.60,ModelProviders
+,o3-mini,200k,Yes,Yes,Proprietary,Yes,o3-mini,,63,79%,75%,9%,72%,40%,97%,97%,77%,,$1.93,$1.10,$4.40,191.4,121.2,160.7,205.9,232.0,15.86,15.86,12.05,14.49,22.29,26.90,18.47,N/A,ModelProviders
+,o3-mini,200k,Yes,Yes,Proprietary,Yes,o3-mini,,63,79%,75%,9%,72%,40%,97%,97%,77%,,$1.93,$1.10,$4.40,163.1,103.1,137.1,200.2,214.8,18.79,18.79,13.53,16.88,23.81,36.96,21.86,N/A,ModelProviders
+,MiniMax M1 40k,1m,Yes,No,Open,Yes,MiniMax-M1,,61,81%,68%,8%,66%,38%,,97%,81%,,$0.82,$0.40,$2.10,24.0,23.7,23.8,24.3,25.9,2.33,85.65,2.16,2.18,2.64,2.83,106.48,83.33,ModelProviders
+,Llama Nemotron Ultra Reasoning Base,131k,Yes,Yes,Open,Yes,nvidia/Llama-3_1-Nemotron-Ultra-253B-v1,,61,83%,73%,8%,64%,35%,,95%,75%,,$0.90,$0.60,$1.80,42.1,40.4,41.5,42.4,42.6,2.46,49.94,2.37,2.42,2.49,2.74,61.82,47.49,ModelProviders
+,Qwen3 235B 2507 (Non-reasoning),262k,No,No,Open,Yes,parasail-qwen3-235b-a22b-instruct-2507,,60,83%,75%,11%,52%,36%,96%,98%,72%,,$0.33,$0.15,$0.85,48.9,22.8,42.7,59.5,74.1,1.06,1.06,0.99,1.04,1.14,10.63,11.29,N/A,ModelProviders
+,Qwen3 235B 2507 (Non-reasoning),131k,Yes,Yes,Open,Yes,qwen-3-235b-a22b-instruct-2507,,60,83%,75%,11%,52%,36%,96%,98%,72%,,$0.75,$0.60,$1.20,"1,410.5","1,003.4","1,263.4","1,583.1","1,633.7",0.77,0.77,0.61,0.70,0.88,2.60,1.12,N/A,ModelProviders
+,Qwen3 235B 2507 (Non-reasoning),128k,No,Yes,Open,Yes,accounts/fireworks/models/qwen3-235b-a22b-instruct-2507,,60,83%,75%,11%,52%,36%,96%,98%,72%,,$0.39,$0.22,$0.88,131.8,117.4,124.8,139.1,141.0,0.84,0.84,0.75,0.80,0.87,1.09,4.63,N/A,ModelProviders
+,Qwen3 235B 2507 (Non-reasoning),262k,Yes,Yes,Open,Yes,Qwen/Qwen3-235B-A22B-Instruct-2507,,60,83%,75%,11%,52%,36%,96%,98%,72%,,$0.25,$0.13,$0.60,33.9,14.5,23.0,39.6,44.4,1.02,1.02,0.71,0.81,1.43,1.61,15.75,N/A,ModelProviders
+,Qwen3 235B 2507 (Non-reasoning),262k,No,No,Open,Yes,qwen/qwen3-235b-a22b-instruct-2507,,60,83%,75%,11%,52%,36%,96%,98%,72%,,$0.31,$0.15,$0.80,79.8,32.8,54.4,80.6,83.9,1.46,1.46,1.17,1.37,1.60,2.54,7.73,N/A,ModelProviders
+,Qwen3 235B 2507 (Non-reasoning) (FP8),256k,No,No,Open,Yes,Qwen/Qwen3-235B-A22B-Instruct-2507-tput,,60,83%,75%,11%,52%,36%,96%,98%,72%,,$0.30,$0.20,$0.60,40.6,17.9,35.4,48.1,51.0,0.86,0.86,0.78,0.83,0.90,1.14,13.17,N/A,ModelProviders
+,Qwen3 235B 2507 (Non-reasoning),131k,Yes,Yes,Open,Yes,qwen3-235b-a22b-instruct-2507,,60,83%,75%,11%,52%,36%,96%,98%,72%,,$1.23,$0.70,$2.80,41.7,33.2,37.5,46.3,52.6,3.00,3.00,2.70,2.84,3.22,4.25,14.98,N/A,ModelProviders
+,GLM-4.5-Air,128k,Yes,Yes,Open,Yes,z-ai/GLM-4.5-Air,,60,82%,73%,7%,68%,31%,93%,97%,67%,,$0.32,$0.14,$0.86,87.0,64.6,76.1,93.1,110.6,2.90,25.88,1.92,2.45,4.17,7.38,31.63,22.98,ModelProviders
+,GLM-4.5-Air,128k,No,No,Open,Yes,zai-org/GLM-4.5-Air,,60,82%,73%,7%,68%,31%,93%,97%,67%,,$0.42,$0.20,$1.10,156.0,32.7,63.7,178.8,210.6,1.40,14.22,0.51,0.58,22.48,759.56,17.43,12.82,ModelProviders
+,GLM-4.5-Air (FP8),131k,No,No,Open,Yes,zai-org/GLM-4.5-Air-FP8,,60,82%,73%,7%,68%,31%,93%,97%,67%,,$0.42,$0.20,$1.10,228.8,169.5,194.2,246.4,256.6,0.73,9.47,0.50,0.54,0.88,1.16,11.66,8.74,ModelProviders
+,Solar Pro 2 (Reasoning),66k,Yes,No,Proprietary,Yes,solar-pro2-250710,,58,81%,69%,7%,62%,30%,97%,97%,69%,,$0.50,$0.50,$0.50,118.4,114.4,116.3,121.6,125.7,2.18,19.07,1.87,1.92,2.35,2.73,23.29,16.89,ModelProviders
+,QwQ-32B,131k,No,No,Open,Yes,Qwen/QwQ-32B,,58,76%,59%,8%,63%,36%,98%,96%,78%,,$0.20,$0.20,$0.20,52.3,43.3,48.7,54.0,55.4,2.24,49.87,1.91,2.07,2.51,2.69,59.43,47.63,ModelProviders
+,QwQ-32B Fast,131k,Yes,Yes,Open,Yes,Qwen/QwQ-32B-fast,,58,76%,59%,8%,63%,36%,98%,96%,78%,,$0.75,$0.50,$1.50,81.6,64.5,77.6,82.5,83.0,1.27,31.79,1.21,1.23,1.30,1.46,37.92,30.52,ModelProviders
+,QwQ-32B Base,131k,Yes,Yes,Open,Yes,Qwen/QwQ-32B,,58,76%,59%,8%,63%,36%,98%,96%,78%,,$0.23,$0.15,$0.45,50.9,42.1,49.4,52.7,57.3,1.58,50.56,1.53,1.56,1.67,1.94,60.39,48.98,ModelProviders
+,QwQ-32B,131k,No,Yes,Open,Yes,Qwen/QwQ-32B,,58,76%,59%,8%,63%,36%,98%,96%,78%,,$0.09,$0.07,$0.15,35.6,27.9,30.9,46.6,52.6,1.62,71.63,0.91,0.99,1.69,1.81,85.68,70.01,ModelProviders
+,QwQ-32B,41k,Yes,Yes,Open,Yes,Qwen/QwQ-32B,,58,76%,59%,8%,63%,36%,98%,96%,78%,,$0.75,$0.50,$1.50,51.0,50.8,50.9,51.2,51.3,1.46,50.30,1.38,1.43,1.55,1.70,60.10,48.83,ModelProviders
+,QwQ-32B,131k,Yes,No,Open,Yes,Qwen/QwQ-32B,,58,76%,59%,8%,63%,36%,98%,96%,78%,,$1.20,$1.20,$1.20,94.1,89.7,92.2,95.2,95.5,0.62,27.10,0.59,0.60,0.68,0.78,32.41,26.48,ModelProviders
+,Claude 4 Opus,200k,Yes,No,Proprietary,No,us.anthropic.claude-opus-4-20250514-v1:0,,58,86%,70%,6%,54%,41%,97%,94%,56%,,$30.00,$15.00,$75.00,22.0,19.2,20.3,23.1,24.6,3.81,3.81,3.51,3.71,3.93,4.28,26.58,N/A,ModelProviders
+,Claude 4 Opus Vertex,200k,Yes,Yes,Proprietary,Yes,claude-opus-4,,58,86%,70%,6%,54%,41%,97%,94%,56%,,$30.00,$15.00,$75.00,39.2,32.0,34.5,42.2,50.7,2.08,2.08,1.92,1.99,2.31,3.17,14.82,N/A,ModelProviders
+,Claude 4 Opus,200k,Yes,Yes,Proprietary,Yes,claude-opus-4-20250514,,58,86%,70%,6%,54%,41%,97%,94%,56%,,$30.00,$15.00,$75.00,48.5,37.0,46.9,50.8,55.1,2.80,2.80,2.00,2.31,3.03,9.04,13.10,N/A,ModelProviders
+,Kimi K2,33k,Yes,Yes,Open,Yes,parasail-kimi-k2-instruct,,58,82%,77%,7%,56%,18%,93%,97%,69%,,$2.13,$1.50,$4.00,17.3,13.2,16.4,22.0,32.9,1.07,1.07,0.91,1.02,1.36,2.24,30.05,N/A,ModelProviders
+,Kimi K2,128k,Yes,Yes,Open,Yes,kimi-k2-0711-preview,,58,82%,77%,7%,56%,18%,93%,97%,69%,,$1.07,$0.60,$2.50,12.4,9.4,11.5,12.8,14.6,6.12,6.12,5.33,5.57,6.37,9.24,46.49,N/A,ModelProviders
+,Kimi K2,131k,Yes,Yes,Open,Yes,accounts/fireworks/models/kimi-k2-instruct,,58,82%,77%,7%,56%,18%,93%,97%,69%,,$1.07,$0.60,$2.50,45.4,19.7,32.0,48.5,54.5,1.18,1.18,0.95,1.02,1.43,1.94,12.19,N/A,ModelProviders
+,Kimi K2,131k,Yes,Yes,Open,Yes,moonshotai/Kimi-K2-Instruct,,58,82%,77%,7%,56%,18%,93%,97%,69%,,$0.88,$0.50,$2.00,48.9,13.9,42.5,53.0,58.4,0.46,0.46,0.37,0.38,0.49,1.63,10.68,N/A,ModelProviders
+,Kimi K2,131k,Yes,Yes,Open,Yes,moonshotai/kimi-k2-instruct,,58,82%,77%,7%,56%,18%,93%,97%,69%,,$1.00,$0.57,$2.30,47.5,44.3,46.2,48.6,51.4,1.99,1.99,0.75,1.92,2.27,4.71,12.52,N/A,ModelProviders
+,Kimi K2,131k,Yes,Yes,Open,Yes,moonshotai/Kimi-K2-Instruct,,58,82%,77%,7%,56%,18%,93%,97%,69%,,$1.50,$1.00,$3.00,32.1,21.6,31.6,32.7,33.6,0.92,0.92,0.84,0.87,0.98,1.04,16.50,N/A,ModelProviders
+,Kimi K2,131k,Yes,Yes,Open,Yes,moonshotai/kimi-k2-instruct,,58,82%,77%,7%,56%,18%,93%,97%,69%,,$1.50,$1.00,$3.00,197.1,180.5,191.3,206.7,222.7,0.60,0.60,0.57,0.58,0.61,0.68,3.13,N/A,ModelProviders
+,Kimi K2,131k,Yes,Yes,Open,Yes,moonshotai/Kimi-K2-Instruct,,58,82%,77%,7%,56%,18%,93%,97%,69%,,$1.50,$1.00,$3.00,36.1,3.6,24.6,41.9,46.7,0.90,0.90,0.78,0.84,1.04,1.25,14.75,N/A,ModelProviders
+,Kimi K2,131k,Yes,Yes,Open,Yes,moonshotai/Kimi-K2-Instruct,,58,82%,77%,7%,56%,18%,93%,97%,69%,,$1.07,$0.60,$2.50,84.0,74.5,80.8,86.6,89.2,0.38,0.38,0.34,0.36,0.42,1.69,6.34,N/A,ModelProviders
+,Qwen3 30B 2507 (Non-reasoning),128k,Yes,Yes,Open,Yes,qwen3-30b-a3b-instruct-2507,,57,78%,66%,7%,52%,30%,94%,98%,73%,,$0.35,$0.20,$0.80,102.9,98.7,102.0,103.8,104.6,2.54,2.54,2.18,2.35,2.69,3.05,7.40,N/A,ModelProviders
+,Magistral Medium,41k,Yes,Yes,Proprietary,No,magistral-medium-2506,,56,75%,68%,10%,53%,30%,,92%,70%,,$2.75,$2.00,$5.00,105.7,61.3,91.1,125.1,130.2,1.47,20.40,1.33,1.38,1.62,2.16,25.13,18.92,ModelProviders
+,Gemini 2.5 Flash-Lite (Reasoning) (AI Studio),1m,Yes,No,Proprietary,Yes,gemini-2.5-flash-lite-preview-06-17,,55,76%,63%,6%,59%,19%,97%,97%,70%,,$0.17,$0.10,$0.40,542.8,406.4,468.2,692.9,725.4,9.00,9.00,5.75,7.56,10.44,13.88,9.92,N/A,ModelProviders
+,Magistral Small,40k,Yes,Yes,Open,No,magistral-small-2506,,55,75%,64%,7%,51%,24%,96%,96%,71%,,$0.75,$0.50,$1.50,178.4,122.2,148.3,199.1,220.6,0.94,12.15,0.80,0.90,1.11,1.16,14.95,11.21,ModelProviders
+,Qwen3 Coder 480B (FP8),262k,No,No,Open,Yes,parasail-qwen3-coder-480b-a35b-instruct,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$1.63,$1.50,$2.00,45.4,23.2,39.0,53.6,73.0,1.30,1.30,1.07,1.16,2.67,5.00,12.32,N/A,ModelProviders
+,Qwen3 Coder 480B,131k,Yes,Yes,Open,Yes,qwen-3-coder-480b,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$2.00,$2.00,$2.00,"1,394.0","1,023.8","1,161.8","1,571.9","1,634.5",0.79,0.79,0.71,0.75,0.89,2.57,1.15,N/A,ModelProviders
+,Qwen3 Coder 480B (FP8),262k,No,No,Open,Yes,Qwen/Qwen3-Coder-480B-A35B-Instruct,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$2.00,$2.00,$2.00,22.3,11.8,15.8,26.9,41.8,3.22,3.22,2.58,2.87,4.66,24.17,25.62,N/A,ModelProviders
+,Qwen3 Coder 480B,262k,No,Yes,Open,Yes,accounts/fireworks/models/qwen3-coder-480b-a35b-instruct,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$0.79,$0.45,$1.80,125.7,93.8,112.3,134.9,154.6,0.88,0.88,0.82,0.83,0.91,1.05,4.86,N/A,ModelProviders
+,Qwen3 Coder 480B (FP8),262k,Yes,No,Open,Yes,Qwen/Qwen3-Coder-480B-A35B-Instruct,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$0.70,$0.40,$1.60,46.5,2.2,17.8,55.1,70.7,1.12,1.12,0.73,1.05,13.55,111.49,11.87,N/A,ModelProviders
+,"Qwen3 Coder 480B (Turbo, FP4)",262k,Yes,No,Open,Yes,Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$0.53,$0.30,$1.20,47.8,30.6,38.7,55.1,65.4,0.54,0.54,0.44,0.46,0.60,3.83,11.00,N/A,ModelProviders
+,Qwen3 Coder 480B,262k,Yes,Yes,Open,Yes,qwen/qwen3-coder-480b-a35b-instruct,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$1.96,$0.95,$5.00,44.7,29.6,38.5,55.4,64.9,0.90,0.90,0.72,0.80,2.08,2.72,12.09,N/A,ModelProviders
+,Qwen3 Coder 480B (FP8),33k,No,No,Open,Yes,Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$1.25,$1.00,$2.00,81.5,60.6,68.5,86.5,89.0,0.92,0.92,0.82,0.89,1.06,2.04,7.06,N/A,ModelProviders
+,Qwen3 Coder 480B (FP8),262k,No,No,Open,Yes,Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$2.00,$2.00,$2.00,43.4,12.2,25.5,59.7,75.2,0.93,0.93,0.88,0.91,1.08,5.57,12.44,N/A,ModelProviders
+,Qwen3 Coder 480B,262k,Yes,Yes,Open,Yes,qwen3-coder-480b-a35b-instruct,,54,79%,62%,4%,59%,36%,97%,94%,48%,,$3.00,$1.50,$7.50,40.6,31.0,37.5,51.6,73.7,3.50,3.50,3.01,3.37,3.68,3.85,15.80,N/A,ModelProviders
+,Gemini 2.5 Flash (AI_Studio),1m,Yes,Yes,Proprietary,Yes,gemini-2.5-flash,,53,81%,68%,5%,50%,29%,95%,93%,50%,,$0.85,$0.30,$2.50,261.9,242.0,250.0,273.5,283.9,0.42,0.42,0.28,0.33,0.44,0.51,2.33,N/A,ModelProviders
+,Gemini 2.5 Flash (Vertex),1m,Yes,Yes,Proprietary,Yes,google/gemini-2.5-flash,,53,81%,68%,5%,50%,29%,95%,93%,50%,,$0.85,$0.30,$2.50,251.9,213.0,226.7,294.9,306.1,0.44,0.44,0.39,0.42,0.50,1.44,2.43,N/A,ModelProviders
+,Claude 4 Sonnet,200k,Yes,No,Proprietary,No,us.anthropic.claude-sonnet-4-20250514-v1:0,,53,84%,68%,4%,45%,37%,97%,93%,41%,,$6.00,$3.00,$15.00,83.2,67.2,74.0,87.0,96.1,2.05,2.05,1.14,1.31,2.10,2.27,8.05,N/A,ModelProviders
+,Claude 4 Sonnet Vertex,200k,Yes,Yes,Proprietary,Yes,claude-sonnet-4,,53,84%,68%,4%,45%,37%,97%,93%,41%,,$6.00,$3.00,$15.00,60.9,53.3,58.0,63.1,67.6,1.58,1.58,1.44,1.53,1.72,2.17,9.79,N/A,ModelProviders
+,Claude 4 Sonnet,200k,Yes,Yes,Proprietary,Yes,claude-sonnet-4-20250514,,53,84%,68%,4%,45%,37%,97%,93%,41%,,$6.00,$3.00,$15.00,60.9,52.0,57.0,69.2,81.3,1.56,1.56,1.27,1.35,1.70,1.86,9.76,N/A,ModelProviders
+,GPT-4.1 mini,1m,Yes,Yes,Proprietary,Yes,gpt-4.1-mini-2025-04-14,,53,78%,66%,5%,48%,40%,95%,93%,43%,,$0.70,$0.40,$1.60,86.9,50.2,75.2,99.6,154.8,0.62,0.62,0.50,0.54,0.69,4.50,6.38,N/A,ModelProviders
+,GPT-4.1 mini,1m,Yes,Yes,Proprietary,Yes,gpt-4.1-mini,,53,78%,66%,5%,48%,40%,95%,93%,43%,,$0.70,$0.40,$1.60,127.9,80.4,111.1,144.6,171.9,0.84,0.84,0.74,0.77,0.90,1.15,4.75,N/A,ModelProviders
+,GPT-4.1,1m,Yes,Yes,Proprietary,Yes,gpt-4.1-2025-04-14,,53,81%,67%,5%,46%,38%,96%,91%,44%,,$3.50,$2.00,$8.00,144.0,95.4,129.2,154.7,184.8,0.94,0.94,0.62,0.80,1.06,1.41,4.41,N/A,ModelProviders
+,GPT-4.1,1m,Yes,Yes,Proprietary,Yes,gpt-4.1,,53,81%,67%,5%,46%,38%,96%,91%,44%,,$3.50,$2.00,$8.00,101.0,64.2,73.4,108.5,134.9,1.42,1.42,1.16,1.25,1.97,2.60,6.38,N/A,ModelProviders
+,DeepSeek R1 0528 Qwen3 8B,131k,Yes,No,Open,Yes,parasail-deepseek-r1-0528-qwen3-8b,,52,74%,61%,6%,51%,20%,91%,93%,65%,,$0.06,$0.05,$0.10,112.6,83.6,101.3,120.5,122.4,0.84,18.60,0.73,0.80,0.88,0.98,23.04,17.75,ModelProviders
+,DeepSeek R1 0528 Qwen3 8B,128k,No,No,Open,Yes,deepseek/deepseek-r1-0528-qwen3-8b,,52,74%,61%,6%,51%,20%,91%,93%,65%,,$0.07,$0.06,$0.09,84.7,79.1,83.9,85.0,85.4,1.91,25.53,1.80,1.86,2.06,5.32,31.43,23.62,ModelProviders
+,EXAONE 4.0 32B,131k,Yes,Yes,Open,Yes,LGAI-EXAONE/EXAONE-4.0-32B,,51,77%,63%,5%,47%,25%,91%,94%,47%,,$0.70,$0.60,$1.00,88.2,75.2,76.2,126.6,129.9,0.94,0.94,0.91,0.93,0.96,1.01,6.61,N/A,ModelProviders
+,Grok 3,131k,Yes,Yes,Proprietary,Yes,grok-3-beta,,51,80%,69%,5%,43%,37%,91%,87%,33%,,$6.00,$3.00,$15.00,70.1,50.9,59.2,84.4,90.2,1.81,1.81,1.66,1.74,1.90,1.96,8.94,N/A,ModelProviders
+,Grok 3 Fast,131k,Yes,Yes,Proprietary,Yes,grok-3-fast-beta,,51,80%,69%,5%,43%,37%,91%,87%,33%,,$10.00,$5.00,$25.00,70.1,43.3,59.5,76.7,85.1,1.82,1.82,1.65,1.75,1.92,1.98,8.94,N/A,ModelProviders
+,Llama 4 Maverick (FP8),1m,Yes,No,Open,Yes,llama-4-maverick-17b-128e-instruct-fp8,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.28,$0.18,$0.60,154.0,131.8,145.4,162.2,166.4,0.44,0.44,0.38,0.42,0.49,0.82,3.69,N/A,ModelProviders
+,Llama 4 Maverick (FP8),1m,Yes,No,Open,Yes,parasail-llama-4-maverick-instruct-fp8,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.35,$0.19,$0.85,149.6,67.5,124.6,171.2,183.0,0.73,0.73,0.64,0.68,0.78,0.92,4.08,N/A,ModelProviders
+,Llama 4 Maverick,32k,Yes,Yes,Open,Yes,llama-4-maverick-17b-128e-instruct,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.30,$0.20,$0.60,"1,876.3","1,391.0","1,598.9","2,549.7","2,837.5",0.55,0.55,0.49,0.51,0.62,0.86,0.81,N/A,ModelProviders
+,Llama 4 Maverick,128k,Yes,No,Open,No,us.meta.llama4-maverick-17b-instruct-v1:0,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.42,$0.24,$0.97,264.2,204.2,238.5,286.3,303.7,0.90,0.90,0.56,0.63,1.00,1.02,2.79,N/A,ModelProviders
+,Llama 4 Maverick Vertex,524k,Yes,Yes,Open,Yes,meta/llama-4-maverick-17b-128e-instruct-maas,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.55,$0.35,$1.15,130.7,111.4,127.5,133.3,134.4,0.49,0.49,0.45,0.47,0.50,0.67,4.31,N/A,ModelProviders
+,Llama 4 Maverick (FP8),128k,No,No,Open,Yes,llama4-maverick-fp8,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.61,$0.35,$1.41,190.3,140.6,179.0,198.3,201.5,0.55,0.55,0.45,0.54,0.56,0.58,3.18,N/A,ModelProviders
+,Llama 4 Maverick (Base),1m,Yes,Yes,Open,Yes,accounts/fireworks/models/llama4-maverick-instruct-basic,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.39,$0.22,$0.88,179.5,166.0,175.6,182.0,184.3,0.66,0.66,0.57,0.62,0.71,0.86,3.44,N/A,ModelProviders
+,Llama 4 Maverick (FP8),131k,No,No,Open,Yes,meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.26,$0.15,$0.60,91.4,52.6,78.8,104.3,112.8,0.49,0.49,0.37,0.41,0.56,0.73,5.95,N/A,ModelProviders
+,Llama 4 Maverick (FP8),1m,Yes,No,Open,Yes,meta-llama/llama-4-maverick-17b-128e-instruct-fp8,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.34,$0.17,$0.85,148.1,61.1,87.0,156.2,170.5,0.84,0.84,0.65,0.76,1.08,2.25,4.21,N/A,ModelProviders
+,Llama 4 Maverick (FP8),1m,Yes,Yes,Open,Yes,meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.39,$0.25,$0.80,176.2,146.8,160.6,185.6,202.9,0.55,0.55,0.50,0.52,0.63,0.74,3.39,N/A,ModelProviders
+,Llama 4 Maverick,128k,Yes,Yes,Open,Yes,meta-llama/llama-4-maverick-17b-128e-instruct,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.30,$0.20,$0.60,474.5,391.3,448.9,496.7,530.8,0.34,0.34,0.30,0.31,0.41,0.68,1.39,N/A,ModelProviders
+,Llama 4 Maverick,131k,Yes,Yes,Open,Yes,Llama-4-Maverick-17B-128E-Instruct,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.92,$0.63,$1.80,823.1,802.3,809.2,836.8,850.7,0.98,0.98,0.95,0.95,1.06,1.17,1.58,N/A,ModelProviders
+,Llama 4 Maverick,524k,Yes,Yes,Open,Yes,meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,,51,81%,67%,5%,40%,33%,88%,89%,39%,,$0.41,$0.27,$0.85,119.3,94.4,110.9,125.9,130.2,0.45,0.45,0.35,0.41,0.50,0.58,4.64,N/A,ModelProviders
+,Mistral Medium 3,128k,Yes,Yes,Proprietary,No,mistral-medium-2505,,49,76%,58%,4%,40%,33%,90%,91%,44%,,$0.80,$0.40,$2.00,73.6,54.0,64.3,83.1,91.6,1.55,1.55,1.30,1.41,1.81,3.61,8.34,N/A,ModelProviders
+,Mistral Medium 3,128k,Yes,Yes,Proprietary,Yes,mistral-medium-2505,,49,76%,58%,4%,40%,33%,90%,91%,44%,,$0.80,$0.40,$2.00,57.0,45.4,51.0,57.7,59.2,1.85,1.85,1.18,1.45,1.90,3.61,10.62,N/A,ModelProviders
+,Reka Flash 3,128k,No,No,Open,No,reka-flash-3,,47,67%,53%,5%,44%,27%,95%,89%,51%,,$0.35,$0.20,$0.80,45.9,43.4,45.7,46.9,47.2,2.45,46.07,2.38,2.42,2.48,2.56,56.98,43.62,ModelProviders
+,Solar Pro 2,66k,Yes,No,Proprietary,Yes,solar-pro2-250710,,47,75%,56%,4%,42%,25%,88%,89%,41%,,$0.50,$0.50,$0.50,131.5,116.5,125.6,134.9,137.4,2.18,2.18,1.93,1.98,2.39,2.77,5.99,N/A,ModelProviders
+,Gemini 2.5 Flash-Lite (AI Studio),1m,Yes,No,Proprietary,Yes,gemini-2.5-flash-lite-preview-06-17,,46,72%,47%,4%,40%,18%,93%,93%,50%,,$0.17,$0.10,$0.40,374.2,287.1,350.4,463.9,524.2,0.39,0.39,0.29,0.32,0.47,0.54,1.72,N/A,ModelProviders
+,Llama 4 Scout,1m,Yes,No,Open,Yes,llama-4-scout-17b-16e-instruct,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.14,$0.08,$0.30,123.8,112.7,120.1,125.2,127.7,0.55,0.55,0.50,0.53,0.58,0.62,4.59,N/A,ModelProviders
+,Llama 4 Scout (FP8),158k,Yes,No,Open,Yes,parasail-llama-4-scout-instruct,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.19,$0.09,$0.48,126.6,111.9,121.3,133.1,136.6,0.83,0.83,0.74,0.76,0.87,0.97,4.78,N/A,ModelProviders
+,Llama 4 Scout,32k,Yes,Yes,Open,Yes,llama-4-scout-17b-16e-instruct,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.70,$0.65,$0.85,"2,382.2","1,867.6","1,923.7","2,739.5","2,931.5",0.58,0.58,0.47,0.50,0.67,0.71,0.78,N/A,ModelProviders
+,Llama 4 Scout,128k,Yes,No,Open,No,us.meta.llama4-scout-17b-instruct-v1:0,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.29,$0.17,$0.66,170.6,166.1,167.2,173.9,176.9,0.84,0.84,0.57,0.62,0.97,1.03,3.78,N/A,ModelProviders
+,Llama 4 Scout Vertex,1m,Yes,Yes,Open,Yes,meta/llama-4-scout-17b-16e-instruct-maas,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.36,$0.25,$0.70,136.7,122.8,134.2,139.9,141.0,0.52,0.52,0.49,0.51,0.55,0.58,4.18,N/A,ModelProviders
+,Llama 4 Scout,128k,Yes,No,Open,Yes,llama4-scout,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.34,$0.20,$0.78,136.8,65.1,100.1,147.6,159.8,0.60,0.60,0.57,0.58,0.61,0.65,4.25,N/A,ModelProviders
+,Llama 4 Scout (Base),1m,Yes,Yes,Open,Yes,accounts/fireworks/models/llama4-scout-instruct-basic,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.26,$0.15,$0.60,173.6,157.7,169.0,175.3,177.0,0.68,0.68,0.60,0.65,0.80,1.14,3.56,N/A,ModelProviders
+,Llama 4 Scout,131k,Yes,No,Open,Yes,meta-llama/Llama-4-Scout-17B-16E-Instruct,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.14,$0.08,$0.30,76.1,45.3,64.1,86.5,95.5,0.69,0.69,0.61,0.64,0.71,0.75,7.27,N/A,ModelProviders
+,Llama 4 Scout,131k,Yes,No,Open,Yes,meta-llama/llama-4-scout-17b-16e-instruct,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.20,$0.10,$0.50,78.2,56.0,68.7,86.6,96.5,1.70,1.70,1.54,1.63,1.92,2.29,8.10,N/A,ModelProviders
+,Llama 4 Scout,1m,No,Yes,Open,Yes,meta-llama/Llama-4-Scout-17B-16E-Instruct,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.18,$0.08,$0.50,138.9,124.5,133.0,147.0,153.1,0.69,0.69,0.62,0.66,0.75,0.84,4.29,N/A,ModelProviders
+,Llama 4 Scout,131k,Yes,Yes,Open,Yes,meta-llama/llama-4-scout-17b-16e-instruct,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.17,$0.11,$0.34,558.5,520.7,545.9,567.2,573.9,0.42,0.42,0.37,0.39,0.48,0.57,1.31,N/A,ModelProviders
+,Llama 4 Scout,328k,Yes,Yes,Open,Yes,meta-llama/Llama-4-Scout-17B-16E-Instruct,,43,75%,59%,4%,30%,17%,83%,84%,28%,,$0.28,$0.18,$0.59,117.0,90.1,111.8,125.7,131.3,0.52,0.52,0.44,0.46,0.58,3.80,4.79,N/A,ModelProviders
+,Nova Premier,1m,Yes,No,Proprietary,No,us.amazon.nova-premier-v1:0,,43,73%,57%,5%,32%,28%,91%,84%,17%,,$5.00,$2.50,$12.50,35.7,30.1,32.2,38.3,39.3,2.80,2.80,2.66,2.74,2.87,2.91,16.79,N/A,ModelProviders
+,Mistral Small 3.2,33k,Yes,Yes,Open,No,mistral-small-2506,,42,68%,51%,4%,28%,26%,85%,88%,32%,,$0.15,$0.10,$0.30,163.8,83.9,123.1,175.7,200.9,0.81,0.81,0.58,0.70,0.87,2.82,3.86,N/A,ModelProviders
+,Mistral Small 3.2 (FP8),128k,Yes,No,Open,Yes,mistralai/Mistral-Small-3.2-24B-Instruct-2506,,42,68%,51%,4%,28%,26%,85%,88%,32%,,$0.06,$0.05,$0.10,38.9,21.6,31.0,43.8,57.0,1.53,1.53,0.91,1.16,1.75,2.39,14.40,N/A,ModelProviders
+,Llama 3.3 70B (FP8),128k,Yes,No,Open,Yes,llama3.3-70b-instruct-fp8,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.17,$0.12,$0.30,53.0,49.9,50.6,54.6,55.4,1.26,1.26,1.14,1.18,1.35,1.43,10.70,N/A,ModelProviders
+,Llama 3.3 70B (FP8),131k,Yes,No,Open,Yes,parasail-llama-33-70b-fp8,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.28,$0.28,$0.28,49.7,46.8,47.9,52.6,58.9,1.63,1.63,1.55,1.57,1.74,2.43,11.70,N/A,ModelProviders
+,Llama 3.3 70B,128k,Yes,Yes,Open,Yes,llama-3.3-70b,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.94,$0.85,$1.20,"2,242.4","1,141.9","1,993.4","2,429.8","2,682.4",0.64,0.64,0.56,0.60,0.76,1.04,0.87,N/A,ModelProviders
+,Llama 3.3 70B,128k,No,No,Open,Yes,meta-llama/Llama-3.3-70B-Instruct,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.40,$0.40,$0.40,31.6,26.0,29.8,32.0,105.2,2.84,2.84,1.75,2.77,3.11,3.85,18.68,N/A,ModelProviders
+,Llama 3.3 70B,128k,Yes,No,Open,No,us.meta.llama3-3-70b-instruct-v1:0,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.71,$0.71,$0.71,213.5,147.9,188.4,235.9,250.2,1.10,1.10,1.03,1.08,1.13,1.14,3.44,N/A,ModelProviders
+,Llama 3.3 70B Fast,128k,Yes,Yes,Open,Yes,meta-llama/Llama-3.3-70B-Instruct-fast,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.38,$0.25,$0.75,234.5,217.7,231.1,239.1,246.9,1.31,1.31,1.27,1.30,1.33,1.39,3.44,N/A,ModelProviders
+,Llama 3.3 70B Base,128k,Yes,Yes,Open,Yes,meta-llama/Llama-3.3-70B-Instruct,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.20,$0.13,$0.40,36.0,27.0,33.5,37.0,38.0,2.42,2.42,2.28,2.34,2.63,3.30,16.32,N/A,ModelProviders
+,Llama 3.3 70B Vertex,128k,Yes,Yes,Open,Yes,meta/llama-3.3-70b-instruct-maas,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.72,$0.72,$0.72,81.0,80.4,80.6,81.1,81.4,0.54,0.54,0.51,0.53,0.57,1.65,6.71,N/A,ModelProviders
+,Llama 3.3 70B,128k,Yes,No,Open,Yes,Llama-3-3-70B-Instruct,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.71,$0.71,$0.71,42.1,12.1,32.2,47.1,50.4,1.80,1.80,1.59,1.70,2.29,118.88,13.67,N/A,ModelProviders
+,Llama 3.3 70B,128k,Yes,Yes,Open,Yes,accounts/fireworks/models/llama-v3p3-70b-instruct,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.90,$0.90,$0.90,139.1,101.8,122.4,157.3,173.6,0.81,0.81,0.67,0.76,0.90,1.55,4.41,N/A,ModelProviders
+,"Llama 3.3 70B (Turbo, FP8)",128k,Yes,Yes,Open,Yes,meta-llama/Llama-3.3-70B-Instruct-Turbo,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.06,$0.04,$0.12,44.7,26.6,35.7,52.3,56.4,1.48,1.48,1.03,1.20,1.80,2.48,12.67,N/A,ModelProviders
+,Llama 3.3 70B,128k,Yes,Yes,Open,Yes,meta-llama/Llama-3.3-70B-Instruct,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.27,$0.23,$0.40,28.3,24.0,25.8,29.8,31.9,1.42,1.42,1.14,1.24,1.79,2.39,19.08,N/A,ModelProviders
+,Llama 3.3 70B,128k,Yes,Yes,Open,Yes,meta-llama-3.3-70b-instruct,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.60,$0.60,$0.60,99.1,87.6,92.8,107.2,111.8,0.94,0.94,0.87,0.90,0.98,1.06,5.99,N/A,ModelProviders
+,Llama 3.3 70B,128k,Yes,No,Open,Yes,meta-llama/llama-3.3-70b-instruct,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.20,$0.13,$0.39,35.5,29.7,35.0,37.4,40.2,1.70,1.70,1.58,1.63,1.87,2.48,15.77,N/A,ModelProviders
+,Llama 3.3 70B,128k,Yes,Yes,Open,Yes,llama-3.3-70b-versatile,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.64,$0.59,$0.79,311.8,259.6,286.7,325.5,348.4,0.87,0.87,0.80,0.84,1.00,1.08,2.47,N/A,ModelProviders
+,Llama 3.3 70B,128k,Yes,Yes,Open,Yes,Meta-Llama-3.3-70B-Instruct,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.75,$0.60,$1.20,298.5,277.8,286.1,317.2,346.2,1.49,1.49,1.47,1.48,1.58,24.05,3.17,N/A,ModelProviders
+,Llama 3.3 70B Turbo,128k,Yes,Yes,Open,Yes,meta-llama/Llama-3.3-70B-Instruct-Turbo,,41,71%,50%,4%,29%,26%,86%,77%,30%,,$0.88,$0.88,$0.88,92.1,50.0,77.3,118.4,178.9,1.10,1.10,0.94,1.03,1.31,1.78,6.53,N/A,ModelProviders
+,GPT-4.1 nano,1m,Yes,Yes,Proprietary,Yes,gpt-4.1-nano-2025-04-14,,41,66%,51%,4%,33%,26%,88%,85%,24%,,$0.17,$0.10,$0.40,117.1,58.0,97.0,126.6,155.8,0.48,0.48,0.38,0.42,0.53,0.76,4.75,N/A,ModelProviders
+,GPT-4.1 nano,1m,Yes,Yes,Proprietary,Yes,gpt-4.1-nano,,41,66%,51%,4%,33%,26%,88%,85%,24%,,$0.17,$0.10,$0.40,211.0,125.5,161.1,248.9,266.1,0.86,0.86,0.80,0.84,1.01,1.42,3.23,N/A,ModelProviders
+,Llama 3.1 405B (FP8),128k,Yes,No,Open,Yes,llama3.1-405b-instruct-fp8,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$0.80,$0.80,$0.80,34.3,33.0,33.8,34.7,35.0,1.78,1.78,1.72,1.75,1.87,1.99,16.35,N/A,ModelProviders
+,Llama 3.1 405B,128k,No,No,Open,Yes,meta-llama/Meta-Llama-3.1-405B-Instruct,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$4.00,$4.00,$4.00,81.1,26.6,27.0,94.0,97.1,2.67,2.67,2.41,2.55,3.11,12.88,8.83,N/A,ModelProviders
+,Llama 3.1 405B Standard,128k,Yes,No,Open,No,meta.llama3-1-405b-instruct-v1:0,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$2.40,$2.40,$2.40,16.0,15.2,15.5,16.1,16.2,7.93,7.93,7.88,7.90,8.06,8.13,39.23,N/A,ModelProviders
+,Llama 3.1 405B Latency Optimized,128k,Yes,No,Open,No,us.meta.llama3-1-405b-instruct-v1:0,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$3.00,$3.00,$3.00,79.5,72.4,74.4,82.2,87.8,2.11,2.11,2.03,2.10,2.15,2.21,8.40,N/A,ModelProviders
+,Llama 3.1 405B Base,128k,Yes,Yes,Open,Yes,meta-llama/Meta-Llama-3.1-405B-Instruct,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$1.50,$1.00,$3.00,31.6,28.9,30.3,32.4,32.7,2.46,2.46,2.39,2.41,2.50,2.93,18.27,N/A,ModelProviders
+,Llama 3.1 405B Vertex,128k,Yes,No,Open,Yes,meta/llama3-405b-instruct-maas,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$7.75,$5.00,$16.00,21.7,20.4,21.3,21.8,23.2,2.44,2.44,2.38,2.42,2.46,2.50,25.45,N/A,ModelProviders
+,Llama 3.1 405B,128k,No,No,Open,Yes,Meta-Llama-3-1-405B-Instruct,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$8.00,$5.33,$16.00,30.4,29.7,30.0,30.6,30.8,1.96,1.96,1.91,1.93,1.97,2.03,18.41,N/A,ModelProviders
+,Llama 3.1 405B,128k,Yes,Yes,Open,Yes,accounts/fireworks/models/llama-v3p1-405b-instruct,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$3.00,$3.00,$3.00,88.4,74.2,81.0,93.6,95.8,2.02,2.02,1.88,1.93,2.09,2.23,7.67,N/A,ModelProviders
+,Llama 3.1 405B,33k,Yes,Yes,Open,Yes,meta-llama/Meta-Llama-3.1-405B-Instruct,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$0.80,$0.80,$0.80,19.9,16.0,17.9,20.8,21.8,2.51,2.51,1.91,2.06,2.66,4.04,27.59,N/A,ModelProviders
+,Llama 3.1 405B,16k,Yes,Yes,Open,Yes,Meta-Llama-3.1-405B-Instruct,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$6.25,$5.00,$10.00,101.5,93.8,96.4,105.0,106.0,5.25,5.25,4.61,5.15,6.93,8.93,10.17,N/A,ModelProviders
+,Llama 3.1 405B,128k,Yes,No,Open,Yes,databricks-meta-llama-3-1-405b-instruct,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$7.50,$5.00,$15.00,15.9,13.9,15.2,16.1,16.4,4.77,4.77,4.36,4.54,4.85,5.11,36.23,N/A,ModelProviders
+,Llama 3.1 405B Turbo,128k,Yes,No,Open,Yes,meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo,,40,73%,52%,4%,31%,30%,85%,70%,21%,1266,$3.50,$3.50,$3.50,26.8,22.5,26.6,26.9,27.0,2.30,2.30,2.19,2.27,2.42,14.11,20.96,N/A,ModelProviders
+,MiniMax-Text-01,1m,Yes,No,Open,Yes,MiniMax-Text-01,,40,76%,58%,4%,25%,25%,86%,75%,13%,,$0.42,$0.20,$1.10,21.4,16.1,18.1,25.4,32.2,1.81,1.81,1.38,1.63,2.49,3.33,25.20,N/A,ModelProviders
+,Phi-4,16k,Yes,Yes,Open,Yes,microsoft/phi-4,,40,71%,57%,4%,23%,26%,87%,81%,14%,,$0.15,$0.10,$0.30,107.1,102.2,106.3,107.6,107.9,1.13,1.13,1.09,1.11,1.16,1.33,5.80,N/A,ModelProviders
+,Phi-4,16k,No,No,Open,Yes,Phi-4-Global-Standard,,40,71%,57%,4%,23%,26%,87%,81%,14%,,$0.22,$0.13,$0.50,39.9,30.3,36.2,41.6,42.6,2.02,2.02,1.88,1.96,2.03,2.16,14.55,N/A,ModelProviders
+,Phi-4,16k,No,Yes,Open,Yes,microsoft/phi-4,,40,71%,57%,4%,23%,26%,87%,81%,14%,,$0.09,$0.07,$0.14,45.4,39.3,43.1,47.5,50.1,1.46,1.46,0.82,1.00,1.69,2.02,12.48,N/A,ModelProviders
+,Command A,256k,Yes,Yes,Open,No,command-a-03-2025,,40,71%,53%,5%,29%,28%,82%,82%,10%,,$4.38,$2.50,$10.00,64.0,31.4,49.2,110.4,170.0,1.18,1.18,0.85,0.94,2.51,32.78,9.00,N/A,ModelProviders
+,Devstral Medium,256k,Yes,Yes,Proprietary,No,devstral-medium-2507,,38,71%,49%,4%,34%,29%,94%,71%,7%,,$0.80,$0.40,$2.00,90.2,69.5,79.9,96.5,108.9,1.56,1.56,1.22,1.39,1.66,4.76,7.10,N/A,ModelProviders
+,Gemma 3 27B,131k,Yes,No,Open,Yes,parasail-gemma3-27b-it,,38,67%,43%,5%,14%,21%,89%,88%,25%,,$0.29,$0.25,$0.40,79.4,68.7,73.6,81.5,87.5,1.16,1.16,1.07,1.12,1.24,1.92,7.46,N/A,ModelProviders
+,Gemma 3 27B (AI_Studio),128k,No,No,Open,Yes,gemma-3-27b-it,,38,67%,43%,5%,14%,21%,89%,88%,25%,,$0.00,$0.00,$0.00,49.1,41.3,46.0,50.7,57.5,1.85,1.85,1.82,1.83,1.88,2.04,12.03,N/A,ModelProviders
+,Gemma 3 27B,128k,Yes,No,Open,Yes,google/gemma-3-27b-it,,38,67%,43%,5%,14%,21%,89%,88%,25%,,$0.11,$0.09,$0.17,33.0,20.9,28.4,41.1,48.5,0.94,0.94,0.80,0.89,1.02,1.66,16.11,N/A,ModelProviders
+,Llama 3.1 Nemotron 70B (FP8),128k,Yes,No,Open,Yes,llama3.1-nemotron-70b-instruct-fp8,,37,69%,47%,5%,17%,23%,82%,73%,25%,1269,$0.17,$0.12,$0.30,49.2,46.4,48.8,49.8,50.1,1.13,1.13,1.08,1.11,1.16,1.22,11.29,N/A,ModelProviders
+,Llama 3.1 Nemotron 70B,128k,Yes,Yes,Open,Yes,nvidia/Llama-3.1-Nemotron-70B-Instruct,,37,69%,47%,5%,17%,23%,82%,73%,25%,1269,$0.17,$0.12,$0.30,34.9,11.1,29.6,37.1,39.2,1.92,1.92,1.32,1.47,2.07,25.43,16.24,N/A,ModelProviders
+,GPT-4o mini,128k,Yes,Yes,Proprietary,Yes,gpt-4o-mini-2024-07-18,,36,65%,43%,4%,23%,23%,88%,79%,12%,1273,$0.26,$0.15,$0.60,61.5,50.2,58.3,67.9,78.8,0.74,0.74,0.54,0.60,0.82,2.22,8.87,N/A,ModelProviders
+,GPT-4o mini,128k,Yes,Yes,Proprietary,Yes,gpt-4o-mini,,36,65%,43%,4%,23%,23%,88%,79%,12%,1273,$0.26,$0.15,$0.60,79.0,59.5,65.2,90.5,148.3,1.30,1.30,1.18,1.24,1.86,2.73,7.63,N/A,ModelProviders
+,Gemma 3 12B,128k,Yes,No,Open,Yes,google/gemma-3-12b-it,,34,60%,35%,5%,14%,17%,83%,85%,22%,,$0.06,$0.05,$0.10,51.0,29.1,35.7,58.6,63.6,1.61,1.61,0.78,1.42,1.96,4.26,11.41,N/A,ModelProviders
+,Llama 3.2 90B (Vision),128k,Yes,No,Open,No,us.meta.llama3-2-90b-instruct-v1:0,,33,67%,43%,5%,21%,24%,82%,63%,5%,,$0.72,$0.72,$0.72,56.4,47.7,54.3,57.1,58.1,1.07,1.07,0.98,1.06,1.09,1.13,9.94,N/A,ModelProviders
+,Llama 3.2 90B (Vision) Vertex,128k,Yes,No,Open,Yes,meta/llama-3.2-90b-vision-instruct-maas,,33,67%,43%,5%,21%,24%,82%,63%,5%,,$0.00,$0.00,$0.00,32.5,29.8,31.2,33.4,33.7,0.64,0.64,0.60,0.63,0.65,0.99,16.04,N/A,ModelProviders
+,Llama 3.2 90B (Vision),33k,No,No,Open,Yes,meta-llama/Llama-3.2-90B-Vision-Instruct,,33,67%,43%,5%,21%,24%,82%,63%,5%,,$0.36,$0.35,$0.40,31.5,24.8,27.7,32.8,36.5,1.77,1.77,1.61,1.69,1.96,2.45,17.65,N/A,ModelProviders
+,Devstral Small,256k,Yes,Yes,Open,No,devstral-small-2507,,32,62%,41%,4%,25%,24%,85%,64%,0%,,$0.15,$0.10,$0.30,141.9,108.9,132.4,162.5,194.2,0.97,0.97,0.83,0.92,1.17,1.27,4.49,N/A,ModelProviders
+,Devstral Small,128k,Yes,Yes,Open,Yes,mistralai/Devstral-Small-2505,,32,62%,41%,4%,25%,24%,85%,64%,0%,,$0.12,$0.08,$0.24,147.4,141.5,144.7,150.2,153.8,1.07,1.07,1.03,1.04,1.13,1.70,4.46,N/A,ModelProviders
+,Devstral Small,128k,No,No,Open,Yes,mistralai/Devstral-Small-2507,,32,62%,41%,4%,25%,24%,85%,64%,0%,,$0.12,$0.07,$0.28,97.2,93.8,95.1,98.7,100.0,1.47,1.47,1.33,1.40,1.52,1.80,6.61,N/A,ModelProviders
+,Jamba 1.7 Large,256k,Yes,Yes,Open,No,jamba-large-1.7,,30,58%,39%,4%,18%,19%,71%,60%,6%,,$3.50,$2.00,$8.00,62.1,56.2,61.2,64.4,65.7,1.62,1.62,1.44,1.54,1.69,1.74,9.68,N/A,ModelProviders
+,Gemma 3n E4B,33k,No,No,Open,Yes,google/gemma-3n-E4B-it,,28,49%,30%,4%,15%,8%,,77%,14%,,$0.03,$0.02,$0.04,77.6,11.3,69.3,82.6,86.5,1.29,1.29,1.02,1.17,1.47,15.18,7.73,N/A,ModelProviders
+,Codestral (Jan '25),256k,Yes,Yes,Proprietary,No,codestral-2501,,28,45%,31%,5%,24%,25%,85%,61%,4%,,$0.45,$0.30,$0.90,159.5,147.8,154.4,185.7,218.1,0.63,0.63,0.55,0.61,0.85,0.89,3.77,N/A,ModelProviders
+,Codestral (Jan '25) Vertex,128k,Yes,No,Proprietary,Yes,mistralai/codestral-2501,,28,45%,31%,5%,24%,25%,85%,61%,4%,,$0.45,$0.30,$0.90,146.2,139.4,143.0,149.2,154.3,0.41,0.41,0.39,0.40,0.43,0.47,3.83,N/A,ModelProviders
+,Phi-4 Multimodal,128k,No,No,Open,Yes,Phi-4-multimodal-instruct-xpmhe,,27,49%,32%,4%,13%,11%,73%,69%,9%,,$0.00,$0.00,$0.00,22.7,21.1,21.8,23.3,23.8,0.83,0.83,0.80,0.81,0.85,0.89,22.81,N/A,ModelProviders
+,Gemma 3 4B,128k,Yes,No,Open,Yes,google/gemma-3-4b-it,,25,42%,29%,5%,11%,7%,72%,77%,6%,,$0.03,$0.02,$0.04,91.7,53.3,63.2,111.0,149.9,1.13,1.13,0.42,0.64,1.26,1.65,6.58,N/A,ModelProviders
+,Ministral 8B,128k,Yes,Yes,Open,No,ministral-8b-latest,,22,39%,28%,5%,11%,12%,77%,57%,4%,1183,$0.10,$0.10,$0.10,141.0,94.1,120.0,157.8,244.3,0.73,0.73,0.60,0.70,0.96,2.45,4.28,N/A,ModelProviders
+,Aya Expanse 32B,128k,No,No,Open,No,c4ai-aya-expanse-32b,,20,38%,23%,5%,14%,15%,68%,45%,0%,1207,$0.75,$0.50,$1.50,38.0,28.5,29.8,40.9,47.2,0.77,0.77,0.71,0.73,0.79,0.83,13.94,N/A,ModelProviders
+,Ministral 3B,128k,Yes,Yes,Proprietary,No,ministral-3b-latest,,20,34%,26%,6%,7%,9%,74%,54%,0%,,$0.04,$0.04,$0.04,219.3,164.5,209.1,229.7,238.9,0.60,0.60,0.49,0.57,0.73,0.82,2.88,N/A,ModelProviders
+,Jamba 1.7 Mini,258k,Yes,Yes,Open,No,jamba-mini-1.7,,18,39%,32%,5%,6%,9%,48%,26%,1%,,$0.25,$0.20,$0.40,169.9,150.4,156.1,176.7,182.7,0.85,0.85,0.69,0.79,0.96,1.10,3.80,N/A,ModelProviders
+,o3-pro,200k,Yes,Yes,Proprietary,Yes,o3-pro-2025-06-10,,,,85%,,,,,,,,$35.00,$20.00,$80.00,36.4,16.1,27.7,42.4,44.3,93.20,93.20,73.54,82.98,116.46,213.17,106.95,N/A,ModelProviders
+,Llama 3.2 11B (Vision),128k,Yes,No,Open,No,us.meta.llama3-2-11b-instruct-v1:0,,,46%,22%,5%,11%,,69%,52%,9%,,$0.16,$0.16,$0.16,53.3,43.9,51.3,55.1,56.2,0.72,0.72,0.58,0.68,0.74,0.77,10.09,N/A,ModelProviders
+,Llama 3.2 11B (Vision),128k,No,No,Open,Yes,meta-llama/Llama-3.2-11B-Vision-Instruct,,,46%,22%,5%,11%,,69%,52%,9%,,$0.05,$0.05,$0.05,53.2,44.7,50.8,57.0,63.3,1.24,1.24,0.65,0.84,1.36,1.59,10.64,N/A,ModelProviders
+,Grok 3 mini Reasoning (low),131k,Yes,Yes,Proprietary,Yes,grok-3-mini-beta,,,,,,,,,,,,$0.35,$0.30,$0.50,157.2,122.7,136.2,166.4,178.0,0.80,13.53,0.69,0.75,0.85,1.12,16.71,12.73,ModelProviders
+,Grok 3 mini Reasoning (low) Fast,131k,Yes,Yes,Proprietary,Yes,grok-3-mini-fast-beta,,,,,,,,,,,,$1.45,$0.60,$4.00,206.1,170.3,197.8,209.5,216.5,0.74,10.44,0.63,0.71,0.90,1.04,12.87,9.70,ModelProviders

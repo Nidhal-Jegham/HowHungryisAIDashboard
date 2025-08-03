@@ -492,7 +492,7 @@ def get_company(api):
     elif api in DEEPSEEK_API_ID:
         return "DeepSeek"
     elif api in DEEPSEEK_API_Microsoft_Azure:
-        return "DeepSeek (Microsoft Azure)"
+        return "DeepSeek"
     elif api in CLAUDE_API_ID:
         return "Anthropic"
     elif api in LLama_API_ID:
@@ -672,6 +672,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

@@ -52,6 +52,7 @@ df.columns
 
 
 api_id= [
+    "DeepSeek-R1-0528",
     "o3-2025-04-16",
     "o4-mini-2025-04-16",
     "o3-mini",
@@ -188,10 +189,13 @@ LLama_API_ID = ["us.meta.llama4-maverick-17b-instruct-v1:0",
 DEEPSEEK_API_ID = ["deepseek-reasoner",
     "deepseek-chat"]
 
+DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-R1-0528"]
+
 # In[15]:
 
 
 LARGE_API_ID= [
+    "DeepSeek-R1-0528",
     "deepseek-reasoner",
     "deepseek-chat",
     "us.meta.llama3-2-90b-instruct-v1:0",
@@ -330,6 +334,7 @@ df_selected = df[df['API ID'].isin(api_id)]
 
 df_selected.columns
 
+
 mask = df_selected['API ID'] == "deepseek-reasoner"
 reasoning_time= df_selected.loc[mask, 'First AnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
 
@@ -341,6 +346,21 @@ df_selected.loc[mask, 'P25First Chunk (s)'] +=reasoning_time*0.5
 df_selected.loc[mask, 'P75First Chunk (s)'] +=reasoning_time*1.5
 df_selected.loc[mask, 'P95First Chunk (s)']= df_selected.loc[mask, 'P95First Chunk (s)'].astype(float)
 df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
+df_selected.loc[mask, 'Model'] = "DeepSeek R1 (DeepSeek)"
+
+mask = df_selected['API ID'] == "DeepSeek-R1-0528"
+reasoning_time= df_selected.loc[mask, 'First AnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
+
+df_selected.loc[mask, 'MedianFirst Chunk (s)'] +=reasoning_time
+
+
+df_selected.loc[mask, 'P5First Chunk (s)'] +=reasoning_time*0.1
+df_selected.loc[mask, 'P25First Chunk (s)'] +=reasoning_time*0.5
+df_selected.loc[mask, 'P75First Chunk (s)'] +=reasoning_time*1.5
+df_selected.loc[mask, 'P95First Chunk (s)']= df_selected.loc[mask, 'P95First Chunk (s)'].astype(float)
+df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
+df_selected.loc[mask, 'Model'] = "DeepSeek R1 (Microsoft Azure)"
+
 
 # In[35]:
 
@@ -374,6 +394,8 @@ def get_hardware_host(api):
         return "DGX A100", "Azure"
     elif api in DEEPSEEK_API_ID:
         return "DGX H800", "Deepseek"
+    elif api in DEEPSEEK_API_Microsoft_Azure:
+        return "DGX H200/H100", "Azure"
     elif api in CLAUDE_API_ID:
         return "DGX H200/H100", "Anthropic"
     elif api in LLama_API_ID:
@@ -442,6 +464,8 @@ def get_environmental_multipliers(api):
         return 1.12,0.3,3.142,0.3528
     elif api in DEEPSEEK_API_ID:
         return 1.27,1.2,6.016,0.6
+    elif api in DEEPSEEK_API_Microsoft_Azure:
+        return 1.12,0.3,3.142,0.3528
     elif api in CLAUDE_API_ID:
         return 1.14,0.18,3.142,0.385
     elif api in LLama_API_ID:
@@ -467,6 +491,8 @@ def get_company(api):
         return "OpenAI"
     elif api in DEEPSEEK_API_ID:
         return "DeepSeek"
+    elif api in DEEPSEEK_API_Microsoft_Azure:
+        return "DeepSeek (Microsoft Azure)"
     elif api in CLAUDE_API_ID:
         return "Anthropic"
     elif api in LLama_API_ID:
@@ -646,7 +672,6 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
-
 
 
 

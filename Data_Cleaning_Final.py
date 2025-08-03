@@ -9,15 +9,10 @@ import numpy as np
 
 # In[2]:
 
-df_short = pd.read_csv('./data/artificialanalysis_cleanshort.csv')
-df_medium = pd.read_csv('./data/artificialanalysis_cleanmedium.csv')
-df_long = pd.read_csv('./data/artificialanalysis_cleanlong.csv')
 
-# 💡 Do your cleaning here...
-
-# Optional: Save cleaned combined version
-df_all = pd.concat([df_short, df_medium, df_long])
-
+df_short= pd.read_csv('artificialanalysis_cleanshort.csv')
+df_medium= pd.read_csv('artificialanalysis_cleanmedium.csv')
+df_long= pd.read_csv('artificialanalysis_cleanlong.csv')
 
 # In[3]:
 
@@ -290,9 +285,26 @@ NANO_API_ID = [
     "us.meta.llama3-2-1b-instruct-v1:0",
     ]
 
+# In[20]:
+
+
+df.columns
+
+# In[21]:
+
 
 
 # In[22]:
+
+
+
+
+# In[23]:
+
+
+# In[24]:
+
+
 
 # In[25]:
 
@@ -301,6 +313,9 @@ df_selected = df[df['API ID'].isin(api_id)]
 
 # In[26]:
 
+
+
+# In[52]:
 
 
 
@@ -315,60 +330,17 @@ df_selected = df[df['API ID'].isin(api_id)]
 
 df_selected.columns
 
-# In[30]:
+mask = df_selected['API ID'] == "deepseek-reasoner"
+reasoning_time= df_selected.loc[mask, 'First AnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
+
+df_selected.loc[mask, 'MedianFirst Chunk (s)'] +=reasoning_time
 
 
-mask = df_selected['Model'] == "DeepSeek R1 0528 (May '25)"
-adjustment = df_selected.loc[mask, 'First AnswerToken (s)'] - (
-    (df_selected.loc[mask, 'P5First Chunk (s)'] + df_selected.loc[mask, 'P95First Chunk (s)']) / 2
-)
-
-df_selected.loc[mask, 'MedianFirst Chunk (s)'] +=df_selected.loc[mask, 'First AnswerToken (s)']
-
-
-# In[31]:
-
-
-mask = df_selected['Model'] == "DeepSeek R1 0528 (May '25)"
-adjustment = df_selected.loc[mask, 'First AnswerToken (s)'] - (
-    (df_selected.loc[mask, 'P5First Chunk (s)'] + df_selected.loc[mask, 'P95First Chunk (s)']) / 2
-)
-
-df_selected.loc[mask, 'P5First Chunk (s)'] +=df_selected.loc[mask, 'First AnswerToken (s)']*0.1
-
-
-# In[32]:
-
-
-mask = df_selected['Model'] == "DeepSeek R1 0528 (May '25)"
-adjustment = df_selected.loc[mask, 'First AnswerToken (s)'] - (
-    (df_selected.loc[mask, 'P5First Chunk (s)'] + df_selected.loc[mask, 'P95First Chunk (s)']) / 2
-)
-
-df_selected.loc[mask, 'P25First Chunk (s)'] +=df_selected.loc[mask, 'First AnswerToken (s)']*0.5
-
-
-# In[33]:
-
-
-mask = df_selected['Model'] == "DeepSeek R1 0528 (May '25)"
-adjustment = df_selected.loc[mask, 'First AnswerToken (s)'] - (
-    (df_selected.loc[mask, 'P5First Chunk (s)'] + df_selected.loc[mask, 'P95First Chunk (s)']) / 2
-)
-
-df_selected.loc[mask, 'P75First Chunk (s)'] +=df_selected.loc[mask, 'First AnswerToken (s)']*1.5
-
-
-# In[34]:
-
-
-mask = df_selected['Model'] == "DeepSeek R1 0528 (May '25)"
-adjustment = df_selected.loc[mask, 'First AnswerToken (s)'] - (
-    (df_selected.loc[mask, 'P95First Chunk (s)'] + df_selected.loc[mask, 'P95First Chunk (s)']) / 2
-)
-
-df_selected.loc[mask, 'P95First Chunk (s)'] +=df_selected.loc[mask, 'First AnswerToken (s)']*1.9
-
+df_selected.loc[mask, 'P5First Chunk (s)'] +=reasoning_time*0.1
+df_selected.loc[mask, 'P25First Chunk (s)'] +=reasoning_time*0.5
+df_selected.loc[mask, 'P75First Chunk (s)'] +=reasoning_time*1.5
+df_selected.loc[mask, 'P95First Chunk (s)']= df_selected.loc[mask, 'P95First Chunk (s)'].astype(float)
+df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
 
 # In[35]:
 
@@ -674,8 +646,6 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
-
-
 
 
 

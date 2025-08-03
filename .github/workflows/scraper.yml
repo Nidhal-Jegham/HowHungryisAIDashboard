@@ -54,6 +54,8 @@ jobs:
         run: |
           mkdir -p output
           python Data_Cleaning_Final.py
+          mv artificialanalysis*.csv output/
+
 
 
       - name: Commit CSVs to repo

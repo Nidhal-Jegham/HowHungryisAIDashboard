@@ -10,9 +10,9 @@ import numpy as np
 # In[2]:
 
 
-df_short= pd.read_csv('artificialanalysis_cleanshort.csv')
-df_medium= pd.read_csv('artificialanalysis_cleanmedium.csv')
-df_long= pd.read_csv('artificialanalysis_cleanlong.csv')
+df_short= pd.read_csv('./data/artificialanalysis_cleanshort.csv')
+df_medium= pd.read_csv('./data/artificialanalysis_cleanmedium.csv')
+df_long= pd.read_csv('./data/artificialanalysis_cleanlong.csv')
 
 # In[3]:
 
@@ -646,6 +646,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

@@ -8,9 +8,9 @@ from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 
 link_list= [
-    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/short",
-    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/medium",
-    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/long",]
+    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/short?deprecation=all",
+    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/medium?deprecation=all",
+    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/long?deprecation=all",]
 length_list = [
     "short", 
     "medium",
@@ -86,3 +86,4 @@ for i in range(3):
 
     df.to_csv(f'artificialanalysis_clean{length_list[i]}.csv', index=False)
     print(f'Data exported to {length_list[i]} artificialanalysis_clean.csv')
+

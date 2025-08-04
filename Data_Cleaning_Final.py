@@ -363,6 +363,11 @@ df_selected.loc[mask, 'P95First Chunk (s)']= df_selected.loc[mask, 'P95First Chu
 df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
 df_selected.loc[mask, 'Model'] = "DeepSeek R1 (Microsoft Azure)"
 
+mask = df_selected['API ID'] == "DeepSeek-V3-0324"
+
+
+df_selected.loc[mask, 'Model'] = "DeepSeek V3 (Microsoft Azure)"
+
 
 # In[35]:
 
@@ -675,6 +680,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

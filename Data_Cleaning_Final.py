@@ -365,11 +365,12 @@ df_selected.loc[mask, 'Model'] = "DeepSeek R1 (Microsoft Azure)"
 # In[35]:
 
 
-df_selected.drop(columns=['API Provider',"Function Calling",'JSON Mode', 'License', 'OpenAI Compatible',"Footnotes",'MMLU-Pro (Reasoning & Knowledge)',
+df_selected.drop(columns=['API Provider',"Function Calling",'JSON Mode', 'License', 'OpenAI Compatible',"Footnotes",
+       'MMLU-Pro (Reasoning & Knowledge)',
        'GPQA Diamond (Scientific Reasoning)',
        "Humanity's Last Exam (Reasoning & Knowledge)",
-       'LiveCodeBench (Coding)', 'SciCode (Coding)', 'HumanEval (Coding)',
-       'MATH-500 (Quantitative Reasoning)', 'AIME 2024 (Competition Math)',
+       'LiveCodeBench (Coding)', 'SciCode (Coding)',
+       'IFBench (Instruction Following)', 'AIME 2025 (Competition Math)',
        'Chatbot Arena', 'BlendedUSD/1M Tokens', 'Input PriceUSD/1M Tokens',
        'Output PriceUSD/1M Tokens','TotalResponse (s)',
        'ReasoningTime (s)', 'FurtherAnalysis'], inplace=True)
@@ -672,6 +673,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

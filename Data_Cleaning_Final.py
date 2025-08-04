@@ -52,6 +52,7 @@ df.columns
 
 
 api_id= [
+    "DeepSeek-V3-0324",
     "DeepSeek-R1-0528",
     "o3-2025-04-16",
     "o4-mini-2025-04-16",
@@ -189,12 +190,13 @@ LLama_API_ID = ["us.meta.llama4-maverick-17b-instruct-v1:0",
 DEEPSEEK_API_ID = ["deepseek-reasoner",
     "deepseek-chat"]
 
-DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-R1-0528"]
+DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-R1-0528","DeepSeek-V3-0324"]
 
 # In[15]:
 
 
 LARGE_API_ID= [
+    "DeepSeek-V3-0324",
     "DeepSeek-R1-0528",
     "deepseek-reasoner",
     "deepseek-chat",
@@ -673,6 +675,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

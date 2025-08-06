@@ -23,12 +23,12 @@ jobs:
           sudo apt install -y google-chrome-stable=138.0.7204.168-1
           sudo apt-mark hold google-chrome-stable
       
-      - name: Install ChromeDriver 138
+      - name: Install ChromeDriver 139
         run: |
-          wget https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.183/linux64/chromedriver-linux64.zip
+          wget https://storage.googleapis.com/chrome-for-testing-public/139.0.7258.66/linux64/chromedriver-linux64.zip
           unzip chromedriver-linux64.zip
-          chmod +x chromedriver-linux64/chromedriver
-          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+          chmod +x chromedriver
+          sudo mv chromedriver /usr/local/bin/chromedriver
 
 
 

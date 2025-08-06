@@ -20,14 +20,16 @@ jobs:
           curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome-keyring.gpg
           echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
           sudo apt update
-          sudo apt install -y google-chrome-stable
-
+          sudo apt install -y google-chrome-stable=138.0.7204.183-1
+          sudo apt-mark hold google-chrome-stable  # Prevent auto-upgrades
+      
       - name: Install ChromeDriver 138
         run: |
           wget https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.183/linux64/chromedriver-linux64.zip
           unzip chromedriver-linux64.zip
           chmod +x chromedriver-linux64/chromedriver
           sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+
 
 
 

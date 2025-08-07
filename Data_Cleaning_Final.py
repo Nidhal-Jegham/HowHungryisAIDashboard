@@ -24,9 +24,10 @@ df_long['length'] = 'Long'
 # In[4]:
 
 
-df_short.drop_duplicates(subset= "API ID",inplace=True)
-df_medium.drop_duplicates(subset= "API ID",inplace=True)
-df_long.drop_duplicates(subset= "API ID",inplace=True)
+df_short.drop_duplicates(subset=["API ID", "Model"], inplace=True)
+df_medium.drop_duplicates(subset=["API ID", "Model"], inplace=True)
+df_long.drop_duplicates(subset=["API ID", "Model"], inplace=True)
+
 
 # In[5]:
 
@@ -52,6 +53,7 @@ df.columns
 
 
 api_id= [
+    "gpt-5-2025-08-07",
     "DeepSeek-V3-0324",
     "DeepSeek-R1-0528",
     "o3-2025-04-16",
@@ -131,7 +133,9 @@ GROK_API_ID=[  "grok-4-0709",
 # In[11]:
 
 
-OpenAI_API_ID_NEW = ["o3-2025-04-16",
+OpenAI_API_ID_NEW = [
+    "gpt-5-2025-08-07",
+    "o3-2025-04-16",
     "o4-mini-2025-04-16",
     "o3-mini",
     "o1-2024-12-17",
@@ -196,6 +200,7 @@ DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-R1-0528","DeepSeek-V3-0324"]
 
 
 LARGE_API_ID= [
+    "gpt-5-2025-08-07",
     "DeepSeek-V3-0324",
     "DeepSeek-R1-0528",
     "deepseek-reasoner",
@@ -680,6 +685,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

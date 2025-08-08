@@ -674,39 +674,39 @@ df_selected.loc[df_selected['Model']=="DeepSeek R1 0528 (May '25)", 'P5First Chu
 df_environmental.loc[df_environmental['Model']=="DeepSeek R1 0528 (May '25)", 'Model'] = 'DeepSeek R1 (May 2025)'
 df_environmental.loc[df_environmental['Model']=="DeepSeek V3 0324 (Mar '25)", 'Model'] = "DeepSeek V3 (Mar '25)"
 
-df_environmental["Energy Consumption of 100 Million Prompts (MWh)"] = df_environmental['Mean Combined Energy (kWh)']
-df_environmental["Carbon Emissions of 100 Million Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (kg/CO2)']
-df_environmental["Water Consumption of 100 Million Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (L)']
-
-df_environmental["Energy Consumption of 500 Million Prompts (MWh)"] = df_environmental['Mean Combined Energy (kWh)']*5
-df_environmental["Carbon Emissions of 500 Million Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (kg/CO2)']*5
-df_environmental["Water Consumption of 500 Million Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (L)']*5
-
 df_environmental["Energy Consumption of 1 Billion Prompts (MWh)"] = df_environmental['Mean Combined Energy (kWh)']*10
 df_environmental["Carbon Emissions of 1 Billion Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (kg/CO2)']*10
 df_environmental["Water Consumption of 1 Billion Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (L)']*10
 
-df_environmental['Household Energy Equiv. – 100M Prompts (MWh)'] = df_environmental["Energy Consumption of 100 Million Prompts (MWh)"]/1.0950
-df_environmental["University Energy Equiv. – 100M Prompts (MWh)"] = df_environmental["Energy Consumption of 100 Million Prompts (MWh)"]/1202
-df_environmental['Household Energy Equiv. – 500M Prompts (MWh)'] = df_environmental["Energy Consumption of 500 Million Prompts (MWh)"]/1.0950
+df_environmental["Energy Consumption of 50 Billion Prompts (MWh)"] = df_environmental['Mean Combined Energy (kWh)']*50
+df_environmental["Carbon Emissions of 50 Billion Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (kg/CO2)']*50
+df_environmental["Water Consumption of 50 Billion Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (L)']*50
+
+df_environmental["Energy Consumption of 100 Billion Prompts (MWh)"] = df_environmental['Mean Combined Energy (kWh)']*100
+df_environmental["Carbon Emissions of 100 Billion Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (kg/CO2)']*100
+df_environmental["Water Consumption of 100 Billion Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (L)']*100
+
 df_environmental['Household Energy Equiv. – 1B Prompts (MWh)'] = df_environmental["Energy Consumption of 1 Billion Prompts (MWh)"]/1.0950
-df_environmental["University Energy Equiv. – 500M Prompts (MWh)"] = df_environmental["Energy Consumption of 500 Million Prompts (MWh)"]/1202
 df_environmental["University Energy Equiv. – 1B Prompts (MWh)"] = df_environmental["Energy Consumption of 1 Billion Prompts (MWh)"]/1202
+df_environmental['Household Energy Equiv. – 50B Prompts (MWh)'] = df_environmental["Energy Consumption of 50 Billion Prompts (MWh)"]/1.0950
+df_environmental['Household Energy Equiv. – 100B Prompts (MWh)'] = df_environmental["Energy Consumption of 100 Billion Prompts (MWh)"]/1.0950
+df_environmental["University Energy Equiv. – 50B Prompts (MWh)"] = df_environmental["Energy Consumption of 50 Billion Prompts (MWh)"]/1202
+df_environmental["University Energy Equiv. – 100B Prompts (MWh)"] = df_environmental["Energy Consumption of 100 Billion Prompts (MWh)"]/1202
 
 
-df_environmental['People Annual Drinking Water Equiv. – 100M Prompts (kL)'] = df_environmental["Water Consumption of 100 Million Prompts (Kiloliter)"]/1.2
-df_environmental['People Annual Drinking Water Equiv. – 500M Prompts (kL)'] = df_environmental["Water Consumption of 500 Million Prompts (Kiloliter)"]/1.2
 df_environmental['People Annual Drinking Water Equiv. – 1B Prompts (kL)'] = df_environmental["Water Consumption of 1 Billion Prompts (Kiloliter)"]/1.2
-df_environmental["Olympic Swimming Pools Equiv. – 100M Prompts (kL)"] = df_environmental["Water Consumption of 100 Million Prompts (Kiloliter)"]/2500
-df_environmental["Olympic Swimming Pools Equiv. – 500M Prompts (kL)"] = df_environmental["Water Consumption of 500 Million Prompts (Kiloliter)"]/2500
+df_environmental['People Annual Drinking Water Equiv. – 50B Prompts (kL)'] = df_environmental["Water Consumption of 50 Billion Prompts (Kiloliter)"]/1.2
+df_environmental['People Annual Drinking Water Equiv. – 100B Prompts (kL)'] = df_environmental["Water Consumption of 100 Billion Prompts (Kiloliter)"]/1.2
 df_environmental["Olympic Swimming Pools Equiv. – 1B Prompts (kL)"] = df_environmental["Water Consumption of 1 Billion Prompts (Kiloliter)"]/2500
+df_environmental["Olympic Swimming Pools Equiv. – 50B Prompts (kL)"] = df_environmental["Water Consumption of 50 Billion Prompts (Kiloliter)"]/2500
+df_environmental["Olympic Swimming Pools Equiv. – 100B Prompts (kL)"] = df_environmental["Water Consumption of 100 Billion Prompts (Kiloliter)"]/2500
 
-df_environmental["Gasoline Car Equiv. – 100M Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 100 Million Prompts (TonsCO2e)"]/4.6
-df_environmental["Gasoline Car Equiv. – 500M Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 500 Million Prompts (TonsCO2e)"]/4.6
 df_environmental["Gasoline Car Equiv. – 1B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 1 Billion Prompts (TonsCO2e)"]/4.6
-df_environmental["Atlantic Flight Equiv. – 100M Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 100 Million Prompts (TonsCO2e)"]/60
-df_environmental["Atlantic Flight Equiv. – 500M Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 500 Million Prompts (TonsCO2e)"]/60
+df_environmental["Gasoline Car Equiv. – 50B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 50 Billion Prompts (TonsCO2e)"]/4.6
+df_environmental["Gasoline Car Equiv. – 100B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 100 Billion Prompts (TonsCO2e)"]/4.6
 df_environmental["Atlantic Flight Equiv. – 1B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 1 Billion Prompts (TonsCO2e)"]/60
+df_environmental["Atlantic Flight Equiv. – 50B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 50 Billion Prompts (TonsCO2e)"]/60
+df_environmental["Atlantic Flight Equiv. – 100B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 100 Billion Prompts (TonsCO2e)"]/60
 
 # In[49]:
 
@@ -719,6 +719,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

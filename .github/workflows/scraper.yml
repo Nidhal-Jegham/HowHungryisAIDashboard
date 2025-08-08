@@ -13,21 +13,35 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Install Latest Chrome & Matching ChromeDriver
+      - name: Install Chrome & Matching ChromeDriver
         run: |
-          # Install latest Google Chrome
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          set -eux  # fail fast, echo commands
       
-          # Extract Chrome major version
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)
+          # 1) Update and install Chrome non-interactively (silencing needrestart)
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive \
+               NEEDRESTART_MODE=a \
+               apt-get install -y ./google-chrome-stable_current_amd64.deb
       
-          # Download matching ChromeDriver
-          CHROMEDRIVER_VERSION=$(wget -qO- "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-          unzip chromedriver_linux64.zip
+          # 2) Grab just the major version number (e.g. "138")
+          CHROME_MAJOR=$(google-chrome-stable --product-version | cut -d. -f1)
+          echo "Detected Chrome major version: $CHROME_MAJOR"
+      
+          # 3) Fetch the matching ChromeDriver version
+          CHROMEDRIVER_VERSION=$(wget -qO- \
+            "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_MAJOR}")
+          echo "Matching ChromeDriver version: $CHROMEDRIVER_VERSION"
+      
+          # 4) Download & install it
+          wget -q "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+          unzip -q chromedriver_linux64.zip
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/
+      
+          # sanity check
+          chromedriver --version
+
       
 
 

@@ -17,27 +17,32 @@ jobs:
         run: |
           set -eux
       
-          # 1) Install Chrome as before
-          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          # 1) Install prerequisites
           sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y wget unzip jq
+      
+          # 2) Install latest Google Chrome (silencing needrestart)
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a \
                apt-get install -y ./google-chrome-stable_current_amd64.deb
       
-          # 2) Grab the Chrome-for-Testing manifest
+          # 3) Fetch the “last-known-good-versions-with-downloads” manifest
           CFT_JSON="https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
-          # Filter for Stable channel + chromedriver + linux64
           CFT_URL=$(curl -sL "$CFT_JSON" \
-            | jq -r '.channels.Stable.downloads[] 
-                | select(.binary=="chromedriver" and .platform=="linux64") 
-                | .url')
+            | jq -r '.channels.Stable.downloads.chromedriver[]
+                       | select(.platform=="linux64")
+                       | .url')
           echo "Downloading ChromeDriver from: $CFT_URL"
       
-          # 3) Download & install
+          # 4) Download & install ChromeDriver
           wget -qO chromedriver.zip "$CFT_URL"
           unzip -q chromedriver.zip
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/
+      
+          # 5) Verify installation
           chromedriver --version
+
 
       
 

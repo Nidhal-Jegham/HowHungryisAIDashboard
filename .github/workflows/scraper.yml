@@ -26,7 +26,7 @@ jobs:
           sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a \
                apt-get install -y ./google-chrome-stable_current_amd64.deb
       
-          # 3) Fetch the “last-known-good-versions-with-downloads” manifest
+          # 3) Fetch Chrome-for-Testing manifest & grab the Linux64 chromedriver URL
           CFT_JSON="https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
           CFT_URL=$(curl -sL "$CFT_JSON" \
             | jq -r '.channels.Stable.downloads.chromedriver[]
@@ -34,14 +34,15 @@ jobs:
                        | .url')
           echo "Downloading ChromeDriver from: $CFT_URL"
       
-          # 4) Download & install ChromeDriver
+          # 4) Download & extract just the binary into CWD
           wget -qO chromedriver.zip "$CFT_URL"
-          unzip -q chromedriver.zip
+          unzip -qj chromedriver.zip -d .
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/
       
           # 5) Verify installation
           chromedriver --version
+
 
 
       

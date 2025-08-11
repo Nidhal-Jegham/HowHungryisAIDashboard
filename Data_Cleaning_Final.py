@@ -423,9 +423,8 @@ def get_hardware_host(api):
     elif api in GROK_API_ID:
         return "DGX H200/H100", "xAI"
     else:
-        return None, None  # default fallback
+        return None, None  
 
-# Apply to each row
 df_selected[['Hardware', 'Host']] = df_selected['API ID'].apply(
     lambda x: pd.Series(get_hardware_host(x))
 )
@@ -470,7 +469,6 @@ def determine_utilization(row):
     else:
         return pd.Series([None, None, None])
 
-# Apply row-wise and assign to columns
 df_selected[["Min GPU Power Utilization", "Max GPU Power Utilization", "Non-GPU Power Utilization"]] = df_selected.apply(determine_utilization, axis=1)
 
 
@@ -493,9 +491,8 @@ def get_environmental_multipliers(api):
     elif api in GROK_API_ID:
         return 1.5, 0.36,3.142,0.385
     else:
-        return None, None  # default fallback
+        return None, None  
 
-# Apply to each row
 df_selected[['PUE', 'WUE (Site)', "WUE (Source)", 'CIF']] = df_selected['API ID'].apply(
     lambda x: pd.Series(get_environmental_multipliers(x))
 )
@@ -520,9 +517,8 @@ def get_company(api):
     elif api in GROK_API_ID:
         return "xAI"
     else:
-        return None  # default fallback
-
-# Apply to each row
+        return None  
+        
 df_selected["Company"] = df_selected['API ID'].apply(
     lambda x: pd.Series(get_company(x))
 )
@@ -543,9 +539,8 @@ def get_size(api):
     elif api in NANO_API_ID:
         return "Nano"
     else:
-        return None, None  # default fallback
-
-# Apply to each row
+        return None, None  
+        
 df_selected["Size"] = df_selected['API ID'].apply(
     lambda x: pd.Series(get_size(x))
 )
@@ -592,13 +587,11 @@ def compute_environmental_metrics(row):
             wue_site = row['WUE (Site)']
             wue_source = row['WUE (Source)']
 
-            # Max case
             power_draw_max = (gpu_power * max_gpu_util) + (non_gpu_power * non_gpu_util)
             energy_max = base_time * power_draw_max * pue
             carbon_max = energy_max * cif
             water_max = (energy_max * wue_source) + ((energy_max / pue) * wue_site)
 
-            # Min case
             power_draw_min = (gpu_power * min_gpu_util) + (non_gpu_power * non_gpu_util)
             energy_min = base_time * power_draw_min * pue
             carbon_min = energy_min * cif
@@ -668,7 +661,7 @@ df_environmental[[
     'Mean Max Water (mL)', 'Std Max Water (mL)',
     'Mean Min Water (mL)', 'Std Min Water (mL)',
     'Mean Combined Water (mL)', 'Std Combined Water (mL)',
-]]*1000  # Convert kg to gCO2e and kWh to Wh and L to mL
+]]*1000  
 
 # In[47]:
 
@@ -726,6 +719,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

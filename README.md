@@ -30,20 +30,8 @@ This repository contains an automated pipeline to scrape, clean, and export larg
    python Data_Cleaning_Final.py
    ```
 
-3. In Power BI:
-   - Set data source to `/output` CSVs.
-   - Refresh to update metrics.
 
-## Model Size Categories
 
-- Nano: <7B parameters (1 GPU)  
-- Micro: 7–20B (2 GPUs)  
-- Small: 20–40B (4 GPUs)  
-- Medium: 40–70B (8 GPUs)  
-- Large: >70B (8 GPUs high-memory)  
-- Non-disclosed flagship models (e.g., GPT-4o, Claude-3.7 Sonnet) are classified as Large.  
-- OpenAI Mini variants (e.g., GPT-4o mini) are classified as Medium.  
-- Models labeled "Nano" but with higher performance (e.g., GPT-4.1 nano) are classified as Small.
 
 ## Automation
 

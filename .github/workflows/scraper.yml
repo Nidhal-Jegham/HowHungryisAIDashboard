@@ -17,16 +17,13 @@ jobs:
         run: |
           set -eux
       
-          # 1) Install prerequisites
           sudo apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y wget unzip jq
       
-          # 2) Install latest Google Chrome (silencing needrestart)
           wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a \
                apt-get install -y ./google-chrome-stable_current_amd64.deb
       
-          # 3) Fetch Chrome-for-Testing manifest & grab the Linux64 chromedriver URL
           CFT_JSON="https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
           CFT_URL=$(curl -sL "$CFT_JSON" \
             | jq -r '.channels.Stable.downloads.chromedriver[]
@@ -34,13 +31,11 @@ jobs:
                        | .url')
           echo "Downloading ChromeDriver from: $CFT_URL"
       
-          # 4) Download & extract just the binary into CWD
           wget -qO chromedriver.zip "$CFT_URL"
           unzip -qj chromedriver.zip -d .
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/
       
-          # 5) Verify installation
           chromedriver --version
 
 
@@ -89,5 +84,4 @@ jobs:
           git commit -m "Auto-update scraped and cleaned data [skip ci]" || echo "No changes to commit"
           git push
         env:
-          # Required for permission to push back to the repo
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

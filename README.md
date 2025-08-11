@@ -31,7 +31,7 @@ This repository contains an automated pipeline to scrape, clean, and export larg
           wget -qO chromedriver.zip "$CFT_URL"
           unzip -qj chromedriver.zip -d .
           chmod +x chromedriver
-          sudo mv chromedriver /usr/local/bin/   ```
+          sudo mv chromedriver /usr/local/bin/   
 
 
 

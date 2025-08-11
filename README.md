@@ -1,6 +1,6 @@
 # HowHungryisAIDashboard
 
-This repository contains an automated pipeline to scrape, clean, and export large language model (LLM) performance and usage metrics for a Power BI dashboard. The dashboard estimates the energy, water, and carbon footprint of LLM inference at various scales.
+This repository contains an automated pipeline to scrape, clean, and export large language model (LLM) performance and usage metrics from ArtificialAnalysis.ai for a Power BI dashboard. The dashboard estimates the energy, water, and carbon footprint of LLM inference at various scales.
 
 
 ## Setup

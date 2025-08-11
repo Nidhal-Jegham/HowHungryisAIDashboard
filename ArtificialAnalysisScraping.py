@@ -17,22 +17,19 @@ length_list = [
     "long",]
 for i in range(3): 
 
-    # Set up the driver
     
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Run in headless mode
+    options.add_argument("--headless")  
     
     driver = webdriver.Chrome(service=Service(), options=options)
 
     driver.get(link_list[i])
     time.sleep(5) 
 
-    # Wait for table to appear
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, "//table"))
     )
 
-    # Step 1: Find and click the "Expand Columns" button
     buttons = driver.find_elements(By.TAG_NAME, "button")
 
 
@@ -86,4 +83,5 @@ for i in range(3):
 
     df.to_csv(f'artificialanalysis_clean{length_list[i]}.csv', index=False)
     print(f'Data exported to {length_list[i]} artificialanalysis_clean.csv')
+
 

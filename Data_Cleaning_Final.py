@@ -633,15 +633,15 @@ def compute_environmental_metrics(row):
 df_environmental = df_selected.copy()
 
 df_environmental[[
-    'Mean Max Energy (kWh)', 'Std Max Energy (kWh)',
-    'Mean Min Energy (kWh)', 'Std Min Energy (kWh)',
-    'Mean Combined Energy (kWh)', 'Std Combined Energy (kWh)',
-    'Mean Max Carbon (kg/CO2)', 'Std Max Carbon (kg/CO2)',
-    'Mean Min Carbon (kg/CO2)', 'Std Min Carbon (kg/CO2)',
-    'Mean Combined Carbon (kg/CO2)', 'Std Combined Carbon (kg/CO2)',
-    'Mean Max Water (L)', 'Std Max Water (L)',
-    'Mean Min Water (L)', 'Std Min Water (L)',
-    'Mean Combined Water (L)', 'Std Combined Water (L)',
+    'Mean Max Energy (Wh)', 'Std Max Energy (Wh)',
+    'Mean Min Energy (Wh)', 'Std Min Energy (Wh)',
+    'Mean Combined Energy (Wh)', 'Std Combined Energy (Wh)',
+    'Mean Max Carbon (gCO2e)', 'Std Max Carbon (gCO2e)',
+    'Mean Min Carbon (gCO2e)', 'Std Min Carbon (gCO2e)',
+    'Mean Combined Carbon (gCO2e)', 'Std Combined Carbon (gCO2e)',
+    'Mean Max Water (mL)', 'Std Max Water (mL)',
+    'Mean Min Water (mL)', 'Std Min Water (mL)',
+    'Mean Combined Water (mL)', 'Std Combined Water (mL)',
 ]] = df_environmental.apply(compute_environmental_metrics, axis=1)
 
 
@@ -649,25 +649,25 @@ df_environmental[[
 
 
 df_environmental[[
-    'Mean Max Energy (kWh)', 'Std Max Energy (kWh)',
-    'Mean Min Energy (kWh)', 'Std Min Energy (kWh)',
-    'Mean Combined Energy (kWh)', 'Std Combined Energy (kWh)',
-    'Mean Max Carbon (kg/CO2)', 'Std Max Carbon (kg/CO2)',
-    'Mean Min Carbon (kg/CO2)', 'Std Min Carbon (kg/CO2)',
-    'Mean Combined Carbon (kg/CO2)', 'Std Combined Carbon (kg/CO2)',
-    'Mean Max Water (L)', 'Std Max Water (L)',
-    'Mean Min Water (L)', 'Std Min Water (L)',
-    'Mean Combined Water (L)', 'Std Combined Water (L)',
+    'Mean Max Energy (Wh)', 'Std Max Energy (Wh)',
+    'Mean Min Energy (Wh)', 'Std Min Energy (Wh)',
+    'Mean Combined Energy (Wh)', 'Std Combined Energy (Wh)',
+    'Mean Max Carbon (gCO2e)', 'Std Max Carbon (gCO2e)',
+    'Mean Min Carbon (gCO2e)', 'Std Min Carbon (gCO2e)',
+    'Mean Combined Carbon (gCO2e)', 'Std Combined Carbon (gCO2e)',
+    'Mean Max Water (mL)', 'Std Max Water (mL)',
+    'Mean Min Water (mL)', 'Std Min Water (mL)',
+    'Mean Combined Water (mL)', 'Std Combined Water (mL)',
 ]]= df_environmental[[
-    'Mean Max Energy (kWh)', 'Std Max Energy (kWh)',
-    'Mean Min Energy (kWh)', 'Std Min Energy (kWh)',
-    'Mean Combined Energy (kWh)', 'Std Combined Energy (kWh)',
-    'Mean Max Carbon (kg/CO2)', 'Std Max Carbon (kg/CO2)',
-    'Mean Min Carbon (kg/CO2)', 'Std Min Carbon (kg/CO2)',
-    'Mean Combined Carbon (kg/CO2)', 'Std Combined Carbon (kg/CO2)',
-    'Mean Max Water (L)', 'Std Max Water (L)',
-    'Mean Min Water (L)', 'Std Min Water (L)',
-    'Mean Combined Water (L)', 'Std Combined Water (L)',
+    'Mean Max Energy (Wh)', 'Std Max Energy (Wh)',
+    'Mean Min Energy (Wh)', 'Std Min Energy (Wh)',
+    'Mean Combined Energy (Wh)', 'Std Combined Energy (Wh)',
+    'Mean Max Carbon (gCO2e)', 'Std Max Carbon (gCO2e)',
+    'Mean Min Carbon (gCO2e)', 'Std Min Carbon (gCO2e)',
+    'Mean Combined Carbon (gCO2e)', 'Std Combined Carbon (gCO2e)',
+    'Mean Max Water (mL)', 'Std Max Water (mL)',
+    'Mean Min Water (mL)', 'Std Min Water (mL)',
+    'Mean Combined Water (mL)', 'Std Combined Water (mL)',
 ]]*1000  # Convert kg to gCO2e and kWh to Wh and L to mL
 
 # In[47]:
@@ -681,17 +681,17 @@ df_selected.loc[df_selected['Model']=="DeepSeek R1 0528 (May '25)", 'P5First Chu
 df_environmental.loc[df_environmental['Model']=="DeepSeek R1 0528 (May '25)", 'Model'] = 'DeepSeek R1 (May 2025)'
 df_environmental.loc[df_environmental['Model']=="DeepSeek V3 0324 (Mar '25)", 'Model'] = "DeepSeek V3 (Mar '25)"
 
-df_environmental["Energy Consumption of 1 Billion Prompts (MWh)"] = df_environmental['Mean Combined Energy (kWh)']*1000
-df_environmental["Carbon Emissions of 1 Billion Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (kg/CO2)']*1000
-df_environmental["Water Consumption of 1 Billion Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (L)']*1000
+df_environmental["Energy Consumption of 1 Billion Prompts (MWh)"] = df_environmental['Mean Combined Energy (Wh)']*1000
+df_environmental["Carbon Emissions of 1 Billion Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (gCO2e)']*1000
+df_environmental["Water Consumption of 1 Billion Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (mL)']*1000
 
-df_environmental["Energy Consumption of 50 Billion Prompts (MWh)"] = df_environmental['Mean Combined Energy (kWh)']*50*1000
-df_environmental["Carbon Emissions of 50 Billion Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (kg/CO2)']*50*1000
-df_environmental["Water Consumption of 50 Billion Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (L)']*50*1000
+df_environmental["Energy Consumption of 50 Billion Prompts (MWh)"] = df_environmental['Mean Combined Energy (Wh)']*50*1000
+df_environmental["Carbon Emissions of 50 Billion Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (gCO2e)']*50*1000
+df_environmental["Water Consumption of 50 Billion Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (mL)']*50*1000
 
-df_environmental["Energy Consumption of 100 Billion Prompts (MWh)"] = df_environmental['Mean Combined Energy (kWh)']*100*100
-df_environmental["Carbon Emissions of 100 Billion Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (kg/CO2)']*100*1000
-df_environmental["Water Consumption of 100 Billion Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (L)']*100*1000
+df_environmental["Energy Consumption of 100 Billion Prompts (MWh)"] = df_environmental['Mean Combined Energy (Wh)']*100*100
+df_environmental["Carbon Emissions of 100 Billion Prompts (TonsCO2e)"] = df_environmental['Mean Combined Carbon (gCO2e)']*100*1000
+df_environmental["Water Consumption of 100 Billion Prompts (Kiloliter)"] = df_environmental['Mean Combined Water (mL)']*100*1000
 
 df_environmental['Household Energy Equiv. – 1B Prompts (MWh)'] = df_environmental["Energy Consumption of 1 Billion Prompts (MWh)"]/1.0950
 df_environmental["University Energy Equiv. – 1B Prompts (MWh)"] = df_environmental["Energy Consumption of 1 Billion Prompts (MWh)"]/1202
@@ -726,6 +726,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

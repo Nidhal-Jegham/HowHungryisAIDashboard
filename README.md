@@ -8,13 +8,13 @@ This repository contains an automated pipeline to scrape, clean, and export larg
 1. Install Python (3.10–3.12 recommended) and dependencies:
    ```bash
    python -m venv .venv
-   source .venv/bin/activate   # Windows: .venv\Scripts\activate
+   source .venv/bin/activate   
    pip install -r requirements.txt
    
 
 2. Install Google Chrome and matching ChromeDriver:
    ```bash
-           sudo apt-get update
+          sudo apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y wget unzip jq
       
           wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb

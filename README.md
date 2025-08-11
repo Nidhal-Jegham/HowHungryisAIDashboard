@@ -24,8 +24,8 @@ This repository contains an automated pipeline to scrape, clean, and export larg
    CFT_JSON="https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
    CFT_URL=$(curl -sL "$CFT_JSON" \
    | jq -r '.channels.Stable.downloads.chromedriver[]
-   | select(.platform=="linux64")
-   | .url')
+      | select(.platform=="linux64")
+      | .url')
    echo "Downloading ChromeDriver from: $CFT_URL"
       
    wget -qO chromedriver.zip "$CFT_URL"

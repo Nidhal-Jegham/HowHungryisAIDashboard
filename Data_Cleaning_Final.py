@@ -53,6 +53,9 @@ df.columns
 
 
 api_id= [
+    "DeepSeek-V3-0324",
+    "gpt-5-mini-2025-08-07",
+    "gpt-5-nano-2025-08-07",
     "gpt-5-2025-08-07",
     "DeepSeek-R1-0528",
     "o3-2025-04-16",
@@ -133,6 +136,8 @@ GROK_API_ID=[  "grok-4-0709",
 
 
 OpenAI_API_ID_NEW = [
+    "gpt-5-mini-2025-08-07",
+    "gpt-5-nano-2025-08-07",
     "gpt-5-2025-08-07",
     "o3-2025-04-16",
     "o4-mini-2025-04-16",
@@ -193,12 +198,13 @@ LLama_API_ID = ["us.meta.llama4-maverick-17b-instruct-v1:0",
 DEEPSEEK_API_ID = ["deepseek-reasoner",
     "deepseek-chat"]
 
-DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-R1-0528"]
+DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-V3-0324","DeepSeek-R1-0528"]
 
 # In[15]:
 
 
 LARGE_API_ID= [
+    "DeepSeek-V3-0324",
     "gpt-5-2025-08-07",
     "DeepSeek-R1-0528",
     "deepseek-reasoner",
@@ -251,6 +257,7 @@ LARGE_API_ID= [
 
 
 MEDIUM_API_ID = [
+    "gpt-5-mini-2025-08-07",
     "o4-mini-2025-04-16",
     "o3-mini",
     "o1-mini-2024-09-12",
@@ -271,6 +278,7 @@ MEDIUM_API_ID = [
 
 
 SMALL_API_ID = [
+    "gpt-5-nano-2025-08-07",
     "gpt-4.1-nano-2025-04-14",
     
 ]
@@ -370,6 +378,9 @@ df_selected.loc[mask, 'Model'] = "DeepSeek R1 (Azure)"
 mask = df_selected['API ID'] == "deepseek-chat"
 df_selected.loc[mask, 'Model'] = "DeepSeek V3 (DeepSeek)"
 
+mask = df_selected['API ID'] == "DeepSeek-V3-0324"
+df_selected.loc[mask, 'Model'] = "DeepSeek V3 (Azure)"
+
 # In[35]:
 
 
@@ -402,7 +413,7 @@ def get_hardware_host(api):
     elif api in OpenAI_API_ID_OLD:
         return "DGX A100", "Azure"
     elif api in DEEPSEEK_API_ID:
-        return "DGX H800", "Deepseek"
+        return "DGX H800", "DeepSeek"
     elif api in DEEPSEEK_API_Microsoft_Azure:
         return "DGX H200/H100", "Azure"
     elif api in CLAUDE_API_ID:
@@ -715,6 +726,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

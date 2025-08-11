@@ -2,7 +2,6 @@
 
 This repository contains an automated pipeline to scrape, clean, and export large language model (LLM) performance and usage metrics for a Power BI dashboard. The dashboard estimates the energy, water, and carbon footprint of LLM inference at various scales.
 
-```
 
 ## Setup
 
@@ -11,7 +10,7 @@ This repository contains an automated pipeline to scrape, clean, and export larg
    python -m venv .venv
    source .venv/bin/activate   # Windows: .venv\Scripts\activate
    pip install -r requirements.txt
-   ```
+   
 
 2. Install Google Chrome and matching ChromeDriver:
    ```bash

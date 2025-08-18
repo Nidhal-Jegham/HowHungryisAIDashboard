@@ -538,7 +538,7 @@ def get_company(api):
     elif api in GROK_API_ID:
         return "xAI"
     elif api in MISTRAL_API_ID:
-        return 'Mistral AI"
+        return "Mistral AI"
     else:
         return None  
         
@@ -835,6 +835,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

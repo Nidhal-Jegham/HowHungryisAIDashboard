@@ -21,6 +21,10 @@ df_short['length'] = 'Short'
 df_medium['length'] = 'Medium'  
 df_long['length'] = 'Long'
 
+df_short['Query Length'] = '300'
+df_medium['Query Length'] = '1000'  
+df_long['Query Length'] = '1500'
+
 # In[4]:
 
 
@@ -556,112 +560,206 @@ df_selected.columns
 
 
 
+import numpy as np
+import pandas as pd
+
 def compute_environmental_metrics(row):
-    output_tokens = 300  
+    # STRICT: derive output length only from Query Length (no 300 fallback)
+    try:
+        output_tokens = float(row["Query Length"])
+    except (KeyError, TypeError, ValueError):
+        # If Query Length is missing or non-numeric, return empty metrics
+        return pd.Series([None] * 30)
+
     latency_cols = ['P5First Chunk (s)', 'P25First Chunk (s)', 'MedianFirst Chunk (s)',
                     'P75First Chunk (s)', 'P95First Chunk (s)']
     tps_cols = ['P5Tokens/s', 'P25Tokens/s', 'MedianTokens/s', 'P75Tokens/s', 'P95Tokens/s']
 
-    max_energy_values = []
-    min_energy_values = []
+    energy_max_vals, energy_min_vals = [], []
+    carbon_max_vals, carbon_min_vals = [], []
+
+    # Water collectors
+    water_site_max_vals, water_site_min_vals = [], []       # Scope 1 (Site)
+    water_source_max_vals, water_source_min_vals = [], []   # Scope 2 (Source)
+    water_comb_max_vals, water_comb_min_vals = [], []       # Site & Source
 
     for latency_col in latency_cols:
         for tps_col in tps_cols:
             try:
                 latency = float(row[latency_col])
                 tps = float(row[tps_col])
-                if tps == 0:
+                if tps <= 0:
                     continue
             except (ValueError, ZeroDivisionError, TypeError):
                 continue
 
-            base_time = (latency + (output_tokens / tps)) / 3600
+            # Total response time in hours: first token latency + generation time
+            base_time = (latency + (output_tokens / tps)) / 3600.0
 
-            gpu_power = row['GPUs Power Draw']
-            non_gpu_power = row['Non-GPUs Power Draw']
-            max_gpu_util = row['Max GPU Power Utilization']
-            min_gpu_util = row['Min GPU Power Utilization']
-            non_gpu_util = row['Non-GPU Power Utilization']
-            pue = row['PUE']
-            cif = row['CIF']
-            wue_site = row['WUE (Site)']
-            wue_source = row['WUE (Source)']
+            gpu_power = float(row['GPUs Power Draw'])
+            non_gpu_power = float(row['Non-GPUs Power Draw'])
+            max_gpu_util = float(row['Max GPU Power Utilization'])
+            min_gpu_util = float(row['Min GPU Power Utilization'])
+            non_gpu_util = float(row['Non-GPU Power Utilization'])
+            pue = float(row['PUE'])
+            cif = float(row['CIF'])
+            wue_site = float(row['WUE (Site)'])       # mL per kWh (IT load)
+            wue_source = float(row['WUE (Source)'])   # mL per kWh (facility)
 
-            power_draw_max = (gpu_power * max_gpu_util) + (non_gpu_power * non_gpu_util)
-            energy_max = base_time * power_draw_max * pue
-            carbon_max = energy_max * cif
-            water_max = (energy_max * wue_source) + ((energy_max / pue) * wue_site)
+            # ---- Max case ----
+            power_draw_max = (gpu_power * max_gpu_util) + (non_gpu_power * non_gpu_util)  # W
+            energy_max = base_time * power_draw_max * pue   # Wh (facility)
+            carbon_max = energy_max * cif                   # gCO2e
 
-            power_draw_min = (gpu_power * min_gpu_util) + (non_gpu_power * non_gpu_util)
-            energy_min = base_time * power_draw_min * pue
-            carbon_min = energy_min * cif
-            water_min = (energy_min * wue_source) + ((energy_min / pue) * wue_site)
+            # Water: Source (facility energy) and Site (IT energy = facility / PUE)
+            water_source_max = energy_max * wue_source      # mL
+            water_site_max = (energy_max / pue) * wue_site  # mL
+            water_combined_max = water_source_max + water_site_max
 
-            max_energy_values.append((energy_max, carbon_max, water_max))
-            min_energy_values.append((energy_min, carbon_min, water_min))
+            energy_max_vals.append(energy_max)
+            carbon_max_vals.append(carbon_max)
+            water_source_max_vals.append(water_source_max)
+            water_site_max_vals.append(water_site_max)
+            water_comb_max_vals.append(water_combined_max)
 
-    if not max_energy_values or not min_energy_values:
-        return pd.Series([None] * 18)
+            # ---- Min case ----
+            power_draw_min = (gpu_power * min_gpu_util) + (non_gpu_power * non_gpu_util)  # W
+            energy_min = base_time * power_draw_min * pue   # Wh (facility)
+            carbon_min = energy_min * cif                   # gCO2e
 
-    energy_max_vals, carbon_max_vals, water_max_vals = zip(*max_energy_values)
-    energy_min_vals, carbon_min_vals, water_min_vals = zip(*min_energy_values)
+            water_source_min = energy_min * wue_source      # mL
+            water_site_min = (energy_min / pue) * wue_site  # mL
+            water_combined_min = water_source_min + water_site_min
 
-    combined_energy_vals = energy_max_vals + energy_min_vals
-    combined_carbon_vals = carbon_max_vals + carbon_min_vals
-    combined_water_vals = water_max_vals + water_min_vals
+            energy_min_vals.append(energy_min)
+            carbon_min_vals.append(carbon_min)
+            water_source_min_vals.append(water_source_min)
+            water_site_min_vals.append(water_site_min)
+            water_comb_min_vals.append(water_combined_min)
+
+    if not energy_max_vals and not energy_min_vals:
+        return pd.Series([None] * 30)
+
+    # Combined sets
+    energy_comb = energy_max_vals + energy_min_vals
+    carbon_comb = carbon_max_vals + carbon_min_vals
+
+    water_site_comb = water_site_max_vals + water_site_min_vals
+    water_source_comb = water_source_max_vals + water_source_min_vals
+    water_comb = water_comb_max_vals + water_comb_min_vals
+
+    m = lambda x: np.mean(x) if len(x) else None
+    s = lambda x: np.std(x) if len(x) else None
 
     return pd.Series([
-        np.mean(energy_max_vals), np.std(energy_max_vals),
-        np.mean(energy_min_vals), np.std(energy_min_vals),
-        np.mean(combined_energy_vals), np.std(combined_energy_vals),
-        np.mean(carbon_max_vals), np.std(carbon_max_vals),
-        np.mean(carbon_min_vals), np.std(carbon_min_vals),
-        np.mean(combined_carbon_vals), np.std(combined_carbon_vals),
-        np.mean(water_max_vals), np.std(water_max_vals),
-        np.mean(water_min_vals), np.std(water_min_vals),
-        np.mean(combined_water_vals), np.std(combined_water_vals),
+        # Energy (Wh)
+        m(energy_max_vals), s(energy_max_vals),
+        m(energy_min_vals), s(energy_min_vals),
+        m(energy_comb),     s(energy_comb),
 
+        # Carbon (gCO2e)
+        m(carbon_max_vals), s(carbon_max_vals),
+        m(carbon_min_vals), s(carbon_min_vals),
+        m(carbon_comb),     s(carbon_comb),
+
+        # Water Scope 1 (Site) (mL)
+        m(water_site_max_vals), s(water_site_max_vals),
+        m(water_site_min_vals), s(water_site_min_vals),
+        m(water_site_comb),     s(water_site_comb),
+
+        # Water Scope 2 (Source) (mL)
+        m(water_source_max_vals), s(water_source_max_vals),
+        m(water_source_min_vals), s(water_source_min_vals),
+        m(water_source_comb),     s(water_source_comb),
+
+        # Water (Site & Source) (mL)
+        m(water_comb_max_vals), s(water_comb_max_vals),
+        m(water_comb_min_vals), s(water_comb_min_vals),
+        m(water_comb),          s(water_comb),
     ])
 
+# --- Apply to your df ---
 df_environmental = df_selected.copy()
 
 df_environmental[[
+    # Energy
     'Mean Max Energy (Wh)', 'Std Max Energy (Wh)',
     'Mean Min Energy (Wh)', 'Std Min Energy (Wh)',
     'Mean Combined Energy (Wh)', 'Std Combined Energy (Wh)',
+
+    # Carbon
     'Mean Max Carbon (gCO2e)', 'Std Max Carbon (gCO2e)',
     'Mean Min Carbon (gCO2e)', 'Std Min Carbon (gCO2e)',
     'Mean Combined Carbon (gCO2e)', 'Std Combined Carbon (gCO2e)',
-    'Mean Max Water (mL)', 'Std Max Water (mL)',
-    'Mean Min Water (mL)', 'Std Min Water (mL)',
-    'Mean Combined Water (mL)', 'Std Combined Water (mL)',
+
+    # Water - Scope 1 (Site)
+    'Mean Max Water (Site, mL)', 'Std Max Water (Site, mL)',
+    'Mean Min Water (Site, mL)', 'Std Min Water (Site, mL)',
+    'Mean Combined Water (Site, mL)', 'Std Combined Water (Site, mL)',
+
+    # Water - Scope 2 (Source)
+    'Mean Max Water (Source, mL)', 'Std Max Water (Source, mL)',
+    'Mean Min Water (Source, mL)', 'Std Min Water (Source, mL)',
+    'Mean Combined Water (Source, mL)', 'Std Combined Water (Source, mL)',
+
+    # Water - Site & Source (combined)
+    'Mean Max Water (Site & Source, mL)', 'Std Max Water (Site & Source, mL)',
+    'Mean Min Water (Site & Source, mL)', 'Std Min Water (Site & Source, mL)',
+    'Mean Combined Water (Site & Source, mL)', 'Std Combined Water (Site & Source, mL)',
 ]] = df_environmental.apply(compute_environmental_metrics, axis=1)
 
-
-# In[46]:
-
-
 df_environmental[[
+    # Energy
     'Mean Max Energy (Wh)', 'Std Max Energy (Wh)',
     'Mean Min Energy (Wh)', 'Std Min Energy (Wh)',
     'Mean Combined Energy (Wh)', 'Std Combined Energy (Wh)',
+
+    # Carbon
     'Mean Max Carbon (gCO2e)', 'Std Max Carbon (gCO2e)',
     'Mean Min Carbon (gCO2e)', 'Std Min Carbon (gCO2e)',
     'Mean Combined Carbon (gCO2e)', 'Std Combined Carbon (gCO2e)',
-    'Mean Max Water (mL)', 'Std Max Water (mL)',
-    'Mean Min Water (mL)', 'Std Min Water (mL)',
-    'Mean Combined Water (mL)', 'Std Combined Water (mL)',
-]]= df_environmental[[
+
+    # Water - Scope 1 (Site)
+    'Mean Max Water (Site, mL)', 'Std Max Water (Site, mL)',
+    'Mean Min Water (Site, mL)', 'Std Min Water (Site, mL)',
+    'Mean Combined Water (Site, mL)', 'Std Combined Water (Site, mL)',
+
+    # Water - Scope 2 (Source)
+    'Mean Max Water (Source, mL)', 'Std Max Water (Source, mL)',
+    'Mean Min Water (Source, mL)', 'Std Min Water (Source, mL)',
+    'Mean Combined Water (Source, mL)', 'Std Combined Water (Source, mL)',
+
+    # Water - Site & Source (combined)
+    'Mean Max Water (Site & Source, mL)', 'Std Max Water (Site & Source, mL)',
+    'Mean Min Water (Site & Source, mL)', 'Std Min Water (Site & Source, mL)',
+    'Mean Combined Water (Site & Source, mL)', 'Std Combined Water (Site & Source, mL)',
+]]=df_environmental[[
+    # Energy
     'Mean Max Energy (Wh)', 'Std Max Energy (Wh)',
     'Mean Min Energy (Wh)', 'Std Min Energy (Wh)',
     'Mean Combined Energy (Wh)', 'Std Combined Energy (Wh)',
+
+    # Carbon
     'Mean Max Carbon (gCO2e)', 'Std Max Carbon (gCO2e)',
     'Mean Min Carbon (gCO2e)', 'Std Min Carbon (gCO2e)',
     'Mean Combined Carbon (gCO2e)', 'Std Combined Carbon (gCO2e)',
-    'Mean Max Water (mL)', 'Std Max Water (mL)',
-    'Mean Min Water (mL)', 'Std Min Water (mL)',
-    'Mean Combined Water (mL)', 'Std Combined Water (mL)',
-]]*1000  
+
+    # Water - Scope 1 (Site)
+    'Mean Max Water (Site, mL)', 'Std Max Water (Site, mL)',
+    'Mean Min Water (Site, mL)', 'Std Min Water (Site, mL)',
+    'Mean Combined Water (Site, mL)', 'Std Combined Water (Site, mL)',
+
+    # Water - Scope 2 (Source)
+    'Mean Max Water (Source, mL)', 'Std Max Water (Source, mL)',
+    'Mean Min Water (Source, mL)', 'Std Min Water (Source, mL)',
+    'Mean Combined Water (Source, mL)', 'Std Combined Water (Source, mL)',
+
+    # Water - Site & Source (combined)
+    'Mean Max Water (Site & Source, mL)', 'Std Max Water (Site & Source, mL)',
+    'Mean Min Water (Site & Source, mL)', 'Std Min Water (Site & Source, mL)',
+    'Mean Combined Water (Site & Source, mL)', 'Std Combined Water (Site & Source, mL)',
+]]*1000
+
 
 # In[47]:
 
@@ -719,6 +817,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

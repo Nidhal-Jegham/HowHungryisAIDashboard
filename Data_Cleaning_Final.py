@@ -60,7 +60,7 @@ api_id= [
       "mistral-medium-2505",
   "Mistral-Large-2411",
   "Mistral-small",
-  "Mistral-Nemo"
+  "Mistral-Nemo",
     "DeepSeek-V3-0324",
     "gpt-5-mini-2025-08-07",
     "gpt-5-nano-2025-08-07",
@@ -218,7 +218,7 @@ DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-V3-0324","DeepSeek-R1-0528"]
 
 LARGE_API_ID= [
       "mistral-medium-2505",
-  "Mistral-Large-2411"
+  "Mistral-Large-2411",
     "DeepSeek-V3-0324",
     "gpt-5-2025-08-07",
     "DeepSeek-R1-0528",
@@ -294,7 +294,7 @@ MEDIUM_API_ID = [
 
 SMALL_API_ID = [
       "Mistral-small",
-  "Mistral-Nemo"
+  "Mistral-Nemo",
     "gpt-5-nano-2025-08-07",
     "gpt-4.1-nano-2025-04-14",
     
@@ -835,6 +835,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

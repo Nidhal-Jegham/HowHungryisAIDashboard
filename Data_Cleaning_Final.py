@@ -496,7 +496,7 @@ df_selected[["Min GPU Power Utilization", "Max GPU Power Utilization", "Non-GPU 
 def get_environmental_multipliers(api):
     if api in OpenAI_API_ID_NEW:
         return 1.12,0.3,3.142,0.3528
-    if api in MISTRAL_API_ID_NEW:
+    if api in MISTRAL_API_ID:
         return 1.12,0.3,3.142,0.3528
         
     elif api in OpenAI_API_ID_OLD:
@@ -835,6 +835,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

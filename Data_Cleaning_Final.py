@@ -57,6 +57,10 @@ df.columns
 
 
 api_id= [
+      "mistral-medium-2505",
+  "Mistral-Large-2411",
+  "Mistral-small",
+  "Mistral-Nemo"
     "DeepSeek-V3-0324",
     "gpt-5-mini-2025-08-07",
     "gpt-5-nano-2025-08-07",
@@ -127,7 +131,12 @@ api_id= [
 
 # In[10]:
 
+MISTRAL_API_ID=[      "mistral-medium-2505",
+  "Mistral-Large-2411",
+  "Mistral-small",
+  "Mistral-Nemo"]
 
+    
 GROK_API_ID=[  "grok-4-0709",
     "grok-3-mini-beta",
     "grok-3-mini-fast-beta",
@@ -208,6 +217,8 @@ DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-V3-0324","DeepSeek-R1-0528"]
 
 
 LARGE_API_ID= [
+      "mistral-medium-2505",
+  "Mistral-Large-2411"
     "DeepSeek-V3-0324",
     "gpt-5-2025-08-07",
     "DeepSeek-R1-0528",
@@ -282,6 +293,8 @@ MEDIUM_API_ID = [
 
 
 SMALL_API_ID = [
+      "Mistral-small",
+  "Mistral-Nemo"
     "gpt-5-nano-2025-08-07",
     "gpt-4.1-nano-2025-04-14",
     
@@ -426,6 +439,8 @@ def get_hardware_host(api):
         return "DGX H200/H100", "AWS"
     elif api in GROK_API_ID:
         return "DGX H200/H100", "xAI"
+    elif api in MISTRAL_API_ID:
+        return "DGX H200/H100", "Azure"
     else:
         return None, None  
 
@@ -453,7 +468,6 @@ df_selected[['GPUs Power Draw', 'Non-GPUs Power Draw']] = df_selected['Hardware'
 # In[40]:
 
 
-import pandas as pd
 
 def determine_utilization(row):
     if row['API ID'] in LARGE_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
@@ -482,6 +496,9 @@ df_selected[["Min GPU Power Utilization", "Max GPU Power Utilization", "Non-GPU 
 def get_environmental_multipliers(api):
     if api in OpenAI_API_ID_NEW:
         return 1.12,0.3,3.142,0.3528
+    if api in MISTRAL_API_ID_NEW:
+        return 1.12,0.3,3.142,0.3528
+        
     elif api in OpenAI_API_ID_OLD:
         return 1.12,0.3,3.142,0.3528
     elif api in DEEPSEEK_API_ID:
@@ -520,6 +537,8 @@ def get_company(api):
         return "Meta"
     elif api in GROK_API_ID:
         return "xAI"
+    elif api in MISTRAL_API_ID:
+        return 'Mistral AI"
     else:
         return None  
         
@@ -560,8 +579,7 @@ df_selected.columns
 
 
 
-import numpy as np
-import pandas as pd
+
 
 def compute_environmental_metrics(row):
     # STRICT: derive output length only from Query Length (no 300 fallback)
@@ -817,6 +835,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

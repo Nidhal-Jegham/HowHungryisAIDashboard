@@ -90,8 +90,7 @@ api_id= [
     "claude-3-5-sonnet-20241022",
     "claude-3-opus-20240229",
     "claude-3-5-haiku-20241022",
-    "claude-3-5-sonnet-20240620",
-    "claude-3-haiku-20240307",
+     "claude-3-haiku-20240307",
     "us.meta.llama4-maverick-17b-instruct-v1:0",
     "us.meta.llama4-scout-17b-instruct-v1:0",
     "us.meta.llama3-3-70b-instruct-v1:0",
@@ -124,8 +123,7 @@ api_id= [
     "claude-3-5-sonnet-20241022",
     "claude-3-opus-20240229",
     "claude-3-5-haiku-20241022",
-    "claude-3-5-sonnet-20240620",
-    "claude-3-haiku-20240307"
+     "claude-3-haiku-20240307"
 ]
 
 
@@ -234,8 +232,7 @@ LARGE_API_ID= [
     "claude-3-5-sonnet-20241022",
     "claude-3-opus-20240229",
     "claude-3-5-haiku-20241022",
-    "claude-3-5-sonnet-20240620",
-    "claude-3-haiku-20240307",
+     "claude-3-haiku-20240307",
     "gpt-4-turbo",
     "gpt-3.5-turbo",
     "gpt-4",
@@ -261,8 +258,7 @@ LARGE_API_ID= [
     "claude-3-5-sonnet-20241022",
     "claude-3-opus-20240229",
     "claude-3-5-haiku-20241022",
-    "claude-3-5-sonnet-20240620",
-    "claude-3-haiku-20240307"
+     "claude-3-haiku-20240307"
 
  ]
 
@@ -835,6 +831,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

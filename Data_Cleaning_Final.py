@@ -482,7 +482,7 @@ def determine_utilization(row):
     if row['API ID'] in LARGE_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.055, 0.075, 0.0625])
     if row['API ID'] in LARGE_API_ID and row['Hardware'] in ["TPU V6e"]:
-        return pd.Series([0.1, 0.1125, 0.125])
+        return pd.Series([0.1, 0.1125, 0.1])
     elif row['API ID'] in MEDIUM_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.03, 0.045, 0.03125])
     elif row['API ID'] in SMALL_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
@@ -551,6 +551,8 @@ def get_company(api):
         return "xAI"
     elif api in MISTRAL_API_ID:
         return "Mistral AI"
+    elif api in GOOGLE_API_ID:
+          return "Google"
     else:
         return None  
         
@@ -847,6 +849,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

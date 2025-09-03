@@ -57,6 +57,8 @@ df.columns
 
 
 api_id= [
+      "gemini-2.5-pro",
+      "google/gemini-2.5-flash",
       "mistral-medium-2505",
   "Mistral-Large-2411",
   "Mistral-small",
@@ -184,10 +186,15 @@ CLAUDE_API_ID = ["claude-opus-4-20250514",
     "claude-3-haiku-20240307"
 ]
 
+GOOGLE_API_ID= [      "gemini-2.5-pro",
+      "google/gemini-2.5-flash"]
+
 # In[13]:
 
 
-LLama_API_ID = ["us.meta.llama4-maverick-17b-instruct-v1:0",
+LLama_API_ID = [
+
+      "us.meta.llama4-maverick-17b-instruct-v1:0",
     "us.meta.llama4-scout-17b-instruct-v1:0",
     "us.meta.llama3-3-70b-instruct-v1:0",
     "us.meta.llama3-2-90b-instruct-v1:0",
@@ -215,6 +222,8 @@ DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-V3-0324","DeepSeek-R1-0528"]
 
 
 LARGE_API_ID= [
+                  "gemini-2.5-pro",
+      "google/gemini-2.5-flash",
       "mistral-medium-2505",
   "Mistral-Large-2411",
     "DeepSeek-V3-0324",
@@ -437,6 +446,8 @@ def get_hardware_host(api):
         return "DGX H200/H100", "xAI"
     elif api in MISTRAL_API_ID:
         return "DGX H200/H100", "Azure"
+    elif api in GOOGLE_API_ID:
+          return "TPU V6e", "Google"
     else:
         return None, None  
 
@@ -453,6 +464,8 @@ def get_power_consumption(hardware):
         return 5.6, 4.6
     elif hardware in ["DGX A100"]:
         return 3.2, 3.3
+    elif hardware in ["TPU V6e"]:
+          return 1.2, 0.96
     else:
         return None, None 
 
@@ -468,6 +481,8 @@ df_selected[['GPUs Power Draw', 'Non-GPUs Power Draw']] = df_selected['Hardware'
 def determine_utilization(row):
     if row['API ID'] in LARGE_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.055, 0.075, 0.0625])
+    if row['API ID'] in LARGE_API_ID and row['Hardware'] in ["TPU V6e"]:
+        return pd.Series([0.1, 0.1125, 0.125])
     elif row['API ID'] in MEDIUM_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.03, 0.045, 0.03125])
     elif row['API ID'] in SMALL_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
@@ -494,7 +509,8 @@ def get_environmental_multipliers(api):
         return 1.12,0.3,3.142,0.3528
     if api in MISTRAL_API_ID:
         return 1.12,0.3,3.142,0.3528
-        
+    if api in GOOGLE_API_ID:
+          return 1.09, 0.3, 1.1, 0.231
     elif api in OpenAI_API_ID_OLD:
         return 1.12,0.3,3.142,0.3528
     elif api in DEEPSEEK_API_ID:
@@ -831,6 +847,7 @@ df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 df_environmental.columns
 
 # In[ ]:
+
 
 
 

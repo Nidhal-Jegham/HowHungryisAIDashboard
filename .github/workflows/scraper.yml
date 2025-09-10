@@ -70,17 +70,18 @@ jobs:
         run: |
           mkdir -p output
           python Data_Cleaning_Final.py
-          mv artificialanalysis*.csv output/
-
-
+          mv artificialanalysis_environmental.csv output/
+          mv artificialanalysis_environmental_*.csv output/ || true
+          mv artificialanalysis_environmental_history.csv output/
 
       - name: Commit CSVs to repo
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "actions@github.com"
           git add data/*.csv
-          git add output/*.csv
-
+          git add output/artificialanalysis_environmental.csv
+          git add output/artificialanalysis_environmental_*.csv || true
+          git add output/artificialanalysis_environmental_history.csv
           git commit -m "Auto-update scraped and cleaned data [skip ci]" || echo "No changes to commit"
           git push
         env:

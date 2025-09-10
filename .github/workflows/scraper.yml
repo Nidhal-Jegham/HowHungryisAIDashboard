@@ -88,7 +88,6 @@ jobs:
             git add data/*.csv 2>/dev/null || true
             test -f output/artificialanalysis_environmental.csv && git add output/artificialanalysis_environmental.csv || true
             ls output/artificialanalysis_environmental_*.csv >/dev/null 2>&1 && git add output/artificialanalysis_environmental_*.csv || true
-            test -f output/artificialanalysis_environmental_history.csv && git add output/artificialanalysis_environmental_history.csv || true
         
             git commit -m "Auto-update scraped and cleaned data [skip ci]" || echo "No changes to commit"
         

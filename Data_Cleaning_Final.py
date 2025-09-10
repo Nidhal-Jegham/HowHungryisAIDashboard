@@ -6,6 +6,9 @@
 
 import pandas as pd 
 import numpy as np 
+from datetime import datetime
+from zoneinfo import ZoneInfo
+import os
 
 # In[2]:
 
@@ -635,17 +638,15 @@ def compute_environmental_metrics(row):
             non_gpu_util = float(row['Non-GPU Power Utilization'])
             pue = float(row['PUE'])
             cif = float(row['CIF'])
-            wue_site = float(row['WUE (Site)'])       # mL per kWh (IT load)
-            wue_source = float(row['WUE (Source)'])   # mL per kWh (facility)
+            wue_site = float(row['WUE (Site)'])       # L per kWh (IT load)
+            wue_source = float(row['WUE (Source)'])   # L per kWh (facility)
 
-            # ---- Max case ----
             power_draw_max = (gpu_power * max_gpu_util) + (non_gpu_power * non_gpu_util)  # W
-            energy_max = base_time * power_draw_max * pue   # Wh (facility)
-            carbon_max = energy_max * cif                   # gCO2e
+            energy_max = base_time * power_draw_max * pue   # kWh (facility)
+            carbon_max = energy_max * cif                   # KgCO2e
 
-            # Water: Source (facility energy) and Site (IT energy = facility / PUE)
-            water_source_max = energy_max * wue_source      # mL
-            water_site_max = (energy_max / pue) * wue_site  # mL
+            water_source_max = energy_max * wue_source      # L
+            water_site_max = (energy_max / pue) * wue_site  # L
             water_combined_max = water_source_max + water_site_max
 
             energy_max_vals.append(energy_max)
@@ -654,13 +655,12 @@ def compute_environmental_metrics(row):
             water_site_max_vals.append(water_site_max)
             water_comb_max_vals.append(water_combined_max)
 
-            # ---- Min case ----
             power_draw_min = (gpu_power * min_gpu_util) + (non_gpu_power * non_gpu_util)  # W
-            energy_min = base_time * power_draw_min * pue   # Wh (facility)
-            carbon_min = energy_min * cif                   # gCO2e
+            energy_min = base_time * power_draw_min * pue   # kWh (facility)
+            carbon_min = energy_min * cif                   # KgCO2e
 
-            water_source_min = energy_min * wue_source      # mL
-            water_site_min = (energy_min / pue) * wue_site  # mL
+            water_source_min = energy_min * wue_source      # L
+            water_site_min = (energy_min / pue) * wue_site  # L
             water_combined_min = water_source_min + water_site_min
 
             energy_min_vals.append(energy_min)
@@ -672,7 +672,6 @@ def compute_environmental_metrics(row):
     if not energy_max_vals and not energy_min_vals:
         return pd.Series([None] * 30)
 
-    # Combined sets
     energy_comb = energy_max_vals + energy_min_vals
     carbon_comb = carbon_max_vals + carbon_min_vals
 
@@ -684,33 +683,32 @@ def compute_environmental_metrics(row):
     s = lambda x: np.std(x) if len(x) else None
 
     return pd.Series([
-        # Energy (Wh)
+        # Energy (kWh)
         m(energy_max_vals), s(energy_max_vals),
         m(energy_min_vals), s(energy_min_vals),
         m(energy_comb),     s(energy_comb),
 
-        # Carbon (gCO2e)
+        # Carbon (KgCO2e)
         m(carbon_max_vals), s(carbon_max_vals),
         m(carbon_min_vals), s(carbon_min_vals),
         m(carbon_comb),     s(carbon_comb),
 
-        # Water Scope 1 (Site) (mL)
+        # Water Scope 1 (Site) (L)
         m(water_site_max_vals), s(water_site_max_vals),
         m(water_site_min_vals), s(water_site_min_vals),
         m(water_site_comb),     s(water_site_comb),
 
-        # Water Scope 2 (Source) (mL)
+        # Water Scope 2 (Source) (L)
         m(water_source_max_vals), s(water_source_max_vals),
         m(water_source_min_vals), s(water_source_min_vals),
         m(water_source_comb),     s(water_source_comb),
 
-        # Water (Site & Source) (mL)
+        # Water (Site & Source) (L)
         m(water_comb_max_vals), s(water_comb_max_vals),
         m(water_comb_min_vals), s(water_comb_min_vals),
         m(water_comb),          s(water_comb),
     ])
 
-# --- Apply to your df ---
 df_environmental = df_selected.copy()
 
 df_environmental[[
@@ -843,12 +841,33 @@ df_environmental["Atlantic Flight Equiv. – 100B Prompts (TonsCO2e)"] = df_envi
 
 df_environmental.to_csv('artificialanalysis_environmental.csv', index=False)
 
+snapshot_date = datetime.now(ZoneInfo("America/New_York")).date().isoformat()
+dated_fname = f"artificialanalysis_environmental_{snapshot_date}.csv"
+
+df_snapshot = df_environmental.copy()
+df_snapshot.insert(0, 'SnapshotDate', snapshot_date)  # keep it explicit in the file
+df_snapshot.to_csv(dated_fname, index=False)
+
+history_fname = 'artificialanalysis_environmental_history.csv'
+if os.path.exists(history_fname):
+    hist = pd.read_csv(history_fname)
+    key_cols = ['SnapshotDate', 'Model', 'API ID', 'Query Length']
+    for c in key_cols:
+        if c not in df_snapshot.columns:
+            df_snapshot[c] = None
+        if c not in hist.columns:
+            hist[c] = None
+    combined = pd.concat([hist, df_snapshot], ignore_index=True)
+    combined.drop_duplicates(subset=key_cols, keep='last', inplace=True)
+    combined.to_csv(history_fname, index=False)
+else:
+    df_snapshot.to_csv(history_fname, index=False)
 # In[50]:
 
 
-df_environmental.columns
 
 # In[ ]:
+
 
 
 

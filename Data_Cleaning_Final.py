@@ -845,28 +845,28 @@ snapshot_date = datetime.now(ZoneInfo("America/New_York")).date().isoformat()
 dated_fname = f"artificialanalysis_environmental_{snapshot_date}.csv"
 
 df_snapshot = df_environmental.copy()
-df_snapshot.insert(0, 'SnapshotDate', snapshot_date)  # keep it explicit in the file
+df_snapshot.insert(0, 'SnapshotDate', snapshot_date)
 df_snapshot.to_csv(dated_fname, index=False)
 
 history_fname = 'artificialanalysis_environmental_history.csv'
+key_cols = ['SnapshotDate', 'Model', 'API ID', 'Query Length']
+
 if os.path.exists(history_fname):
     hist = pd.read_csv(history_fname)
-    key_cols = ['SnapshotDate', 'Model', 'API ID', 'Query Length']
     for c in key_cols:
         if c not in df_snapshot.columns:
             df_snapshot[c] = None
         if c not in hist.columns:
             hist[c] = None
     combined = pd.concat([hist, df_snapshot], ignore_index=True)
-    combined.drop_duplicates(subset=key_cols, keep='last', inplace=True)
+    combined = combined.drop_duplicates(subset=key_cols, keep='last')
     combined.to_csv(history_fname, index=False)
 else:
     df_snapshot.to_csv(history_fname, index=False)
-# In[50]:
-
 
 
 # In[ ]:
+
 
 
 

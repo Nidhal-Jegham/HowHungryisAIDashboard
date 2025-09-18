@@ -386,13 +386,12 @@ df_selected.loc[mask, 'P95First Chunk (s)']= df_selected.loc[mask, 'P95First Chu
 df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
 # Example: mask is already defined to select DeepSeek rows
 df_selected.loc[mask, 'Model'] = df_selected.loc[mask].apply(
-    lambda row: (
-        f"DeepSeek R1 (DeepSeek) [{int(row['ContextWindow']/1000)}k]"
-        if pd.notna(row['ContextWindow']) else
-        "DeepSeek R1 (DeepSeek)"
-    ),
+    lambda row: f"DeepSeek R1 (DeepSeek) [{row['ContextWindow']}]"
+    if pd.notna(row['ContextWindow'])
+    else "DeepSeek R1 (DeepSeek)",
     axis=1
 )
+
 
 
 mask = df_selected['API ID'] == "DeepSeek-R1-0528"
@@ -862,6 +861,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

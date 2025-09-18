@@ -388,7 +388,7 @@ df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
 df_selected.loc[mask, 'Model'] = df_selected.loc[mask].apply(
     lambda row: (
         f"DeepSeek R1 (DeepSeek) [{int(row['WindowContext']/1000)}k]"
-        if pd.notna(row['Context Window']) else
+        if pd.notna(row['WindowContext']) else
         "DeepSeek R1 (DeepSeek)"
     ),
     axis=1
@@ -862,6 +862,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

@@ -5,6 +5,8 @@
 
 
 import pandas as pd 
+import re
+
 import numpy as np 
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -29,6 +31,16 @@ df_medium['Query Length'] = '1000'
 df_long['Query Length'] = '1500'
 
 # In[4]:
+
+def normalize_columns(df):
+    df.columns = [
+        re.sub(r'\s+', ' ', c).replace('\xa0', ' ').replace('–', '-').strip()
+        for c in df.columns
+    ]
+    return df
+
+for df_ in [df_short, df_medium, df_long]:
+    df_ = normalize_columns(df_)
 
 
 df_short.drop_duplicates(subset=["API ID", "Model"], inplace=True)
@@ -861,6 +873,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

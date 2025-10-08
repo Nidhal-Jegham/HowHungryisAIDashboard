@@ -43,6 +43,8 @@ for df_ in [df_short, df_medium, df_long]:
     df_ = normalize_columns(df_)
 
 
+print(df_short.columns)
+
 df_short.drop_duplicates(subset=["API ID", "Model"], inplace=True)
 df_medium.drop_duplicates(subset=["API ID", "Model"], inplace=True)
 df_long.drop_duplicates(subset=["API ID", "Model"], inplace=True)
@@ -873,6 +875,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

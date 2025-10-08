@@ -45,9 +45,9 @@ for df_ in [df_short, df_medium, df_long]:
 
 print(df_short.columns)
 
-df_short.drop_duplicates(subset=["API ID", "Model"], inplace=True)
-df_medium.drop_duplicates(subset=["API ID", "Model"], inplace=True)
-df_long.drop_duplicates(subset=["API ID", "Model"], inplace=True)
+df_short.drop_duplicates(subset=["APIID", "Model"], inplace=True)
+df_medium.drop_duplicates(subset=["APIID", "Model"], inplace=True)
+df_long.drop_duplicates(subset=["APIID", "Model"], inplace=True)
 
 
 # In[5]:
@@ -365,7 +365,7 @@ df.columns
 # In[25]:
 
 
-df_selected = df[df['API ID'].isin(api_id)]
+df_selected = df[df['APIID'].isin(api_id)]
 
 # In[26]:
 
@@ -387,7 +387,7 @@ df_selected = df[df['API ID'].isin(api_id)]
 df_selected.columns
 
 
-mask = df_selected['API ID'] == "deepseek-reasoner"
+mask = df_selected['APIID'] == "deepseek-reasoner"
 reasoning_time= df_selected.loc[mask, 'First AnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
 
 df_selected.loc[mask, 'MedianFirst Chunk (s)'] +=reasoning_time
@@ -408,7 +408,7 @@ df_selected.loc[mask, 'Model'] = df_selected.loc[mask].apply(
 
 
 
-mask = df_selected['API ID'] == "DeepSeek-R1-0528"
+mask = df_selected['APIID'] == "DeepSeek-R1-0528"
 reasoning_time= df_selected.loc[mask, 'First AnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
 
 df_selected.loc[mask, 'MedianFirst Chunk (s)'] +=reasoning_time
@@ -422,10 +422,10 @@ df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
 df_selected.loc[mask, 'Model'] = "DeepSeek R1 (Azure)"
 
 
-mask = df_selected['API ID'] == "deepseek-chat"
+mask = df_selected['APIID'] == "deepseek-chat"
 df_selected.loc[mask, 'Model'] = "DeepSeek V3 (DeepSeek)"
 
-mask = df_selected['API ID'] == "DeepSeek-V3-0324"
+mask = df_selected['APIID'] == "DeepSeek-V3-0324"
 df_selected.loc[mask, 'Model'] = "DeepSeek V3 (Azure)"
 
 # In[35]:
@@ -476,7 +476,7 @@ def get_hardware_host(api):
     else:
         return None, None  
 
-df_selected[['Hardware', 'Host']] = df_selected['API ID'].apply(
+df_selected[['Hardware', 'Host']] = df_selected['APIID'].apply(
     lambda x: pd.Series(get_hardware_host(x))
 )
 
@@ -504,21 +504,21 @@ df_selected[['GPUs Power Draw', 'Non-GPUs Power Draw']] = df_selected['Hardware'
 
 
 def determine_utilization(row):
-    if row['API ID'] in LARGE_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    if row['APIID'] in LARGE_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.055, 0.075, 0.0625])
-    if row['API ID'] in LARGE_API_ID and row['Hardware'] in ["TPU V6e"]:
+    if row['APIID'] in LARGE_API_ID and row['Hardware'] in ["TPU V6e"]:
         return pd.Series([0.1, 0.1125, 0.1])
-    elif row['API ID'] in MEDIUM_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    elif row['APIID'] in MEDIUM_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.03, 0.045, 0.03125])
-    elif row['API ID'] in SMALL_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    elif row['APIID'] in SMALL_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.017, 0.025, 0.016])
-    elif row['API ID'] in MICRO_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    elif row['APIID'] in MICRO_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.0075, 0.0125, 0.0087])
-    elif row['API ID'] in NANO_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    elif row['APIID'] in NANO_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.0055, 0.01, 0.0087])
-    elif row['API ID'] in LARGE_API_ID and row['Hardware'] == "DGX A100":
+    elif row['APIID'] in LARGE_API_ID and row['Hardware'] == "DGX A100":
         return pd.Series([0.125, 0.15, 0.0625])
-    elif row['API ID'] in MEDIUM_API_ID and row['Hardware'] == "DGX A100":
+    elif row['APIID'] in MEDIUM_API_ID and row['Hardware'] == "DGX A100":
         return pd.Series([0.0625, 0.07, 0.0312])
     else:
         return pd.Series([None, None, None])
@@ -551,7 +551,7 @@ def get_environmental_multipliers(api):
     else:
         return None, None  
 
-df_selected[['PUE', 'WUE (Site)', "WUE (Source)", 'CIF']] = df_selected['API ID'].apply(
+df_selected[['PUE', 'WUE (Site)', "WUE (Source)", 'CIF']] = df_selected['APIID'].apply(
     lambda x: pd.Series(get_environmental_multipliers(x))
 )
 
@@ -581,7 +581,7 @@ def get_company(api):
     else:
         return None  
         
-df_selected["Company"] = df_selected['API ID'].apply(
+df_selected["Company"] = df_selected['APIID'].apply(
     lambda x: pd.Series(get_company(x))
 )
 
@@ -603,7 +603,7 @@ def get_size(api):
     else:
         return None, None  
         
-df_selected["Size"] = df_selected['API ID'].apply(
+df_selected["Size"] = df_selected['APIID'].apply(
     lambda x: pd.Series(get_size(x))
 )
 
@@ -875,6 +875,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

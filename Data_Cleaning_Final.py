@@ -114,11 +114,33 @@ def canonicalize_headers(df: pd.DataFrame) -> pd.DataFrame:
             fixed.append(c2)
     df.columns = fixed
 
-if "API ID" not in df.columns and "API" in df.columns and "ID" in df.columns:
+    # Special stitch if site emitted two physical columns "API" and "ID"
+    if "API ID" not in df.columns and "API" in df.columns and "ID" in df.columns:
         df["API ID"] = df["API"].astype(str) + " " + df["ID"].astype(str)
         df.drop(columns=[c for c in ["API","ID"] if c in df.columns], inplace=True)
 
     return df
+
+# 5) Resolve and drop lists safely
+def resolve_columns(df: pd.DataFrame, targets: list[str]) -> list[str]:
+    """Return actual present names corresponding to targets, using canonical keys."""
+    table = {_norm(c): c for c in df.columns}
+    resolved = []
+    for t in targets:
+        k = _norm(t)
+        if k in table:
+            resolved.append(table[k])
+        else:
+            # fuzzy containment
+            cands = [c for kk,c in table.items() if k in kk or kk in k]
+            if len(cands) == 1:
+                resolved.append(cands[0])
+    return resolved
+
+def drop_targets(df: pd.DataFrame, targets: list[str]) -> None:
+    cols = resolve_columns(df, targets)
+    if cols:
+        df.drop(columns=cols, inplace=True, errors="ignore")
 
 # 5) Resolve and drop lists safely
 def resolve_columns(df: pd.DataFrame, targets: list[str]) -> list[str]:
@@ -1002,6 +1024,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

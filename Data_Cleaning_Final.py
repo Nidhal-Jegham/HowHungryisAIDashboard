@@ -14,6 +14,134 @@ import os
 
 # In[2]:
 
+CANON = {
+    "API ID": [
+        "API ID","API\nID","APIID","API-ID","API  ID","API  \nID","API / ID"
+    ],
+    "Model": ["Model"],
+    "API Provider": ["API Provider","APIProvider"],
+    "Function Calling": ["Function Calling","FunctionCalling"],
+    "JSON Mode": ["JSON Mode","JSONMode"],
+    "License": ["License"],
+    "OpenAI Compatible": ["OpenAI Compatible","OpenAICompatible"],
+    "ContextWindow": ["ContextWindow","Context Window"],
+    "Footnotes": ["Footnotes"],
+    "FurtherAnalysis": ["FurtherAnalysis","Further Analysis"],
+    "Artificial Analysis Intelligence Index": [
+        "Artificial Analysis Intelligence Index","Artificial AnalysisIntelligence Index"
+    ],
+
+    "BlendedUSD/1M Tokens": ["BlendedUSD/1M Tokens","Blended USD/1M Tokens"],
+    "Input PriceUSD/1M Tokens": [
+        "Input PriceUSD/1M Tokens","InputPriceUSD/1M Tokens","Input Price USD/1M Tokens"
+    ],
+    "Output PriceUSD/1M Tokens": [
+        "Output PriceUSD/1M Tokens","OutputPriceUSD/1M Tokens","Output Price USD/1M Tokens"
+    ],
+
+    "MedianTokens/s": ["MedianTokens/s","Median Tokens/s","Median Token/s"],
+    "P5Tokens/s": ["P5Tokens/s","P5 Tokens/s"],
+    "P25Tokens/s": ["P25Tokens/s","P25 Tokens/s"],
+    "P75Tokens/s": ["P75Tokens/s","P75 Tokens/s"],
+    "P95Tokens/s": ["P95Tokens/s","P95 Tokens/s"],
+
+    "MedianFirst Chunk (s)": ["MedianFirst Chunk (s)","Median First Chunk (s)","MedianFirstChunk (s)"],
+    "First AnswerToken (s)": ["First AnswerToken (s)","FirstAnswerToken (s)","First Answer Token (s)"],
+    "P5First Chunk (s)": ["P5First Chunk (s)","P5 First Chunk (s)","P5FirstChunk (s)"],
+    "P25First Chunk (s)": ["P25First Chunk (s)","P25 First Chunk (s)","P25FirstChunk (s)"],
+    "P75First Chunk (s)": ["P75First Chunk (s)","P75 First Chunk (s)","P75FirstChunk (s)"],
+    "P95First Chunk (s)": ["P95First Chunk (s)","P95 First Chunk (s)","P95FirstChunk (s)"],
+    "TotalResponse (s)": ["TotalResponse (s)","Total Response (s)"],
+    "ReasoningTime (s)": ["ReasoningTime (s)","Reasoning Time (s)"],
+
+    "MMLU-Pro (Reasoning & Knowledge)": [
+        "MMLU-Pro(Reasoning &Knowledge)","MMLU-Pro(Reasoning & Knowledge)","MMLU Pro (Reasoning & Knowledge)","MMLU-Pro"
+    ],
+    "GPQA Diamond (Scientific Reasoning)": [
+        "GPQA Diamond(ScientificReasoning)","GPQA Diamond(Scientific Reasoning)","GPQA Diamond","GPQA-Diamond"
+    ],
+    "Humanity's Last Exam (Reasoning & Knowledge)": [
+        "Humanity's LastExam(Reasoning & Knowledge)","Humanity's Last Exam(Reasoning & Knowledge)",
+        "Humanitys Last Exam (Reasoning & Knowledge)"
+    ],
+
+    "LiveCodeBench (Coding)": ["LiveCodeBench(Coding)","LiveCodeBench"],
+    "SciCode (Coding)": ["SciCode(Coding)","SciCode"],
+    "HumanEval (Coding)": ["HumanEval(Coding)","HumanEval"],
+
+    "AIME 2025 (Competition Math)": ["AIME 2025(CompetitionMath)","AIME 2025"],
+    "AIME 2024 (Competition Math)": ["AIME 2024(CompetitionMath)","AIME 2024"],
+    "Math 500 (Competition Math)": ["Math 500(CompetitionMath)","Math 500"],
+
+    "IFBench (Instruction Following)": ["IFBench(InstructionFollowing)","IFBench"],
+
+    "Terminal-Bench Hard (Agentic Coding & Terminal Use)": [
+        "Terminal-BenchHard (AgenticCoding & Terminal Use)","Terminal-Bench Hard (Agentic Coding & Terminal Use)","Terminal Bench Hard"
+    ],
+    "Tau2-Bench Telecom (Agentic Tool Use)": [
+        "𝜏²-BenchTelecom(Agentic Tool Use)","Tau^2-BenchTelecom(Agentic Tool Use)",
+        "Tau2-Bench Telecom (Agentic Tool Use)","Tau2-BenchTelecom"
+    ],
+    "AA-LCR (Long Context Reasoning)": [
+        "AA-LCR(LongContext Reasoning)","AA-LCR (LongContext Reasoning)","AA-LCR","AA-LCR (Long Context Reasoning)"
+    ],
+
+    "Chatbot Arena": ["ChatbotArena","Chatbot Arena"],
+
+    "length": ["length"],
+    "Query Length": ["Query Length","QueryLength"],
+}
+
+def _norm(s: str) -> str:
+    s = s.lower().replace('\xa0', ' ').replace('\u200b', '')
+    s = re.sub(r'\s+', ' ', s).strip()
+    return re.sub(r'[^a-z0-9]', '', s)
+
+CANON_LOOKUP = {}
+for canon, variants in CANON.items():
+    for v in variants:
+        CANON_LOOKUP[_norm(v)] = canon
+
+def canonicalize_headers(df: pd.DataFrame) -> pd.DataFrame:
+    fixed = []
+    for c in df.columns:
+        key = _norm(c)
+        if key in CANON_LOOKUP:
+            fixed.append(CANON_LOOKUP[key])
+        else:
+            c2 = (c.replace('\xa0',' ').replace('\u200b','').replace('–','-'))
+            c2 = re.sub(r'\s+', ' ', c2).strip()
+            fixed.append(c2)
+    df.columns = fixed
+
+if "API ID" not in df.columns and "API" in df.columns and "ID" in df.columns:
+        df["API ID"] = df["API"].astype(str) + " " + df["ID"].astype(str)
+        df.drop(columns=[c for c in ["API","ID"] if c in df.columns], inplace=True)
+
+    return df
+
+# 5) Resolve and drop lists safely
+def resolve_columns(df: pd.DataFrame, targets: list[str]) -> list[str]:
+    """Return actual present names corresponding to targets, using canonical keys."""
+    table = {_norm(c): c for c in df.columns}
+    resolved = []
+    for t in targets:
+        k = _norm(t)
+        if k in table:
+            resolved.append(table[k])
+        else:
+            # fuzzy containment
+            cands = [c for kk,c in table.items() if k in kk or kk in k]
+            if len(cands) == 1:
+                resolved.append(cands[0])
+    return resolved
+
+def drop_targets(df: pd.DataFrame, targets: list[str]) -> None:
+    cols = resolve_columns(df, targets)
+    if cols:
+        df.drop(columns=cols, inplace=True, errors="ignore")
+
+
 
 df_short= pd.read_csv('./data/artificialanalysis_cleanshort.csv')
 df_medium= pd.read_csv('./data/artificialanalysis_cleanmedium.csv')
@@ -32,22 +160,21 @@ df_long['Query Length'] = '1500'
 
 # In[4]:
 
-def normalize_columns(df):
-    df.columns = [
-        re.sub(r'\s+', ' ', c).replace('\xa0', ' ').replace('–', '-').strip()
-        for c in df.columns
-    ]
-    return df
+df_short  = canonicalize_headers(df_short)
+df_medium = canonicalize_headers(df_medium)
+df_long   = canonicalize_headers(df_long)
 
-for df_ in [df_short, df_medium, df_long]:
-    df_ = normalize_columns(df_)
+# dedup guarded on the canonical names
+for name, d in [("short", df_short), ("medium", df_medium), ("long", df_long)]:
+    if {"API ID","Model"}.issubset(d.columns):
+        d.drop_duplicates(subset=["API ID","Model"], inplace=True)
+    else:
+        print(f"[{name}] missing API ID or Model. Columns: {list(d.columns)}")
 
 
-print(df_short.columns)
 
-df_short.drop_duplicates(subset=["APIID", "Model"], inplace=True)
-df_medium.drop_duplicates(subset=["APIID", "Model"], inplace=True)
-df_long.drop_duplicates(subset=["APIID", "Model"], inplace=True)
+
+
 
 
 # In[5]:
@@ -365,7 +492,7 @@ df.columns
 # In[25]:
 
 
-df_selected = df[df['APIID'].isin(api_id)]
+df_selected = df[df['API ID'].isin(api_id)]
 
 # In[26]:
 
@@ -387,8 +514,8 @@ df_selected = df[df['APIID'].isin(api_id)]
 df_selected.columns
 
 
-mask = df_selected['APIID'] == "deepseek-reasoner"
-reasoning_time= df_selected.loc[mask, 'FirstAnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
+mask = df_selected['API ID'] == "deepseek-reasoner"
+reasoning_time= df_selected.loc[mask, 'First AnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
 
 df_selected.loc[mask, 'MedianFirst Chunk (s)'] +=reasoning_time
 
@@ -408,8 +535,8 @@ df_selected.loc[mask, 'Model'] = df_selected.loc[mask].apply(
 
 
 
-mask = df_selected['APIID'] == "DeepSeek-R1-0528"
-reasoning_time= df_selected.loc[mask, 'FirstAnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
+mask = df_selected['API ID'] == "DeepSeek-R1-0528"
+reasoning_time= df_selected.loc[mask, 'First AnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
 
 df_selected.loc[mask, 'MedianFirst Chunk (s)'] +=reasoning_time
 
@@ -422,21 +549,21 @@ df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
 df_selected.loc[mask, 'Model'] = "DeepSeek R1 (Azure)"
 
 
-mask = df_selected['APIID'] == "deepseek-chat"
+mask = df_selected['API ID'] == "deepseek-chat"
 df_selected.loc[mask, 'Model'] = "DeepSeek V3 (DeepSeek)"
 
-mask = df_selected['APIID'] == "DeepSeek-V3-0324"
+mask = df_selected['API ID'] == "DeepSeek-V3-0324"
 df_selected.loc[mask, 'Model'] = "DeepSeek V3 (Azure)"
 
 # In[35]:
 
 
-df_selected.drop(columns=['API Provider',"Function Calling",'JSON Mode', 'License', 'OpenAICompatible',"Footnotes",
-       'MMLU-Pro(Reasoning & Knowledge)',
-       'GPQA Diamond(Scientific Reasoning)',
-       "Humanity's Last Exam(Reasoning & Knowledge)",
-       'LiveCodeBench(Coding)', 'SciCode(Coding)',
-       'IFBench(Instruction Following)', 'AIME 2025(Competition Math)',
+df_selected.drop(columns=['API Provider',"Function Calling",'JSON Mode', 'License', 'OpenAI Compatible',"Footnotes",
+       'MMLU-Pro (Reasoning & Knowledge)',
+       'GPQA Diamond (Scientific Reasoning)',
+       "Humanity's Last Exam (Reasoning & Knowledge)",
+       'LiveCodeBench (Coding)', 'SciCode (Coding)',
+       'IFBench (Instruction Following)', 'AIME 2025 (Competition Math)',
        'Chatbot Arena', 'BlendedUSD/1M Tokens', 'Input PriceUSD/1M Tokens',
        'Output PriceUSD/1M Tokens','TotalResponse (s)',
        'ReasoningTime (s)', 'FurtherAnalysis'], inplace=True)
@@ -476,7 +603,7 @@ def get_hardware_host(api):
     else:
         return None, None  
 
-df_selected[['Hardware', 'Host']] = df_selected['APIID'].apply(
+df_selected[['Hardware', 'Host']] = df_selected['API ID'].apply(
     lambda x: pd.Series(get_hardware_host(x))
 )
 
@@ -504,21 +631,21 @@ df_selected[['GPUs Power Draw', 'Non-GPUs Power Draw']] = df_selected['Hardware'
 
 
 def determine_utilization(row):
-    if row['APIID'] in LARGE_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    if row['API ID'] in LARGE_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.055, 0.075, 0.0625])
-    if row['APIID'] in LARGE_API_ID and row['Hardware'] in ["TPU V6e"]:
+    if row['API ID'] in LARGE_API_ID and row['Hardware'] in ["TPU V6e"]:
         return pd.Series([0.1, 0.1125, 0.1])
-    elif row['APIID'] in MEDIUM_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    elif row['API ID'] in MEDIUM_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.03, 0.045, 0.03125])
-    elif row['APIID'] in SMALL_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    elif row['API ID'] in SMALL_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.017, 0.025, 0.016])
-    elif row['APIID'] in MICRO_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    elif row['API ID'] in MICRO_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.0075, 0.0125, 0.0087])
-    elif row['APIID'] in NANO_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
+    elif row['API ID'] in NANO_API_ID and row['Hardware'] in ["DGX H200/H100", "DGX H800"]:
         return pd.Series([0.0055, 0.01, 0.0087])
-    elif row['APIID'] in LARGE_API_ID and row['Hardware'] == "DGX A100":
+    elif row['API ID'] in LARGE_API_ID and row['Hardware'] == "DGX A100":
         return pd.Series([0.125, 0.15, 0.0625])
-    elif row['APIID'] in MEDIUM_API_ID and row['Hardware'] == "DGX A100":
+    elif row['API ID'] in MEDIUM_API_ID and row['Hardware'] == "DGX A100":
         return pd.Series([0.0625, 0.07, 0.0312])
     else:
         return pd.Series([None, None, None])
@@ -551,7 +678,7 @@ def get_environmental_multipliers(api):
     else:
         return None, None  
 
-df_selected[['PUE', 'WUE (Site)', "WUE (Source)", 'CIF']] = df_selected['APIID'].apply(
+df_selected[['PUE', 'WUE (Site)', "WUE (Source)", 'CIF']] = df_selected['API ID'].apply(
     lambda x: pd.Series(get_environmental_multipliers(x))
 )
 
@@ -581,7 +708,7 @@ def get_company(api):
     else:
         return None  
         
-df_selected["Company"] = df_selected['APIID'].apply(
+df_selected["Company"] = df_selected['API ID'].apply(
     lambda x: pd.Series(get_company(x))
 )
 
@@ -603,7 +730,7 @@ def get_size(api):
     else:
         return None, None  
         
-df_selected["Size"] = df_selected['APIID'].apply(
+df_selected["Size"] = df_selected['API ID'].apply(
     lambda x: pd.Series(get_size(x))
 )
 
@@ -875,10 +1002,6 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
-
-
-
-
 
 
 

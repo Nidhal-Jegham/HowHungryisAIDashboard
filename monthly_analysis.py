@@ -29,21 +29,16 @@ def harmonize_benchmark_names(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# 1) where CSVs live
 DATA_DIR = "./output"  
 
-# 2) only files with a date like YYYY-MM-DD
 pattern = re.compile(r"artificialanalysis_environmental_(\d{4}-\d{2}-\d{2})\.csv$")
 
-# 3) pick matching files
 files_with_dates = [f for f in os.listdir(DATA_DIR) if pattern.match(f)]
 if not files_with_dates:
     raise FileNotFoundError(f"No files matching pattern in {DATA_DIR}")
 
-# 4) sort by date
 files_with_dates.sort(key=lambda x: datetime.strptime(pattern.search(x).group(1), "%Y-%m-%d"))
 
-# 5) load each CSV
 dfs = {}
 for fname in files_with_dates:
     date_str = pattern.search(fname).group(1)
@@ -53,13 +48,11 @@ for fname in files_with_dates:
     dfs[date_str] = df
     print(f"Loaded {fname} → df_{date_str.replace('-', '_')}  ({df.shape[0]} rows, {df.shape[1]} cols)")
 
-# 6) expose individual variables (optional)
 for date_str, df in dfs.items():
     globals()[f"df_{date_str.replace('-', '_')}"] = df
 
 print(f"\nLoaded {len(dfs)} dated datasets successfully.\n")
 
-# 7) schema compare
 schemas = {date: sorted(df.columns.tolist()) for date, df in dfs.items()}
 first_date = list(schemas.keys())[0]
 first_schema = schemas[first_date]
@@ -70,13 +63,12 @@ for date, cols in schemas.items():
         differences[date] = diff
 
 if not differences:
-    print("✅ All datasets have identical columns.")
+    print("All datasets have identical columns.")
 else:
-    print("⚠️ Schema differences found:")
+    print("Schema differences found:")
     for date, diff in differences.items():
         print(f"  {date}: {diff}")
 
-# 8) align + concat
 aligned = []
 for date_str, df in dfs.items():
     df = df.copy()
@@ -85,7 +77,6 @@ for date_str, df in dfs.items():
 df_all = pd.concat(aligned, ignore_index=True)
 print(f"\nConcatenated df_all shape: {df_all.shape}")
 
-# 9) tag DeepSeek context window for DeepSeek-hosted R1 and V3 (not Azure)
 def tag_ctx(model_col, ctx_col, pattern_model):
     is_non_azure = model_col.str.contains(pattern_model, case=False, na=False)
     already_tagged = model_col.str.contains(r"\[\s*\d+\s*k\s*\]", case=False, na=False)
@@ -99,7 +90,6 @@ df_all.loc[mask_r1, "Model"] = df_all.loc[mask_r1].apply(lambda r: f"{r['Model']
 mask_v3 = tag_ctx(df_all["Model"], df_all.get("ContextWindow", pd.Series(index=df_all.index, dtype=str)), r"^DeepSeek\s*V3\s*\(DeepSeek\)")
 df_all.loc[mask_v3, "Model"] = df_all.loc[mask_v3].apply(lambda r: f"{r['Model']} [{r['ContextWindow']}]", axis=1)
 
-# 10) keep only needed cols (robust to drift)
 keep = [
     "SnapshotDate","Model","ContextWindow","API ID","length","Query Length",
     "MedianTokens/s","P5Tokens/s","P25Tokens/s","P75Tokens/s","P95Tokens/s",
@@ -128,7 +118,6 @@ present = [c for c in keep if c in df_all.columns]
 df_all = df_all[present].copy()
 df_all = df_all.sort_values(["SnapshotDate","Model"], kind="mergesort").reset_index(drop=True)
 
-# 11) model-level aggregation
 group_keys = [
     "Model", "Query Length", "API ID", "Company", "Hardware", "Host",
     "GPUs Power Draw", "Non-GPUs Power Draw", "Min GPU Power Utilization",
@@ -162,7 +151,6 @@ model_avg = (
 model_avg.columns = [" ".join(col).strip() for col in model_avg.columns]
 model_avg = model_avg.reset_index()
 
-# 12) pooled std (within-day + between-day)
 def pooled_std(group: pd.DataFrame, mean_col: str, std_col: str) -> float:
     mu = group[mean_col].dropna()
     si = group[std_col].dropna()
@@ -198,7 +186,6 @@ pooled_all = pooled_frames[0]
 for s in pooled_frames[1:]:
     pooled_all = pooled_all.merge(s, on=group_keys, how="outer")
 
-# 13) rename for clarity (Combined → Average; day-to-day vs intra-day wording)
 rename_map_main = {
     "Mean Max Energy (Wh) mean": "Avg Daily Max Energy (Wh)",
     "Mean Max Energy (Wh) std": "Day-to-day Std of Daily Max Energy (Wh)",
@@ -241,11 +228,9 @@ out = model_avg_renamed.merge(
 preferred_order = ["Model"] + [c for c in out.columns if c != "Model"]
 out = out[preferred_order].sort_values("Model").reset_index(drop=True)
 
-# 14) save main monthly summary (per-model)
 out.to_csv("Monthly LLM Environmental Footprint.csv", index=False)
 print('Wrote "Monthly LLM Environmental Footprint.csv"')
 
-# 15) also a day-to-day version (row-level renames on df_all)
 rename_map_day2day = {
     "Mean Max Energy (Wh)": "Daily Max Energy (Wh)",
     "Std Max Energy (Wh)": "Intra-day Std (Max Energy, Wh)",

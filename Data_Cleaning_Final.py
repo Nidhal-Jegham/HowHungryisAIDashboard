@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 # In[1]:
 
@@ -114,14 +112,12 @@ def canonicalize_headers(df: pd.DataFrame) -> pd.DataFrame:
             fixed.append(c2)
     df.columns = fixed
 
-    # Special stitch if site emitted two physical columns "API" and "ID"
     if "API ID" not in df.columns and "API" in df.columns and "ID" in df.columns:
         df["API ID"] = df["API"].astype(str) + " " + df["ID"].astype(str)
         df.drop(columns=[c for c in ["API","ID"] if c in df.columns], inplace=True)
 
     return df
 
-# 5) Resolve and drop lists safely
 def resolve_columns(df: pd.DataFrame, targets: list[str]) -> list[str]:
     """Return actual present names corresponding to targets, using canonical keys."""
     table = {_norm(c): c for c in df.columns}
@@ -131,7 +127,6 @@ def resolve_columns(df: pd.DataFrame, targets: list[str]) -> list[str]:
         if k in table:
             resolved.append(table[k])
         else:
-            # fuzzy containment
             cands = [c for kk,c in table.items() if k in kk or kk in k]
             if len(cands) == 1:
                 resolved.append(cands[0])
@@ -142,7 +137,6 @@ def drop_targets(df: pd.DataFrame, targets: list[str]) -> None:
     if cols:
         df.drop(columns=cols, inplace=True, errors="ignore")
 
-# 5) Resolve and drop lists safely
 def resolve_columns(df: pd.DataFrame, targets: list[str]) -> list[str]:
     """Return actual present names corresponding to targets, using canonical keys."""
     table = {_norm(c): c for c in df.columns}
@@ -152,7 +146,6 @@ def resolve_columns(df: pd.DataFrame, targets: list[str]) -> list[str]:
         if k in table:
             resolved.append(table[k])
         else:
-            # fuzzy containment
             cands = [c for kk,c in table.items() if k in kk or kk in k]
             if len(cands) == 1:
                 resolved.append(cands[0])
@@ -186,7 +179,6 @@ df_short  = canonicalize_headers(df_short)
 df_medium = canonicalize_headers(df_medium)
 df_long   = canonicalize_headers(df_long)
 
-# dedup guarded on the canonical names
 for name, d in [("short", df_short), ("medium", df_medium), ("long", df_long)]:
     if {"API ID","Model"}.issubset(d.columns):
         d.drop_duplicates(subset=["API ID","Model"], inplace=True)
@@ -547,7 +539,6 @@ df_selected.loc[mask, 'P25First Chunk (s)'] +=reasoning_time*0.5
 df_selected.loc[mask, 'P75First Chunk (s)'] +=reasoning_time*1.5
 df_selected.loc[mask, 'P95First Chunk (s)']= df_selected.loc[mask, 'P95First Chunk (s)'].astype(float)
 df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
-# Example: mask is already defined to select DeepSeek rows
 df_selected.loc[mask, 'Model'] = df_selected.loc[mask].apply(
     lambda row: f"DeepSeek R1 (DeepSeek) [{row['ContextWindow']}]"
     if pd.notna(row['ContextWindow'])
@@ -770,11 +761,9 @@ df_selected.columns
 
 
 def compute_environmental_metrics(row):
-    # STRICT: derive output length only from Query Length (no 300 fallback)
     try:
         output_tokens = float(row["Query Length"])
     except (KeyError, TypeError, ValueError):
-        # If Query Length is missing or non-numeric, return empty metrics
         return pd.Series([None] * 30)
 
     latency_cols = ['P5First Chunk (s)', 'P25First Chunk (s)', 'MedianFirst Chunk (s)',
@@ -784,10 +773,9 @@ def compute_environmental_metrics(row):
     energy_max_vals, energy_min_vals = [], []
     carbon_max_vals, carbon_min_vals = [], []
 
-    # Water collectors
-    water_site_max_vals, water_site_min_vals = [], []       # Scope 1 (Site)
-    water_source_max_vals, water_source_min_vals = [], []   # Scope 2 (Source)
-    water_comb_max_vals, water_comb_min_vals = [], []       # Site & Source
+    water_site_max_vals, water_site_min_vals = [], []       
+    water_source_max_vals, water_source_min_vals = [], []   
+    water_comb_max_vals, water_comb_min_vals = [], []       
 
     for latency_col in latency_cols:
         for tps_col in tps_cols:
@@ -799,7 +787,6 @@ def compute_environmental_metrics(row):
             except (ValueError, ZeroDivisionError, TypeError):
                 continue
 
-            # Total response time in hours: first token latency + generation time
             base_time = (latency + (output_tokens / tps)) / 3600.0
 
             gpu_power = float(row['GPUs Power Draw'])
@@ -809,15 +796,15 @@ def compute_environmental_metrics(row):
             non_gpu_util = float(row['Non-GPU Power Utilization'])
             pue = float(row['PUE'])
             cif = float(row['CIF'])
-            wue_site = float(row['WUE (Site)'])       # L per kWh (IT load)
-            wue_source = float(row['WUE (Source)'])   # L per kWh (facility)
+            wue_site = float(row['WUE (Site)'])       
+            wue_source = float(row['WUE (Source)'])  
 
-            power_draw_max = (gpu_power * max_gpu_util) + (non_gpu_power * non_gpu_util)  # W
-            energy_max = base_time * power_draw_max * pue   # kWh (facility)
-            carbon_max = energy_max * cif                   # KgCO2e
+            power_draw_max = (gpu_power * max_gpu_util) + (non_gpu_power * non_gpu_util)  
+            energy_max = base_time * power_draw_max * pue   
+            carbon_max = energy_max * cif                   
 
-            water_source_max = energy_max * wue_source      # L
-            water_site_max = (energy_max / pue) * wue_site  # L
+            water_source_max = energy_max * wue_source      
+            water_site_max = (energy_max / pue) * wue_site  
             water_combined_max = water_source_max + water_site_max
 
             energy_max_vals.append(energy_max)
@@ -826,12 +813,12 @@ def compute_environmental_metrics(row):
             water_site_max_vals.append(water_site_max)
             water_comb_max_vals.append(water_combined_max)
 
-            power_draw_min = (gpu_power * min_gpu_util) + (non_gpu_power * non_gpu_util)  # W
-            energy_min = base_time * power_draw_min * pue   # kWh (facility)
-            carbon_min = energy_min * cif                   # KgCO2e
+            power_draw_min = (gpu_power * min_gpu_util) + (non_gpu_power * non_gpu_util)  
+            energy_min = base_time * power_draw_min * pue   
+            carbon_min = energy_min * cif                   
 
-            water_source_min = energy_min * wue_source      # L
-            water_site_min = (energy_min / pue) * wue_site  # L
+            water_source_min = energy_min * wue_source      
+            water_site_min = (energy_min / pue) * wue_site  
             water_combined_min = water_source_min + water_site_min
 
             energy_min_vals.append(energy_min)
@@ -854,27 +841,22 @@ def compute_environmental_metrics(row):
     s = lambda x: np.std(x) if len(x) else None
 
     return pd.Series([
-        # Energy (kWh)
         m(energy_max_vals), s(energy_max_vals),
         m(energy_min_vals), s(energy_min_vals),
         m(energy_comb),     s(energy_comb),
 
-        # Carbon (KgCO2e)
         m(carbon_max_vals), s(carbon_max_vals),
         m(carbon_min_vals), s(carbon_min_vals),
         m(carbon_comb),     s(carbon_comb),
 
-        # Water Scope 1 (Site) (L)
         m(water_site_max_vals), s(water_site_max_vals),
         m(water_site_min_vals), s(water_site_min_vals),
         m(water_site_comb),     s(water_site_comb),
 
-        # Water Scope 2 (Source) (L)
         m(water_source_max_vals), s(water_source_max_vals),
         m(water_source_min_vals), s(water_source_min_vals),
         m(water_source_comb),     s(water_source_comb),
 
-        # Water (Site & Source) (L)
         m(water_comb_max_vals), s(water_comb_max_vals),
         m(water_comb_min_vals), s(water_comb_min_vals),
         m(water_comb),          s(water_comb),
@@ -883,34 +865,28 @@ def compute_environmental_metrics(row):
 df_environmental = df_selected.copy()
 
 df_environmental[[
-    # Energy
     'Mean Max Energy (Wh)', 'Std Max Energy (Wh)',
     'Mean Min Energy (Wh)', 'Std Min Energy (Wh)',
     'Mean Combined Energy (Wh)', 'Std Combined Energy (Wh)',
 
-    # Carbon
     'Mean Max Carbon (gCO2e)', 'Std Max Carbon (gCO2e)',
     'Mean Min Carbon (gCO2e)', 'Std Min Carbon (gCO2e)',
     'Mean Combined Carbon (gCO2e)', 'Std Combined Carbon (gCO2e)',
 
-    # Water - Scope 1 (Site)
     'Mean Max Water (Site, mL)', 'Std Max Water (Site, mL)',
     'Mean Min Water (Site, mL)', 'Std Min Water (Site, mL)',
     'Mean Combined Water (Site, mL)', 'Std Combined Water (Site, mL)',
 
-    # Water - Scope 2 (Source)
     'Mean Max Water (Source, mL)', 'Std Max Water (Source, mL)',
     'Mean Min Water (Source, mL)', 'Std Min Water (Source, mL)',
     'Mean Combined Water (Source, mL)', 'Std Combined Water (Source, mL)',
 
-    # Water - Site & Source (combined)
     'Mean Max Water (Site & Source, mL)', 'Std Max Water (Site & Source, mL)',
     'Mean Min Water (Site & Source, mL)', 'Std Min Water (Site & Source, mL)',
     'Mean Combined Water (Site & Source, mL)', 'Std Combined Water (Site & Source, mL)',
 ]] = df_environmental.apply(compute_environmental_metrics, axis=1)
 
 df_environmental[[
-    # Energy
     'Mean Max Energy (Wh)', 'Std Max Energy (Wh)',
     'Mean Min Energy (Wh)', 'Std Min Energy (Wh)',
     'Mean Combined Energy (Wh)', 'Std Combined Energy (Wh)',
@@ -1024,6 +1000,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

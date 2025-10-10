@@ -93,19 +93,16 @@ jobs:
             git config --global user.email "actions@github.com"
             git config --global --add safe.directory "$GITHUB_WORKSPACE"
         
-            # Add only if they exist
             git add data/*.csv 2>/dev/null || true
             test -f output/artificialanalysis_environmental.csv && git add output/artificialanalysis_environmental.csv || true
             ls output/artificialanalysis_environmental_*.csv >/dev/null 2>&1 && git add output/artificialanalysis_environmental_*.csv || true
             test -f output/artificialanalysis_environmental_history.csv && git add output/artificialanalysis_environmental_history.csv || true
 
-            # Add new monthly outputs if present
             test -f output/"Monthly LLM Environmental Footprint.csv" && git add output/"Monthly LLM Environmental Footprint.csv" || true
             test -f output/"Monthly LLM Environmental Footprint Day2Day.csv" && git add output/"Monthly LLM Environmental Footprint Day2Day.csv" || true
         
             git commit -m "Auto-update scraped, cleaned, and monthly environmental data [skip ci]" || echo "No changes to commit"
         
-            # Avoid non-fast-forward issues
             git pull --rebase || true
             git push
         env:

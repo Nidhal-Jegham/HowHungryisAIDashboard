@@ -71,12 +71,21 @@ jobs:
           set -e
           mkdir -p output
           python Data_Cleaning_Final.py
-      
+          
           # Move only if present (first run safety)
           test -f artificialanalysis_environmental.csv && mv artificialanalysis_environmental.csv output/
           ls artificialanalysis_environmental_*.csv >/dev/null 2>&1 && mv artificialanalysis_environmental_*.csv output/ || true
           test -f artificialanalysis_environmental_history.csv && mv artificialanalysis_environmental_history.csv output/ || true
-      
+
+      - name: Run monthly analysis
+        run: |
+          set -e
+          python monthly_analysis.py
+
+          # Move new monthly outputs if generated
+          test -f "Monthly LLM Environmental Footprint.csv" && mv "Monthly LLM Environmental Footprint.csv" output/ || true
+          test -f "Monthly LLM Environmental Footprint Day2Day.csv" && mv "Monthly LLM Environmental Footprint Day2Day.csv" output/ || true
+
       - name: Commit CSVs to repo
         run: |
             set -e
@@ -88,12 +97,18 @@ jobs:
             git add data/*.csv 2>/dev/null || true
             test -f output/artificialanalysis_environmental.csv && git add output/artificialanalysis_environmental.csv || true
             ls output/artificialanalysis_environmental_*.csv >/dev/null 2>&1 && git add output/artificialanalysis_environmental_*.csv || true
+            test -f output/artificialanalysis_environmental_history.csv && git add output/artificialanalysis_environmental_history.csv || true
+
+            # Add new monthly outputs if present
+            test -f output/"Monthly LLM Environmental Footprint.csv" && git add output/"Monthly LLM Environmental Footprint.csv" || true
+            test -f output/"Monthly LLM Environmental Footprint Day2Day.csv" && git add output/"Monthly LLM Environmental Footprint Day2Day.csv" || true
         
-            git commit -m "Auto-update scraped and cleaned data [skip ci]" || echo "No changes to commit"
+            git commit -m "Auto-update scraped, cleaned, and monthly environmental data [skip ci]" || echo "No changes to commit"
         
             # Avoid non-fast-forward issues
             git pull --rebase || true
             git push
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 

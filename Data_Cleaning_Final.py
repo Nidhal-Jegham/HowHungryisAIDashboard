@@ -215,6 +215,7 @@ df.columns
 
 
 api_id= [
+  "mistral.mistral-large-2407-v1:0",
       "gemini-2.5-pro",
       "google/gemini-2.5-flash",
       "mistral-medium-2505",
@@ -289,10 +290,15 @@ api_id= [
 
 # In[10]:
 
-MISTRAL_API_ID=[      "mistral-medium-2505",
+MISTRAL_API_ID_AZURE=[      "mistral-medium-2505",
   "Mistral-Large-2411",
   "Mistral-small",
-  "Mistral-Nemo"]
+  "Mistral-Nemo",
+            ]
+
+MISTRAL_API_ID_AWS=[     
+ "mistral.mistral-large-2407-v1:0"
+            ]
 
     
 GROK_API_ID=[  "grok-4-0709",
@@ -380,8 +386,9 @@ DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-V3-0324","DeepSeek-R1-0528"]
 
 
 LARGE_API_ID= [
-                  "gemini-2.5-pro",
-      "google/gemini-2.5-flash",
+  "mistral.mistral-large-2407-v1:0",
+    "gemini-2.5-pro",
+    "google/gemini-2.5-flash",
       "mistral-medium-2505",
   "Mistral-Large-2411",
     "DeepSeek-V3-0324",
@@ -568,6 +575,12 @@ df_selected.loc[mask, 'Model'] = "DeepSeek V3 (DeepSeek)"
 mask = df_selected['API ID'] == "DeepSeek-V3-0324"
 df_selected.loc[mask, 'Model'] = "DeepSeek V3 (Azure)"
 
+
+mask = df_selected['API ID'] == "mistral.mistral-large-2407-v1:0"
+df_selected.loc[mask, 'Model'] = "Mistral Large 2 (AWS)"
+
+mask = df_selected['API ID'] == "Mistral-Large-2411"
+df_selected.loc[mask, 'Model'] = "Mistral Large 2 (Azure)"
 # In[35]:
 
 
@@ -609,8 +622,10 @@ def get_hardware_host(api):
         return "DGX H200/H100", "AWS"
     elif api in GROK_API_ID:
         return "DGX H200/H100", "xAI"
-    elif api in MISTRAL_API_ID:
+    elif api in MISTRAL_API_ID_AZURE:
         return "DGX H200/H100", "Azure"
+    elif api in MISTRAL_API_ID_AWS:
+        return "DGX H200/H100", "AWS"
     elif api in GOOGLE_API_ID:
           return "TPU V6e", "Google"
     else:
@@ -672,8 +687,10 @@ df_selected[["Min GPU Power Utilization", "Max GPU Power Utilization", "Non-GPU 
 def get_environmental_multipliers(api):
     if api in OpenAI_API_ID_NEW:
         return 1.12,0.3,3.142,0.3528
-    if api in MISTRAL_API_ID:
+    if api in MISTRAL_API_ID_AZURE:
         return 1.12,0.3,3.142,0.3528
+    if api in MISTRAL_API_ID_AWS:
+        return 1.14,0.18,3.142,0.385
     if api in GOOGLE_API_ID:
           return 1.09, 0.3, 1.1, 0.231
     elif api in OpenAI_API_ID_OLD:
@@ -714,7 +731,9 @@ def get_company(api):
         return "Meta"
     elif api in GROK_API_ID:
         return "xAI"
-    elif api in MISTRAL_API_ID:
+    elif api in MISTRAL_API_ID_AWS:
+        return "Mistral AI"
+    elif api in MISTRAL_API_ID_AZURE:
         return "Mistral AI"
     elif api in GOOGLE_API_ID:
           return "Google"
@@ -1000,6 +1019,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

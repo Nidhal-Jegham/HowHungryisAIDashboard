@@ -90,6 +90,12 @@ df_all.loc[mask_r1, "Model"] = df_all.loc[mask_r1].apply(lambda r: f"{r['Model']
 mask_v3 = tag_ctx(df_all["Model"], df_all.get("ContextWindow", pd.Series(index=df_all.index, dtype=str)), r"^DeepSeek\s*V3\s*\(DeepSeek\)")
 df_all.loc[mask_v3, "Model"] = df_all.loc[mask_v3].apply(lambda r: f"{r['Model']} [{r['ContextWindow']}]", axis=1)
 
+mask = df_all['API ID'] == "mistral.mistral-large-2407-v1:0"
+df_all.loc[mask, 'Model'] = "Mistral Large 2 (AWS)"
+
+mask = df_all['API ID'] == "Mistral-Large-2411"
+df_all.loc[mask, 'Model'] = "Mistral Large 2 (Azure)"
+
 keep = [
     "SnapshotDate","Model","ContextWindow","API ID","length","Query Length",
     "MedianTokens/s","P5Tokens/s","P25Tokens/s","P75Tokens/s","P95Tokens/s",

@@ -532,7 +532,18 @@ df_selected = df[df['API ID'].isin(api_id)]
 # In[29]:
 
 
-df_selected.columns
+df_selected['MedianFirst Chunk (s)']=df_selected['MedianFirst Chunk (s)'].astype(float)
+df_selected['First AnswerToken (s)']=df_selected['First AnswerToken (s)'].astype(float)
+
+df_selected['P5First Chunk (s)']=df_selected['P5First Chunk (s)'].astype(float)
+
+df_selected['P25First Chunk (s)']=df_selected['P25First Chunk (s)'].astype(float)
+
+df_selected['P75First Chunk (s)']=df_selected['P75First Chunk (s)'].astype(float)
+df_selected['P95First Chunk (s)']=df_selected['P95First Chunk (s)'].astype(float)
+
+
+
 
 
 mask = df_selected['API ID'] == "deepseek-reasoner"
@@ -1019,6 +1030,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

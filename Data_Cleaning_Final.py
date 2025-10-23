@@ -53,14 +53,14 @@ CANON = {
     "ReasoningTime (s)": ["ReasoningTime (s)","Reasoning Time (s)"],
 
     "MMLU-Pro (Reasoning & Knowledge)": [
-        "MMLU-Pro(Reasoning &Knowledge)","MMLU-Pro(Reasoning & Knowledge)","MMLU Pro (Reasoning & Knowledge)","MMLU-Pro"
+        "MMLU-Pro(Reasoning &Knowledge)","MMLU-Pro(Reasoning & Knowledge)","MMLU Pro (Reasoning & Knowledge)","MMLU-Pro", "MMLU-Pro(Reasoning &Knowledge)"
     ],
     "GPQA Diamond (Scientific Reasoning)": [
-        "GPQA Diamond(ScientificReasoning)","GPQA Diamond(Scientific Reasoning)","GPQA Diamond","GPQA-Diamond"
+        "GPQA Diamond(ScientificReasoning)","GPQA Diamond(Scientific Reasoning)","GPQA Diamond","GPQA-Diamond", "GPQA Diamond(ScientificReasoning)"
     ],
     "Humanity's Last Exam (Reasoning & Knowledge)": [
         "Humanity's LastExam(Reasoning & Knowledge)","Humanity's Last Exam(Reasoning & Knowledge)",
-        "Humanitys Last Exam (Reasoning & Knowledge)"
+        "Humanitys Last Exam (Reasoning & Knowledge)", "Humanity's LastExam(Reasoning & Knowledge)"
     ],
 
     "LiveCodeBench (Coding)": ["LiveCodeBench(Coding)","LiveCodeBench"],
@@ -74,14 +74,14 @@ CANON = {
     "IFBench (Instruction Following)": ["IFBench(InstructionFollowing)","IFBench"],
 
     "Terminal-Bench Hard (Agentic Coding & Terminal Use)": [
-        "Terminal-BenchHard (AgenticCoding & Terminal Use)","Terminal-Bench Hard (Agentic Coding & Terminal Use)","Terminal Bench Hard"
+        "Terminal-BenchHard (AgenticCoding & Terminal Use)","Terminal-Bench Hard (Agentic Coding & Terminal Use)","Terminal Bench Hard", "Terminal-BenchHard (AgenticCoding & Terminal Use)"
     ],
     "Tau2-Bench Telecom (Agentic Tool Use)": [
-        "𝜏²-BenchTelecom(Agentic Tool Use)","Tau^2-BenchTelecom(Agentic Tool Use)",
+        "𝜏²-BenchTelecom(Agentic Tool Use)","Tau^2-BenchTelecom(Agentic Tool Use)", "𝜏²-BenchTelecom(Agentic Tool Use)"
         "Tau2-Bench Telecom (Agentic Tool Use)","Tau2-BenchTelecom"
     ],
     "AA-LCR (Long Context Reasoning)": [
-        "AA-LCR(LongContext Reasoning)","AA-LCR (LongContext Reasoning)","AA-LCR","AA-LCR (Long Context Reasoning)"
+        "AA-LCR(LongContext Reasoning)","AA-LCR (LongContext Reasoning)","AA-LCR","AA-LCR (Long Context Reasoning)", "AA-LCR(LongContext Reasoning)"
     ],
 
     "Chatbot Arena": ["ChatbotArena","Chatbot Arena"],
@@ -1030,6 +1030,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

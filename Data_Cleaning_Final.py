@@ -596,11 +596,7 @@ df_selected.loc[mask, 'Model'] = "Mistral Large 2 (Azure)"
 
 
 df_selected.drop(columns=['API Provider',"Function Calling",'JSON Mode', 'License', 'OpenAI Compatible',"Footnotes",
-       'MMLU-Pro (Reasoning & Knowledge)',
-       'GPQA Diamond (Scientific Reasoning)',
-       "Humanity's Last Exam (Reasoning & Knowledge)",
-       'LiveCodeBench (Coding)', 'SciCode (Coding)',
-       'IFBench (Instruction Following)', 'AIME 2025 (Competition Math)',
+      
         'BlendedUSD/1M Tokens', 'Input PriceUSD/1M Tokens',
        'Output PriceUSD/1M Tokens','TotalResponse (s)',
        'ReasoningTime (s)', 'FurtherAnalysis'], inplace=True)
@@ -1030,6 +1026,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

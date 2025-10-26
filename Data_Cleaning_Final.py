@@ -693,23 +693,23 @@ df_selected[["Min GPU Power Utilization", "Max GPU Power Utilization", "Non-GPU 
 
 def get_environmental_multipliers(api):
     if api in OpenAI_API_ID_NEW:
-        return 1.12,0.3,3.142,0.3528
+        return 1.12,0.3,4.35,0.34
     if api in MISTRAL_API_ID_AZURE:
-        return 1.12,0.3,3.142,0.3528
+        return 1.12,0.3,4.35,0.34
     if api in MISTRAL_API_ID_AWS:
-        return 1.14,0.18,3.142,0.385
+        return 1.14,0.18,5.12,0.3
     if api in GOOGLE_API_ID:
           return 1.09, 0.3, 1.1, 0.231
     elif api in OpenAI_API_ID_OLD:
-        return 1.12,0.3,3.142,0.3528
+        return 1.12,0.3,4.35,0.34
     elif api in DEEPSEEK_API_ID:
         return 1.27,1.2,6.016,0.6
     elif api in DEEPSEEK_API_Microsoft_Azure:
-        return 1.12,0.3,3.142,0.3528
+        return 1.12,0.3,4.35,0.34
     elif api in CLAUDE_API_ID:
-        return 1.14,0.18,3.142,0.385
+        return 1.14,0.18,5.12,0.3
     elif api in LLama_API_ID:
-        return 1.14,0.18,3.142,0.385
+        return 1.14,0.18,5.12,0.3
     elif api in GROK_API_ID:
         return 1.5, 0.36,3.142,0.385
     else:
@@ -786,107 +786,139 @@ df_selected.columns
 
 
 
-def compute_environmental_metrics(row):
+def _phi(x):
+    x = np.asarray(x, dtype=float)
+    sign = np.sign(x)
+    x = np.abs(x) / np.sqrt(2.0)
+    a1,a2,a3,a4,a5 = 0.254829592,-0.284496736,1.421413741,-1.453152027,1.061405429
+    t = 1.0/(1.0+0.3275911*x)
+    erf_approx = 1 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*np.exp(-x*x)
+    erf_approx = sign * erf_approx
+    return 0.5 * (1.0 + erf_approx)
+
+
+
+def compute_environmental_metrics(row,
+                                  N=10000,
+                                  rho=-0.30,   
+                                  w_max=0.60,  
+                                  seed=0):
     try:
         output_tokens = float(row["Query Length"])
     except (KeyError, TypeError, ValueError):
         return pd.Series([None] * 30)
 
-    latency_cols = ['P5First Chunk (s)', 'P25First Chunk (s)', 'MedianFirst Chunk (s)',
-                    'P75First Chunk (s)', 'P95First Chunk (s)']
-    tps_cols = ['P5Tokens/s', 'P25Tokens/s', 'MedianTokens/s', 'P75Tokens/s', 'P95Tokens/s']
-
-    energy_max_vals, energy_min_vals = [], []
-    carbon_max_vals, carbon_min_vals = [], []
-
-    water_site_max_vals, water_site_min_vals = [], []       
-    water_source_max_vals, water_source_min_vals = [], []   
-    water_comb_max_vals, water_comb_min_vals = [], []       
-
-    for latency_col in latency_cols:
-        for tps_col in tps_cols:
-            try:
-                latency = float(row[latency_col])
-                tps = float(row[tps_col])
-                if tps <= 0:
-                    continue
-            except (ValueError, ZeroDivisionError, TypeError):
-                continue
-
-            base_time = (latency + (output_tokens / tps)) / 3600.0
-
-            gpu_power = float(row['GPUs Power Draw'])
-            non_gpu_power = float(row['Non-GPUs Power Draw'])
-            max_gpu_util = float(row['Max GPU Power Utilization'])
-            min_gpu_util = float(row['Min GPU Power Utilization'])
-            non_gpu_util = float(row['Non-GPU Power Utilization'])
-            pue = float(row['PUE'])
-            cif = float(row['CIF'])
-            wue_site = float(row['WUE (Site)'])       
-            wue_source = float(row['WUE (Source)'])  
-
-            power_draw_max = (gpu_power * max_gpu_util) + (non_gpu_power * non_gpu_util)  
-            energy_max = base_time * power_draw_max * pue   
-            carbon_max = energy_max * cif                   
-
-            water_source_max = energy_max * wue_source      
-            water_site_max = (energy_max / pue) * wue_site  
-            water_combined_max = water_source_max + water_site_max
-
-            energy_max_vals.append(energy_max)
-            carbon_max_vals.append(carbon_max)
-            water_source_max_vals.append(water_source_max)
-            water_site_max_vals.append(water_site_max)
-            water_comb_max_vals.append(water_combined_max)
-
-            power_draw_min = (gpu_power * min_gpu_util) + (non_gpu_power * non_gpu_util)  
-            energy_min = base_time * power_draw_min * pue   
-            carbon_min = energy_min * cif                   
-
-            water_source_min = energy_min * wue_source      
-            water_site_min = (energy_min / pue) * wue_site  
-            water_combined_min = water_source_min + water_site_min
-
-            energy_min_vals.append(energy_min)
-            carbon_min_vals.append(carbon_min)
-            water_source_min_vals.append(water_source_min)
-            water_site_min_vals.append(water_site_min)
-            water_comb_min_vals.append(water_combined_min)
-
-    if not energy_max_vals and not energy_min_vals:
+    qs = [0.05, 0.25, 0.50, 0.75, 0.95]
+    try:
+        lat = [float(row[k]) for k in [
+            'P5First Chunk (s)','P25First Chunk (s)','MedianFirst Chunk (s)','P75First Chunk (s)','P95First Chunk (s)']]
+        tps = [float(row[k]) for k in [
+            'P5Tokens/s','P25Tokens/s','MedianTokens/s','P75Tokens/s','P95Tokens/s']]
+    except (KeyError, TypeError, ValueError):
         return pd.Series([None] * 30)
 
-    energy_comb = energy_max_vals + energy_min_vals
-    carbon_comb = carbon_max_vals + carbon_min_vals
+    lat = np.maximum.accumulate(lat).tolist()
+    tps = np.maximum.accumulate(tps).tolist()
 
-    water_site_comb = water_site_max_vals + water_site_min_vals
-    water_source_comb = water_source_max_vals + water_source_min_vals
-    water_comb = water_comb_max_vals + water_comb_min_vals
+    try:
+        gpu_power     = float(row['GPUs Power Draw'])        
+        non_gpu_power = float(row['Non-GPUs Power Draw'])    
+        max_gpu_util  = float(row['Max GPU Power Utilization'])   
+        min_gpu_util  = float(row['Min GPU Power Utilization'])   
+        non_gpu_util  = float(row['Non-GPU Power Utilization'])   
+        pue           = float(row['PUE'])
+        cif           = float(row['CIF'])                    
+        wue_site      = float(row['WUE (Site)'])             
+        wue_source    = float(row['WUE (Source)'])           
+    except (KeyError, TypeError, ValueError):
+        return pd.Series([None] * 30)
 
-    m = lambda x: np.mean(x) if len(x) else None
-    s = lambda x: np.std(x) if len(x) else None
+    def inv_cdf(qs, xs):
+        qs = np.asarray(qs, float)
+        xs = np.asarray(xs, float)
+        def f(u):
+            u = np.clip(u, qs[0], qs[-1])
+            return np.interp(u, qs, xs)
+        return f
+    invL = inv_cdf(qs, lat)   
+    invR = inv_cdf(qs, tps)   
+
+    rng = np.random.default_rng(seed)
+    z = rng.normal(size=(N, 2))
+    Lmat = np.array([[1.0, 0.0],
+                     [rho, np.sqrt(max(1 - rho**2, 1e-12))]])
+    zc = z @ Lmat.T
+    u = _phi(zc) 
+    uL, uR = u[:, 0], u[:, 1]
+
+
+    L = invL(uL)                    
+    R = np.maximum(invR(uR), 1e-9)  
+
+    base_time_h = (L + (output_tokens / R)) / 3600.0  
+
+    power_min = gpu_power * min_gpu_util + non_gpu_power * non_gpu_util
+    power_max = gpu_power * max_gpu_util + non_gpu_power * non_gpu_util
+
+ 
+    energy_min = base_time_h * power_min * pue
+    energy_max = base_time_h * power_max * pue
+
+    carbon_min = energy_min * cif
+    carbon_max = energy_max * cif
+
+    water_source_min = energy_min * wue_source
+    water_source_max = energy_max * wue_source
+
+    water_site_min = (energy_min / pue) * wue_site
+    water_site_max = (energy_max / pue) * wue_site
+
+    water_comb_min = water_source_min + water_site_min
+    water_comb_max = water_source_max + water_site_max
+
+    w_min = 1.0 - w_max
+    energy_exp = w_max*energy_max + w_min*energy_min
+    carbon_exp = w_max*carbon_max + w_min*carbon_min
+    water_site_exp = w_max*water_site_max + w_min*water_site_min
+    water_source_exp = w_max*water_source_max + w_min*water_source_min
+    water_comb_exp = w_max*water_comb_max + w_min*water_comb_min
+
+    def mu_sd(x):
+        x = np.asarray(x, float)
+        if x.size == 0:
+            return None, None
+        mu = float(np.mean(x))
+        sd = float(np.std(x, ddof=1)) if x.size > 1 else 0.0
+        return mu, sd
+
+    e_max_mu, e_max_sd = mu_sd(energy_max)
+    e_min_mu, e_min_sd = mu_sd(energy_min)
+    e_exp_mu, e_exp_sd = mu_sd(energy_exp)
+
+    c_max_mu, c_max_sd = mu_sd(carbon_max)
+    c_min_mu, c_min_sd = mu_sd(carbon_min)
+    c_exp_mu, c_exp_sd = mu_sd(carbon_exp)
+
+    ws_max_mu, ws_max_sd = mu_sd(water_site_max)
+    ws_min_mu, ws_min_sd = mu_sd(water_site_min)
+    ws_exp_mu, ws_exp_sd = mu_sd(water_site_exp)
+
+    wr_max_mu, wr_max_sd = mu_sd(water_source_max)
+    wr_min_mu, wr_min_sd = mu_sd(water_source_min)
+    wr_exp_mu, wr_exp_sd = mu_sd(water_source_exp)
+
+    wc_max_mu, wc_max_sd = mu_sd(water_comb_max)
+    wc_min_mu, wc_min_sd = mu_sd(water_comb_min)
+    wc_exp_mu, wc_exp_sd = mu_sd(water_comb_exp)
 
     return pd.Series([
-        m(energy_max_vals), s(energy_max_vals),
-        m(energy_min_vals), s(energy_min_vals),
-        m(energy_comb),     s(energy_comb),
-
-        m(carbon_max_vals), s(carbon_max_vals),
-        m(carbon_min_vals), s(carbon_min_vals),
-        m(carbon_comb),     s(carbon_comb),
-
-        m(water_site_max_vals), s(water_site_max_vals),
-        m(water_site_min_vals), s(water_site_min_vals),
-        m(water_site_comb),     s(water_site_comb),
-
-        m(water_source_max_vals), s(water_source_max_vals),
-        m(water_source_min_vals), s(water_source_min_vals),
-        m(water_source_comb),     s(water_source_comb),
-
-        m(water_comb_max_vals), s(water_comb_max_vals),
-        m(water_comb_min_vals), s(water_comb_min_vals),
-        m(water_comb),          s(water_comb),
+        e_max_mu, e_max_sd, e_min_mu, e_min_sd, e_exp_mu, e_exp_sd,
+        c_max_mu, c_max_sd, c_min_mu, c_min_sd, c_exp_mu, c_exp_sd,
+        ws_max_mu, ws_max_sd, ws_min_mu, ws_min_sd, ws_exp_mu, ws_exp_sd,
+        wr_max_mu, wr_max_sd, wr_min_mu, wr_min_sd, wr_exp_mu, wr_exp_sd,
+        wc_max_mu, wc_max_sd, wc_min_mu, wc_min_sd, wc_exp_mu, wc_exp_sd
     ])
+
 
 df_environmental = df_selected.copy()
 
@@ -1026,6 +1058,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

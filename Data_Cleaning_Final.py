@@ -801,7 +801,7 @@ def _phi(x):
 def compute_environmental_metrics(row,
                                   N=10000,
                                   rho=-0.30,   
-                                  w_max=0.60,  
+                                  w_max=0.50,  
                                   seed=0):
     try:
         output_tokens = float(row["Query Length"])
@@ -1058,6 +1058,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

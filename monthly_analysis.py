@@ -4,6 +4,173 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
+api_id= [
+  "mistral.mistral-large-2407-v1:0",
+      "gemini-2.5-pro",
+      "google/gemini-2.5-flash",
+      "mistral-medium-2505",
+  "Mistral-Large-2411",
+  "Mistral-small",
+  "Mistral-Nemo",
+    "DeepSeek-V3-0324",
+    "gpt-5-mini-2025-08-07",
+    "gpt-5-nano-2025-08-07",
+    "gpt-5-2025-08-07",
+    "DeepSeek-R1-0528",
+    "o3-2025-04-16",
+    "o4-mini-2025-04-16",
+    "o3-mini",
+    "o1-2024-12-17",
+    "o1-mini-2024-09-12",
+    "gpt-4.1-mini-2025-04-14",
+    "gpt-4.1-2025-04-14",
+    "chatgpt-4o-latest",
+    "gpt-4o-2024-11-20",
+    "gpt-4.1-nano-2025-04-14",
+    "gpt-4o",
+    "gpt-4o-mini-2024-07-18",
+    "o3-pro-2025-06-10",
+    "o1-preview-2024-09-12",
+    "gpt-4o-2024-08-06",
+    "gpt-4-turbo",
+    "gpt-3.5-turbo",
+    "gpt-4",  
+    "claude-opus-4-20250514",
+    "claude-3-7-sonnet-20250219",
+    "claude-sonnet-4-20250514",
+    "claude-3-5-sonnet-20241022",
+    "claude-3-opus-20240229",
+    "claude-3-5-haiku-20241022",
+     "claude-3-haiku-20240307",
+    "us.meta.llama4-maverick-17b-instruct-v1:0",
+    "us.meta.llama4-scout-17b-instruct-v1:0",
+    "us.meta.llama3-3-70b-instruct-v1:0",
+    "us.meta.llama3-2-90b-instruct-v1:0",
+    "meta.llama3-70b-instruct-v1:0",
+    "meta.llama3-1-8b-instruct-v1:0",
+    "meta.llama3-8b-instruct-v1:0",
+    "us.meta.llama3-2-3b-instruct-v1:0",
+    "us.meta.llama3-2-1b-instruct-v1:0",
+    "us.meta.llama3-2-11b-instruct-v1:0",
+    "us.meta.llama3-1-405b-instruct-v1:0",
+    "us.meta.llama3-1-70b-instruct-v1:0",
+    "meta.llama3-1-405b-instruct-v1:0",
+    "meta.llama3-1-70b-instruct-v1:0",
+    "deepseek-reasoner",
+    "deepseek-chat",
+    "grok-4-0709",
+    "grok-3-mini-beta",
+    "grok-3-mini-fast-beta",
+    "grok-3-beta",
+    "grok-3-fast-beta",
+    "grok-3-mini-beta",
+    "grok-3-mini-fast-beta",
+        "claude-opus-4-20250514",
+    "claude-sonnet-4-20250514",
+    "claude-opus-4-20250514",
+    "claude-3-7-sonnet-20250219",
+    "claude-sonnet-4-20250514",
+    "claude-3-7-sonnet-20250219",
+    "claude-3-5-sonnet-20241022",
+    "claude-3-opus-20240229",
+    "claude-3-5-haiku-20241022",
+     "claude-3-haiku-20240307"
+]
+
+
+# In[10]:
+
+MISTRAL_API_ID_AZURE=[      "mistral-medium-2505",
+  "Mistral-Large-2411",
+  "Mistral-small",
+  "Mistral-Nemo",
+            ]
+
+MISTRAL_API_ID_AWS=[     
+ "mistral.mistral-large-2407-v1:0"
+            ]
+
+    
+GROK_API_ID=[  "grok-4-0709",
+    "grok-3-mini-beta",
+    "grok-3-mini-fast-beta",
+    "grok-3-beta",
+    "grok-3-fast-beta",
+    "grok-3-mini-beta",
+    "grok-3-mini-fast-beta"]
+
+# In[11]:
+
+
+OpenAI_API_ID_NEW = [
+    "gpt-5-mini-2025-08-07",
+    "gpt-5-nano-2025-08-07",
+    "gpt-5-2025-08-07",
+    "o3-2025-04-16",
+    "o4-mini-2025-04-16",
+    "o3-mini",
+    "o1-2024-12-17",
+    "o1-mini-2024-09-12",
+    "gpt-4.1-mini-2025-04-14",
+    "gpt-4.1-2025-04-14",
+    "chatgpt-4o-latest",
+    "gpt-4o-2024-11-20",
+    "gpt-4.1-nano-2025-04-14",
+    "gpt-4o",
+    "o3-pro-2025-06-10",
+    "o1-preview-2024-09-12",
+    "gpt-4o-2024-08-06",
+    ]
+OpenAI_API_ID_OLD = [    
+    "gpt-4o-mini-2024-07-18",
+    "gpt-4-turbo",
+    "gpt-3.5-turbo",
+    "gpt-4"]
+
+# In[12]:
+
+
+CLAUDE_API_ID = ["claude-opus-4-20250514",
+    "claude-sonnet-4-20250514",
+    "claude-3-7-sonnet-20250219",
+    "claude-3-5-sonnet-20241022",
+
+    "claude-3-opus-20240229",
+    "claude-3-5-haiku-20241022",
+    "claude-3-haiku-20240307"
+]
+
+GOOGLE_API_ID= [      "gemini-2.5-pro",
+      "google/gemini-2.5-flash"]
+
+# In[13]:
+
+
+LLama_API_ID = [
+
+      "us.meta.llama4-maverick-17b-instruct-v1:0",
+    "us.meta.llama4-scout-17b-instruct-v1:0",
+    "us.meta.llama3-3-70b-instruct-v1:0",
+    "us.meta.llama3-2-90b-instruct-v1:0",
+    "meta.llama3-70b-instruct-v1:0",
+    "meta.llama3-1-8b-instruct-v1:0",
+    "meta.llama3-8b-instruct-v1:0",
+    "us.meta.llama3-2-3b-instruct-v1:0",
+    "us.meta.llama3-2-1b-instruct-v1:0",
+    "us.meta.llama3-2-11b-instruct-v1:0",
+    "us.meta.llama3-1-405b-instruct-v1:0",
+    "us.meta.llama3-1-70b-instruct-v1:0",
+    "meta.llama3-1-405b-instruct-v1:0",
+    "meta.llama3-1-70b-instruct-v1:0",
+    ]
+
+# In[14]:
+
+
+DEEPSEEK_API_ID = ["deepseek-reasoner",
+    "deepseek-chat"]
+
+DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-V3-0324","DeepSeek-R1-0528"]
 
 def harmonize_benchmark_names(df: pd.DataFrame) -> pd.DataFrame:
     rename_map = {}
@@ -123,6 +290,34 @@ keep = [
 present = [c for c in keep if c in df_all.columns]
 df_all = df_all[present].copy()
 df_all = df_all.sort_values(["SnapshotDate","Model"], kind="mergesort").reset_index(drop=True)
+
+def get_environmental_multipliers(api):
+    if api in OpenAI_API_ID_NEW:
+        return 1.12,0.3,4.35,0.34
+    if api in MISTRAL_API_ID_AZURE:
+        return 1.12,0.3,4.35,0.34
+    if api in MISTRAL_API_ID_AWS:
+        return 1.14,0.18,5.12,0.3
+    if api in GOOGLE_API_ID:
+          return 1.09, 0.3, 1.1, 0.231
+    elif api in OpenAI_API_ID_OLD:
+        return 1.12,0.3,4.35,0.34
+    elif api in DEEPSEEK_API_ID:
+        return 1.27,1.2,6.016,0.6
+    elif api in DEEPSEEK_API_Microsoft_Azure:
+        return 1.12,0.3,4.35,0.34
+    elif api in CLAUDE_API_ID:
+        return 1.14,0.18,5.12,0.3
+    elif api in LLama_API_ID:
+        return 1.14,0.18,5.12,0.3
+    elif api in GROK_API_ID:
+        return 1.5, 0.36,3.142,0.385
+    else:
+        return None, None, None, None
+
+df_all[['PUE', 'WUE (Site)', "WUE (Source)", 'CIF']] = df_all['API ID'].apply(
+    lambda x: pd.Series(get_environmental_multipliers(x))
+)
 
 group_keys = [
     "Model", "Query Length", "API ID", "Company", "Hardware", "Host",

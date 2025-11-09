@@ -5,6 +5,11 @@ import numpy as np
 from datetime import datetime
 
 api_id= [
+   "claude-opus-4-1-20250805",
+    "claude-haiku-4-5-20251001",
+    "claude-sonnet-4-20250514",
+    "claude-sonnet-4-5-20250929",
+    "claude-opus-4-20250514",
   "mistral.mistral-large-2407-v1:0",
       "gemini-2.5-pro",
       "google/gemini-2.5-flash",

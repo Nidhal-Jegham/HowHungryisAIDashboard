@@ -215,6 +215,12 @@ df.columns
 
 
 api_id= [
+
+    "claude-opus-4-1-20250805",
+    "claude-haiku-4-5-20251001",
+    "claude-sonnet-4-20250514",
+    "claude-sonnet-4-5-20250929",
+    "claude-opus-4-20250514",
   "mistral.mistral-large-2407-v1:0",
       "gemini-2.5-pro",
       "google/gemini-2.5-flash",
@@ -347,7 +353,12 @@ CLAUDE_API_ID = ["claude-opus-4-20250514",
 
     "claude-3-opus-20240229",
     "claude-3-5-haiku-20241022",
-    "claude-3-haiku-20240307"
+    "claude-3-haiku-20240307",
+    "claude-opus-4-1-20250805",
+    "claude-haiku-4-5-20251001",
+    "claude-sonnet-4-20250514",
+    "claude-sonnet-4-5-20250929",
+    "claude-opus-4-20250514",
 ]
 
 GOOGLE_API_ID= [      "gemini-2.5-pro",
@@ -386,6 +397,11 @@ DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-V3-0324","DeepSeek-R1-0528"]
 
 
 LARGE_API_ID= [
+        "claude-opus-4-1-20250805",
+    "claude-haiku-4-5-20251001",
+    "claude-sonnet-4-20250514",
+    "claude-sonnet-4-5-20250929",
+    "claude-opus-4-20250514",
   "mistral.mistral-large-2407-v1:0",
     "gemini-2.5-pro",
     "google/gemini-2.5-flash",
@@ -1058,6 +1074,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

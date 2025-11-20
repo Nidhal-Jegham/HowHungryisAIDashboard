@@ -5,6 +5,7 @@ import numpy as np
 from datetime import datetime
 
 api_id= [
+   "gpt-5.1-2025-11-13",
    "claude-opus-4-1-20250805",
     "claude-haiku-4-5-20251001",
     "claude-sonnet-4-20250514",
@@ -108,6 +109,7 @@ GROK_API_ID=[  "grok-4-0709",
 
 
 OpenAI_API_ID_NEW = [
+   "gpt-5.1-2025-11-13",
     "gpt-5-mini-2025-08-07",
     "gpt-5-nano-2025-08-07",
     "gpt-5-2025-08-07",

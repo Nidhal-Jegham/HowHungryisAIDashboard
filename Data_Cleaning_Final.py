@@ -1053,9 +1053,9 @@ df_environmental["Olympic Swimming Pools Equiv. – 100B Prompts (kL)"] = df_env
 df_environmental["Gasoline Car Equiv. – 1B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 1 Billion Prompts (TonsCO2e)"]/4.6
 df_environmental["Gasoline Car Equiv. – 50B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 50 Billion Prompts (TonsCO2e)"]/4.6
 df_environmental["Gasoline Car Equiv. – 100B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 100 Billion Prompts (TonsCO2e)"]/4.6
-df_environmental["Atlantic Flight Equiv. – 1B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 1 Billion Prompts (TonsCO2e)"]/60
-df_environmental["Atlantic Flight Equiv. – 50B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 50 Billion Prompts (TonsCO2e)"]/60
-df_environmental["Atlantic Flight Equiv. – 100B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 100 Billion Prompts (TonsCO2e)"]/60
+df_environmental["Atlantic Flight Equiv. – 1B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 1 Billion Prompts (TonsCO2e)"]/200
+df_environmental["Atlantic Flight Equiv. – 50B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 50 Billion Prompts (TonsCO2e)"]/200
+df_environmental["Atlantic Flight Equiv. – 100B Prompts (TonsCO2e)"] = df_environmental["Carbon Emissions of 100 Billion Prompts (TonsCO2e)"]/200
 
 # In[49]:
 
@@ -1074,6 +1074,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

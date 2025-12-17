@@ -5,6 +5,7 @@ import numpy as np
 from datetime import datetime
 
 api_id= [
+   "moonshot.kimi-k2-thinking",
    "claude-opus-4-1-20250805",
     "claude-haiku-4-5-20251001",
     "claude-sonnet-4-20250514",
@@ -84,6 +85,8 @@ api_id= [
 
 
 # In[10]:
+
+MOONSHOT_API_ID_AWS= ["moonshot.kimi-k2-thinking",]
 
 MISTRAL_API_ID_AZURE=[      "mistral-medium-2505",
   "Mistral-Large-2411",

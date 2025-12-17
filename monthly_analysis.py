@@ -311,6 +311,8 @@ def get_environmental_multipliers(api):
         return 1.12,0.3,4.35,0.34
     if api in MISTRAL_API_ID_AWS:
         return 1.14,0.18,5.12,0.3
+    if api in MOONSHOT_API_ID_AWS:
+        return 1.14,0.18,5.12,0.3
     if api in GOOGLE_API_ID:
           return 1.09, 0.3, 1.1, 0.231
     elif api in OpenAI_API_ID_OLD:

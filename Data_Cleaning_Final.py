@@ -215,7 +215,7 @@ df.columns
 
 
 api_id= [
-
+    "moonshot.kimi-k2-thinking",
     "claude-opus-4-1-20250805",
     "claude-haiku-4-5-20251001",
     "claude-sonnet-4-20250514",
@@ -295,6 +295,8 @@ api_id= [
 
 
 # In[10]:
+
+MOONSHOT_API_ID_AWS=["moonshot.kimi-k2-thinking",]
 
 MISTRAL_API_ID_AZURE=[      "mistral-medium-2505",
   "Mistral-Large-2411",
@@ -397,6 +399,7 @@ DEEPSEEK_API_Microsoft_Azure = ["DeepSeek-V3-0324","DeepSeek-R1-0528"]
 
 
 LARGE_API_ID= [
+    "moonshot.kimi-k2-thinking",
         "claude-opus-4-1-20250805",
     "claude-haiku-4-5-20251001",
     "claude-sonnet-4-20250514",
@@ -560,7 +563,17 @@ df_selected['P95First Chunk (s)']=df_selected['P95First Chunk (s)'].astype(float
 
 
 
+mask = df_selected['API ID'] == "moonshot.kimi-k2-thinking"
+reasoning_time= df_selected.loc[mask, 'First AnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
 
+df_selected.loc[mask, 'MedianFirst Chunk (s)'] +=reasoning_time
+
+
+df_selected.loc[mask, 'P5First Chunk (s)'] +=reasoning_time*0.1
+df_selected.loc[mask, 'P25First Chunk (s)'] +=reasoning_time*0.5
+df_selected.loc[mask, 'P75First Chunk (s)'] +=reasoning_time*1.5
+df_selected.loc[mask, 'P95First Chunk (s)']= df_selected.loc[mask, 'P95First Chunk (s)'].astype(float)
+df_selected.loc[mask, 'P95First Chunk (s)'] +=reasoning_time*1.9
 
 mask = df_selected['API ID'] == "deepseek-reasoner"
 reasoning_time= df_selected.loc[mask, 'First AnswerToken (s)']-df_selected.loc[mask, 'MedianFirst Chunk (s)']
@@ -627,6 +640,8 @@ df_selected.shape
 def get_hardware_host(api):
     if api in OpenAI_API_ID_NEW:
         return "DGX H200/H100", "Azure"
+    elif api in MOONSHOT_API_ID_AWS:
+        return "DGX H200/H100", "AWS",
     elif api in OpenAI_API_ID_OLD:
         return "DGX A100", "Azure"
     elif api in DEEPSEEK_API_ID:
@@ -708,6 +723,8 @@ def get_environmental_multipliers(api):
         return 1.12,0.3,4.35,0.34
     if api in MISTRAL_API_ID_AWS:
         return 1.14,0.18,5.12,0.3
+    if api in MOONSHOT_API_ID_AWS:
+        return 1.14,0.18,5.12,0.3
     if api in GOOGLE_API_ID:
           return 1.09, 0.3, 1.1, 0.231
     elif api in OpenAI_API_ID_OLD:
@@ -736,6 +753,8 @@ df_selected[['PUE', 'WUE (Site)', "WUE (Source)", 'CIF']] = df_selected['API ID'
 def get_company(api):
     if api in OpenAI_API_ID_NEW:
         return "OpenAI"
+    if api in MOONSHOT_API_ID_AWS:
+        return "Moonshot"
     elif api in OpenAI_API_ID_OLD:
         return "OpenAI"
     elif api in DEEPSEEK_API_ID:
@@ -1068,6 +1087,7 @@ df_snapshot.to_csv(dated_fname, index=False)
 
 
 # In[ ]:
+
 
 
 

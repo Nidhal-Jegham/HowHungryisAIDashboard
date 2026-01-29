@@ -12,16 +12,7 @@ Install Python (3.10–3.12 recommended) and dependencies:
    python -m venv .venv
    source .venv/bin/activate   
    pip install -r requirements.txt
-   
 
-
-
-
-## Usage
-
-1. Scrape data:
-   ```bash
-   python ArtificialAnalysisScraping.py
    ```
 
 2. Clean and export:

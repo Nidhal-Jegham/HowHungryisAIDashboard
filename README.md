@@ -1,8 +1,7 @@
 # HowHungryisAIDashboard
 
-This repository contains an automated pipeline to scrape, clean, and export large language model (LLM) performance and usage metrics from ArtificialAnalysis.ai for a How Hungry is AI. The dashboard estimates the energy, water, and carbon footprint of LLM inference at various scales.
+This repository contains an automated pipeline to scrape, clean, and export large language model (LLM) performance and usage metrics from ArtificialAnalysis.ai for How Hungry is AI. The dashboard estimates the energy, water, and carbon footprint of LLM inference at various scales.
 
-Link: https://app.powerbi.com/view?r=eyJrIjoiZjVmOTI0MmMtY2U2Mi00ZTE2LTk2MGYtY2ZjNDMzODZkMjlmIiwidCI6IjQyNmQyYThkLTljY2QtNDI1NS04OTNkLTA2ODZhMzJjMTY4ZCIsImMiOjF9
 
 
 ## Setup

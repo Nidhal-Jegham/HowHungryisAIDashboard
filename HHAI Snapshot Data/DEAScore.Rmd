@@ -1,0 +1,86 @@
+---
+title: "DEA Cross Efficiency HHAI"
+output: html_document
+date: "2026-02-14"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(deaR)
+
+df<- read.csv("C:/Users/jegha/OneDrive/Desktop/HHAI CACM Review/DEADataset.csv")
+df
+```
+```{r}
+df$Model_Task <- paste(df$Model, df$length, sep="_")
+```
+
+
+```{r}
+df$WUE..Source
+```
+
+
+```{r}
+colnames(df)
+```
+```{r}
+df$Mean.Combined.Energy..Wh
+```
+
+```{r}
+data_dea <- read_data(df, 
+                      dmus = "Model_Task", 
+                      inputs = c("Price", 
+                                 "CIF", 
+                                 "WUE..Site.", 
+                                 "WUE..Source.", 
+                                 "Mean.Combined.Energy..Wh.", 
+                                 "PUE"), 
+                      outputs = "Artificial.Analysis.Intelligence.Index")
+
+result <- cross_efficiency(data_dea, 
+                           epsilon = 0,
+                           orientation = "io", 
+                           rts = "crs", 
+                           selfapp = TRUE, 
+                           M3 = TRUE)   
+
+
+```
+
+
+
+```{r}
+
+model_names <- sub("_[^_]+$", "", names(result$M3_agg$e))
+
+final_comparison <- aggregate(as.numeric(result$M3_agg$e), 
+                              by = list(Model = model_names), 
+                              FUN = mean)
+colnames(final_comparison) <- c("Model", "Sustainability_Index")
+
+
+ai_scores <- aggregate(df$Artificial.Analysis.Intelligence.Index, 
+                       by = list(Model = df$Model), 
+                       FUN = mean)
+colnames(ai_scores) <- c("Model", "AI_Index")
+
+final_leaderboard <- merge(final_comparison, ai_scores, by = "Model")
+
+final_leaderboard <- final_leaderboard[order(-final_leaderboard$Sustainability_Index), ]
+
+print(final_leaderboard)
+```
+
+```{r}
+write.csv(final_leaderboard, file="DEALeaderboard.csv")
+```
+
+
+
+
+

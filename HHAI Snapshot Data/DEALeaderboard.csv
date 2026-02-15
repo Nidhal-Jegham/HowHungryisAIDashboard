@@ -1,0 +1,19 @@
+Model,Efficiency_Score,AI_Score,Company
+o4-mini (high),0.780705861,33,OpenAI
+o3,0.764201413,38,OpenAI
+Llama 3.1 8B,0.746997465,12,Meta
+GPT-4.1 mini,0.746444208,22,OpenAI
+Llama 3.3 70B,0.645671199,14,Meta
+Claude 3.7 Sonnet,0.636586198,31,Anthropic
+Claude 3.5 Haiku,0.630816051,19,Anthropic
+DeepSeek R1 (Azure),0.613207079,27,DeepSeek
+o3-mini (high),0.598267554,25,OpenAI
+GPT-4.1 nano,0.593321238,13,OpenAI
+DeepSeek V3 (Azure),0.559213318,22,DeepSeek
+GPT-4.1,0.54312303,26,OpenAI
+Llama 3.1 70B Standard,0.485410552,12,Meta
+Llama 3.1 405B Standard,0.383742081,14,Meta
+GPT-4o (Mar),0.324225638,19,OpenAI
+o1,0.275814397,31,OpenAI
+DeepSeek V3 (DeepSeek),0.261654019,22,DeepSeek
+DeepSeek R1 (DeepSeek) [128k],0.254296621,27,DeepSeek

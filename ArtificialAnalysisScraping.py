@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import time
-from bs4 import BeautifulSoup
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
@@ -83,5 +82,6 @@ for i in range(3):
 
     df.to_csv(f'artificialanalysis_clean{length_list[i]}.csv', index=False)
     print(f'Data exported to {length_list[i]} artificialanalysis_clean.csv')
+
 
 

@@ -8,11 +8,11 @@ from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 
 link_list= [
-    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/short?deprecation=all",
+    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/100k?deprecation=all",
     "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/medium?deprecation=all",
     "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/long?deprecation=all",]
 length_list = [
-    "short", 
+    "extra_long", 
     "medium",
     "long",]
 for i in range(3): 

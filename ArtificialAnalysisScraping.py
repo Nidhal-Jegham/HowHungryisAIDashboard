@@ -1,65 +1,66 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from bs4 import BeautifulSoup
-import time
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from bs4 import BeautifulSoup
 import pandas as pd
+import time
+import os
+from datetime import date
 
-link_list= [
+TODAY = date.today().strftime("%Y-%m-%d")
+SNAPSHOT_DIR = "snapshots"
+CUMULATIVE_FILE = "artificialanalysis_cumulative.csv"
+
+os.makedirs(SNAPSHOT_DIR, exist_ok=True)
+
+link_list = [
     "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/100k?deprecation=all",
     "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/medium?deprecation=all",
-    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/long?deprecation=all",]
+    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/long?deprecation=all",
+]
 length_list = [
-    "extra_long", 
+    "extra_long",
     "medium",
-    "long",]
-for i in range(3): 
+    "long",
+]
 
-    
+all_today = []
+
+for i in range(len(link_list)):
+    print(f"\n--- Scraping: {length_list[i]} ---")
+
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  
-    
+    options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(), options=options)
 
-    driver.get(link_list[i])
-    time.sleep(5) 
+    try:
+        driver.get(link_list[i])
+        time.sleep(5)
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//table"))
+        )
 
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//table"))
-    )
+        buttons = driver.find_elements(By.TAG_NAME, "button")
+        for btn in buttons:
+            text = btn.text.strip().replace("\n", " ").lower()
+            if "expand columns" in text:
+                print("Found 'Expand Columns' button — clicking.")
+                try:
+                    ActionChains(driver).move_to_element(btn).pause(0.3).click().perform()
+                    print("Button clicked.")
+                    time.sleep(1)
+                except Exception as e:
+                    print(f"ActionChains failed: {e}")
+                break
 
-    buttons = driver.find_elements(By.TAG_NAME, "button")
+        html = driver.page_source
+    finally:
+        driver.quit()
 
-
-    for btn in buttons:
-        text = btn.text.strip().replace("\n", " ").lower()
-        if "expand columns" in text:
-            print("Found the'Expand Columns' button.")
-
-            driver.execute_script("""
-                arguments[0].style.border = "3px solid red";
-                arguments[0].style.background = "#ff0";
-            """, btn)
-
-            time.sleep(0.5)
-
-            try:
-                from selenium.webdriver.common.action_chains import ActionChains
-                actions = ActionChains(driver)
-                actions.move_to_element(btn).pause(0.3).click().perform()
-                print("Button Clicked")
-            except Exception as e:
-                print(f" ActionChains failed: {e}")
-
-            break
-
-
-
-    html = driver.page_source
     soup = BeautifulSoup(html, "html.parser")
-
     rows = soup.find_all("tr")
     raw_data = []
     for row in rows:
@@ -68,22 +69,40 @@ for i in range(3):
         if row_data:
             raw_data.append(row_data)
 
-    header = raw_data[1]
+    if len(raw_data) < 3:
+        print(f"Not enough rows found for {length_list[i]}, skipping.")
+        continue
 
+    header = raw_data[1]
     cleaned_rows = [r for r in raw_data[2:] if len(r) == len(header)]
     bad_rows = [r for r in raw_data[2:] if len(r) != len(header)]
-
     if bad_rows:
-        print(f"Skipped {len(bad_rows)} rows that didn't match header length of {len(header)}.")
+        print(f"Skipped {len(bad_rows)} rows with mismatched column count.")
 
-    import pandas as pd
     df = pd.DataFrame(cleaned_rows, columns=header)
 
+    df.insert(0, "query_size", length_list[i])
+    df.insert(1, "date", TODAY)
+
     print(df.head())
+    all_today.append(df)
 
-    df.to_csv(f'artificialanalysis_clean{length_list[i]}.csv', index=False)
-    print(f'Data exported to {length_list[i]} artificialanalysis_clean.csv')
+if all_today:
+    snapshot_df = pd.concat(all_today, ignore_index=True)
+    snapshot_path = os.path.join(SNAPSHOT_DIR, f"artificialanalysis_{TODAY}.csv")
+    snapshot_df.to_csv(snapshot_path, index=False)
+    print(f"\nSnapshot saved → {snapshot_path}  ({len(snapshot_df)} rows)")
 
+    if os.path.exists(CUMULATIVE_FILE):
+        existing = pd.read_csv(CUMULATIVE_FILE)
 
+        existing = existing[existing["date"] != TODAY]
 
+        cumulative_df = pd.concat([existing, snapshot_df], ignore_index=True)
+    else:
+        cumulative_df = snapshot_df
 
+    cumulative_df.to_csv(CUMULATIVE_FILE, index=False)
+    print(f"Cumulative file updated → {CUMULATIVE_FILE}  ({len(cumulative_df)} rows total)")
+else:
+    print("No data collected — nothing saved.")

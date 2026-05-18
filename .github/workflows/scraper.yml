@@ -1,14 +1,11 @@
 name: Run Scraper
-
 on:
   schedule:
     - cron: "0 10,22 * * *"
   workflow_dispatch:
-
 jobs:
   scrape:
     runs-on: ubuntu-22.04
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -24,40 +21,26 @@ jobs:
           wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
 
-
-
-
-
-
-
-
-
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-
       - name: Install Python packages
         run: pip install -r requirements.txt
 
       - name: Run scraper
         run: |
-          mkdir -p data
+          mkdir -p data snapshots
           xvfb-run python ArtificialAnalysisScraping.py
-          mv artificialanalysis_clean*.csv data/
+          mv artificialanalysis_cumulative.csv data/ 2>/dev/null || true
+          mv snapshots/*.csv data/ 2>/dev/null || true
+
       - name: Check filenames exactly
         run: ls -lh data/
-
 
       - name: Run cleaning script
         run: |
           set -e
           mkdir -p output
           python Data_Cleaning_Final.py
-          
-          # Move only if present (first run safety)
-          test -f artificialanalysis_environmental.csv && mv artificialanalysis_environmental.csv output/
+
+          test -f artificialanalysis_environmental.csv && mv artificialanalysis_environmental.csv output/ || true
           ls artificialanalysis_environmental_*.csv >/dev/null 2>&1 && mv artificialanalysis_environmental_*.csv output/ || true
           test -f artificialanalysis_environmental_history.csv && mv artificialanalysis_environmental_history.csv output/ || true
 
@@ -65,31 +48,25 @@ jobs:
         run: |
           set -e
           python monthly_analysis.py
-
-          # Move new monthly outputs if generated
           test -f "Monthly LLM Environmental Footprint.csv" && mv "Monthly LLM Environmental Footprint.csv" output/ || true
           test -f "Monthly LLM Environmental Footprint Day2Day.csv" && mv "Monthly LLM Environmental Footprint Day2Day.csv" output/ || true
 
       - name: Commit CSVs to repo
         run: |
-            set -e
-            git config --global user.name "GitHub Action"
-            git config --global user.email "actions@github.com"
-            git config --global --add safe.directory "$GITHUB_WORKSPACE"
-        
-            git add data/*.csv 2>/dev/null || true
-            test -f output/artificialanalysis_environmental.csv && git add output/artificialanalysis_environmental.csv || true
-            ls output/artificialanalysis_environmental_*.csv >/dev/null 2>&1 && git add output/artificialanalysis_environmental_*.csv || true
-            test -f output/artificialanalysis_environmental_history.csv && git add output/artificialanalysis_environmental_history.csv || true
+          set -e
+          git config --global user.name "GitHub Action"
+          git config --global user.email "actions@github.com"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-            test -f output/"Monthly LLM Environmental Footprint.csv" && git add output/"Monthly LLM Environmental Footprint.csv" || true
-            test -f output/"Monthly LLM Environmental Footprint Day2Day.csv" && git add output/"Monthly LLM Environmental Footprint Day2Day.csv" || true
-        
-            git commit -m "Auto-update scraped, cleaned, and monthly environmental data [skip ci]" || echo "No changes to commit"
-        
-            git pull --rebase || true
-            git push
+          git add data/*.csv 2>/dev/null || true
+          test -f output/artificialanalysis_environmental.csv && git add output/artificialanalysis_environmental.csv || true
+          ls output/artificialanalysis_environmental_*.csv >/dev/null 2>&1 && git add output/artificialanalysis_environmental_*.csv || true
+          test -f output/artificialanalysis_environmental_history.csv && git add output/artificialanalysis_environmental_history.csv || true
+          test -f output/"Monthly LLM Environmental Footprint.csv" && git add output/"Monthly LLM Environmental Footprint.csv" || true
+          test -f output/"Monthly LLM Environmental Footprint Day2Day.csv" && git add output/"Monthly LLM Environmental Footprint Day2Day.csv" || true
+
+          git commit -m "Auto-update scraped, cleaned, and monthly environmental data [skip ci]" || echo "No changes to commit"
+          git pull --rebase || true
+          git push
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

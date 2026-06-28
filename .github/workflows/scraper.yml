@@ -28,8 +28,6 @@ jobs:
         run: |
           mkdir -p data snapshots
           xvfb-run python ArtificialAnalysisScraping.py
-          # Delete the line below from your workflow:
-          # mv artificialanalysis_cumulative.csv data/ 2>/dev/null || true
           mv snapshots/*.csv data/ 2>/dev/null || true
 
       - name: Check filenames exactly

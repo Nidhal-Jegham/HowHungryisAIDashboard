@@ -12,7 +12,7 @@ from datetime import date
 
 TODAY = date.today().strftime("%Y-%m-%d")
 SNAPSHOT_DIR = "snapshots"
-CUMULATIVE_FILE = "artificialanalysis_cumulative.csv"
+CUMULATIVE_FILE = "data/artificialanalysis_cumulative.csv"
 
 os.makedirs(SNAPSHOT_DIR, exist_ok=True)
 

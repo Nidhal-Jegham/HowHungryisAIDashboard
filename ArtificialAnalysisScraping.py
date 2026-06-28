@@ -89,14 +89,12 @@ for i in range(len(link_list)):
     all_today.append(df)
 
 if all_today:
-    # 1. Save today's snapshot
     snapshot_df = pd.concat(all_today, ignore_index=True)
     snapshot_path = os.path.join(SNAPSHOT_DIR, f"artificialanalysis_{TODAY}.csv")
     snapshot_df.to_csv(snapshot_path, index=False)
     print(f"\nSnapshot saved → {snapshot_path}  ({len(snapshot_df)} rows)")
 
-    # 2. Find all historical daily files in the data directory
-    # The pattern "20*.csv" ensures we only grab dated files, ignoring 'clean' or 'cumulative' files
+
     historical_files = glob.glob("data/artificialanalysis_20*.csv")
     
     dfs_to_combine = []
@@ -106,16 +104,12 @@ if all_today:
         except Exception as e:
             print(f"Skipping {file}: {e}")
             
-    # 3. Add today's newly scraped data to the list
     dfs_to_combine.append(snapshot_df)
     
-    # 4. Concatenate everything into one master DataFrame
     cumulative_df = pd.concat(dfs_to_combine, ignore_index=True)
     
-    # 5. Drop duplicates just in case there are overlapping rows
     cumulative_df = cumulative_df.drop_duplicates()
     
-    # 6. Save the newly built cumulative file directly to the data folder
     cumulative_path = "data/artificialanalysis_cumulative.csv"
     cumulative_df.to_csv(cumulative_path, index=False)
     print(f"Cumulative file dynamically rebuilt → {cumulative_path}  ({len(cumulative_df)} rows total)")

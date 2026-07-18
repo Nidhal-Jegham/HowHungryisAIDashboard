@@ -194,7 +194,7 @@ for name, d in [("long", df_long)]:
 # In[5]:
 
 
-df_merged = pd.concat([df_extra_long, df_medium, df_long], ignore_index=True)
+df_merged = df_long
 
 # In[6]:
 

@@ -179,7 +179,7 @@ df_long['Query Length'] = '1500'
 #df_medium = canonicalize_headers(df_medium)
 df_long   = canonicalize_headers(df_long)
 
-for name, d in ("long", df_long)]:
+for name, d in [("long", df_long)]:
     if {"API ID","Model"}.issubset(d.columns):
         d.drop_duplicates(subset=["API ID","Model"], inplace=True)
     else:

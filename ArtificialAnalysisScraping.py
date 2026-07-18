@@ -20,7 +20,7 @@ os.makedirs(SNAPSHOT_DIR, exist_ok=True)
 link_list = [
     "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/100k?deprecation=all",
     "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/medium?deprecation=all",
-    "https://artificialanalysis.ai/leaderboards/providers/prompt-options/single/long?deprecation=all",
+    "https://artificialanalysis.ai/leaderboards/providers",
 ]
 length_list = [
     "extra_long",

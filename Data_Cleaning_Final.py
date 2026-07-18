@@ -158,28 +158,28 @@ def drop_targets(df: pd.DataFrame, targets: list[str]) -> None:
 
 
 
-df_extra_long= pd.read_csv('./data/artificialanalysis_cleanextra_long.csv')
-df_medium= pd.read_csv('./data/artificialanalysis_cleanmedium.csv')
+#df_extra_long= pd.read_csv('./data/artificialanalysis_cleanextra_long.csv')
+#df_medium= pd.read_csv('./data/artificialanalysis_cleanmedium.csv')
 df_long= pd.read_csv('./data/artificialanalysis_cleanlong.csv')
 
 # In[3]:
 
 
-df_extra_long['length'] = 'Extra Long'
-df_medium['length'] = 'Medium'  
+#df_extra_long['length'] = 'Extra Long'
+#df_medium['length'] = 'Medium'  
 df_long['length'] = 'Long'
 
-df_extra_long['Query Length'] = '2000'
-df_medium['Query Length'] = '1000'  
+#df_extra_long['Query Length'] = '2000'
+#df_medium['Query Length'] = '1000'  
 df_long['Query Length'] = '1500'
 
 # In[4]:
 
-df_extra_long  = canonicalize_headers(df_extra_long)
-df_medium = canonicalize_headers(df_medium)
+#df_extra_long  = canonicalize_headers(df_extra_long)
+#df_medium = canonicalize_headers(df_medium)
 df_long   = canonicalize_headers(df_long)
 
-for name, d in [("extra long", df_extra_long), ("medium", df_medium), ("long", df_long)]:
+for name, d in ("long", df_long)]:
     if {"API ID","Model"}.issubset(d.columns):
         d.drop_duplicates(subset=["API ID","Model"], inplace=True)
     else:

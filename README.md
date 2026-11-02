@@ -5,7 +5,6 @@ This repository powers the **“How Hungry is AI?”** dashboard and provides th
 The paper is constrained to **10 pages (excluding references)**, so this repo also hosts the **full tables, figures, and methodological details** that are too large for the manuscript.
 
 - **Live Dashboard (Power BI):** https://app.powerbi.com/view?r=eyJrIjoiZjVmOTI0MmMtY2U2Mi00ZTE2LTk2MGYtY2ZjNDMzODZkMjlmIiwidCI6IjQyNmQyYThkLTljY2QtNDI1NS04OTNkLTA2ODZhMzJjMTY4ZCIsImMiOjF9  
-- **GitHub Repository:** https://github.com/Nidhal-Jegham/HowHungryisAIDashboard
 
 > **Scope note.** All estimates in this project focus on **operational inference** (electricity + associated water/carbon) using published infrastructure multipliers. We **do not** include training energy or embodied (Scope 3) impacts unless explicitly stated.
 
